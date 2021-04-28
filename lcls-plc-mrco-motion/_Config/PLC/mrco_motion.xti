@@ -897,7 +897,7 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 	</DataTypes>
-	<Project GUID="{BE140C0D-19B5-44FF-802A-E5742642FDE5}" Name=mrco_motion" PrjFilePath="..\..\mrco_motion\mrco_motion.plcproj" TmcFilePath="..\..\mrco_motion\mrco_motion.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+	<Project GUID="{BE140C0D-19B5-44FF-802A-E5742642FDE5}" Name="mrco_motion" PrjFilePath="..\..\mrco_motion\mrco_motion.plcproj" TmcFilePath="..\..\mrco_motion\mrco_motion.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="mrco_motion\mrco_motion.tmc">
 			<Name>mrco_motion Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
