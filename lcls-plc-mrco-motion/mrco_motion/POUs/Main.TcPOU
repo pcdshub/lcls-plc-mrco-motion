@@ -1,94 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="Main" Id="{3f08c9da-acd6-4059-bcf8-867945acb3ea}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Main
 VAR
     // Motors
-    // CVMI Axes
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasJetX-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasJetX-EL7041]^STM Status^Status^Digital input 2'}
+    // MRCO Axes
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7041]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7041]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:01
+        pv: TMO:MRCO:MMS:01
     '}
-    M1 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Jet X
+    M1 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle X
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasJetY-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasJetY-EL7041]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzletY-EL7041]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7041]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:02
+        pv: TMO:MRCO:MMS:02
     '}
-    M2 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Jet Y
+    M2 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle Y
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasJetZ-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasJetZ-EL7041]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7041]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7041]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:03
+        pv: TMO:MRCO:MMS:03
     '}
-    M3 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Jet Z
+    M3 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle Z
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNeedleX-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNeedleX-EL7041]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7041]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7041]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:04
+        pv: TMO:MRCO:MMS:04
     '}
-    M4 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Needle X
+    M4 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle X
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNeedleY-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasNeedleY-EL7041]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7041]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7041]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:05
+        pv: TMO:MRCO:MMS:05
     '}
-    M5 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Needle Y
+    M5 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle Y
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNeedleZ-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNeedleZ-EL7041]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7041]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7041]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:06
+        pv: TMO:MRCO:MMS:06
     '}
-    M6 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Needle Z
+    M6 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle Z
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddle-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddle-EL7041]^STM Status^Status^Digital input 2'}
-    {attribute 'pytmc' := '
-        pv: TMO:CVMI:MMS:07
-    '}
-    M7 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle
-
-    // KTOF Axes
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[KTOF_X-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[KTOF_X-EL7041]^STM Status^Status^Digital input 2'}
-    {attribute 'pytmc' := '
-        pv: TMO:KTOF:MMS:01
-    '}
-    M8 : DUT_MotionStage := (bPowerSelf:=TRUE); // KTOF X
-
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[KTOF_Y-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[KTOF_Y-EL7041]^STM Status^Status^Digital input 1'}
-    {attribute 'pytmc' := '
-        pv: TMO:KTOF:MMS:02
-    '}
-    M9 : DUT_MotionStage := (bPowerSelf:=TRUE); // KTOF Y
-
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[KTOF_Z-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[KTOF_Z-EL7041]^STM Status^Status^Digital input 1'}
-    {attribute 'pytmc' := '
-        pv: TMO:KTOF:MMS:03
-    '}
-    M10 : DUT_MotionStage := (bPowerSelf:=TRUE); // KTOF Z
-
-    // CVMI Axes
+    // MRCO Axes
     fbMotionStageM1 : FB_MotionStage;
     fbMotionStageM2 : FB_MotionStage;
     fbMotionStageM3 : FB_MotionStage;
     fbMotionStageM4 : FB_MotionStage;
     fbMotionStageM5 : FB_MotionStage;
     fbMotionStageM6 : FB_MotionStage;
-    fbMotionStageM7 : FB_MotionStage;
-    // KTOF Axes
-    fbMotionStageM8 : FB_MotionStage;
-    fbMotionStageM9 : FB_MotionStage;
-    fbMotionStageM10 : FB_MotionStage;
-
+    
     //persistent data
     fbWritePersistentData : WritePersistentData;
     bInit : BOOL := TRUE;
@@ -96,18 +62,14 @@ VAR
     mcSetPosition : ARRAY [1..10] of MC_SetPosition;
 END_VAR
 VAR PERSISTENT
-    // CVMI Axes
-    fGasJetXPos : LREAL;
-    fGasJetYPos : LREAL;
-    fGasJetZPos : LREAL;
-    fGasNeedleXPos : LREAL;
-    fGasNeedleYPos : LREAL;
-    fGasNeedleZPos : LREAL;
-    fSamplePaddlePos : LREAL;
-    // KTOF Axes
-    fKTOF_XPos : LREAL;
-    fKTOF_YPos : LREAL;
-    fKTOF_ZPos : LREAL;
+    // MRCO Axes
+    fGasNozzleXPos : LREAL;
+    fGasNozzleYPos : LREAL;
+    fGasNozzleZPos : LREAL;
+    fSamplePaddleXPos : LREAL;
+    fSamplePaddleYPos : LREAL;
+    fSamplePaddleZPos : LREAL;
+ 
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF bInit THEN
