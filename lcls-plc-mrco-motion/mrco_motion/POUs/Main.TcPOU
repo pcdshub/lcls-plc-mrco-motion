@@ -72,69 +72,29 @@ VAR PERSISTENT
  
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bInit THEN
-    //Sets axes position with persistent value
-    // CVMI
-    mcSetPosition[1](Axis:=M1.Axis, Position:=fGasNozzleXPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[2](Axis:=M2.Axis, Position:=fGasNozzleYPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[3](Axis:=M3.Axis, Position:=fGasNozzleZPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[4](Axis:=M4.Axis, Position:=fSamplePaddleXPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[5](Axis:=M5.Axis, Position:=fSamplePaddleYPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[6](Axis:=M6.Axis, Position:=fSamplePaddleZPos, Mode:=FALSE, Execute:=TRUE);
+      <ST><![CDATA[// Hardware Enable
+//Mrco
+// Gas Nozzle
+M1.bHardwareEnable := TRUE;
+M2.bHardwareEnable := TRUE;
+M3.bHardwareEnable := TRUE;
+// Sample Paddle
+M4.bHardwareEnable := TRUE;
+M5.bHardwareEnable := TRUE;
+M6.bHardwareEnable := TRUE;
     
-    // KTOF
-    
-    if (mcSetPosition[1].Done and NOT mcSetPosition[1].Error) AND (mcSetPosition[2].Done and NOT mcSetPosition[2].Error)
-        AND (mcSetPosition[3].Done and NOT mcSetPosition[3].Error) AND (mcSetPosition[4].Done and NOT mcSetPosition[4].Error)
-        AND (mcSetPosition[5].Done and NOT mcSetPosition[5].Error) AND (mcSetPosition[6].Done and NOT mcSetPosition[6].Error) THEN
-        bInit:=FALSE;
-        mcSetPosition[1](Axis:=M1.Axis, Execute:=FALSE);
-        mcSetPosition[2](Axis:=M2.Axis, Execute:=FALSE);
-        mcSetPosition[3](Axis:=M3.Axis, Execute:=FALSE);
-        mcSetPosition[4](Axis:=M4.Axis, Execute:=FALSE);
-        mcSetPosition[5](Axis:=M5.Axis, Execute:=FALSE);
-        mcSetPosition[6](Axis:=M6.Axis, Execute:=FALSE);
-    END_IF
-ELSE
-    // Hardware Enable
-    // CVMI
-    // Gas Nozzle
-    M1.bHardwareEnable := TRUE;
-    M2.bHardwareEnable := TRUE;
-    M3.bHardwareEnable := TRUE;
-    // Sample Paddle
-    M4.bHardwareEnable := TRUE;
-    M5.bHardwareEnable := TRUE;
-    M6.bHardwareEnable := TRUE;
-    
-    // fbMotionStage
-    // CVMI
-    // Gas Nozzle
-    fbMotionStageM1(stMotionStage:=M1);
-    fbMotionStageM2(stMotionStage:=M2);
-    fbMotionStageM3(stMotionStage:=M3);
-    // Sample Paddle
-    fbMotionStageM4(stMotionStage:=M4);
-    fbMotionStageM5(stMotionStage:=M5);
-    fbMotionStageM6(stMotionStage:=M6);
+// fbMotionStage
+// MRCO
+// Gas Nozzle
+fbMotionStageM1(stMotionStage:=M1);
+fbMotionStageM2(stMotionStage:=M2);
+fbMotionStageM3(stMotionStage:=M3);
+// Sample Paddle
+fbMotionStageM4(stMotionStage:=M4);
+fbMotionStageM5(stMotionStage:=M5);
+fbMotionStageM6(stMotionStage:=M6);
 
-    //Keep track of position
-    // CVMI
-    fGasNozzleXPos := M1.Axis.NcToPlc.ActPos;
-    fGasNozzleYPos := M2.Axis.NcToPlc.ActPos;
-    fGasNozzleZPos := M3.Axis.NcToPlc.ActPos;
-    fSamplePaddleXPos := M4.Axis.NcToPlc.ActPos;
-    fSamplePaddleYPos := M5.Axis.NcToPlc.ActPos;
-    fSamplePaddleZPos := M6.Axis.NcToPlc.ActPos;
-
-    IF fbWriteDelay.Q THEN
-        fbWritePersistentData(NETID:='', PORT:=851, START:=TRUE, TMOUT:=T#1S);
-        fbWriteDelay(IN:=FALSE);
-    ELSE
-        fbWritePersistentData(START:=FALSE);
-        fbWriteDelay(IN:=TRUE, PT:=T#0.5S);
-    END_IF
-END_IF;]]></ST>
+    ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
