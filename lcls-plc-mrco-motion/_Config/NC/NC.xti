@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4022.32" ClassName="CNcSafTaskDef" SubType="0">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4022.30" ClassName="CNcSafTaskDef" SubType="0">
 	<NC>
 		<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true">
 			<Name>NC-Task 1 SAF</Name>
@@ -16,15 +16,11 @@
 		<SvbTask Priority="8" CycleTime="100000" AmsPort="511">
 			<Name>NC-Task 1 SVB</Name>
 		</SvbTask>
-		<Axis File="GasJetX.xti" Id="1"/>
-		<Axis File="GasJetY.xti" Id="2"/>
-		<Axis File="GasJetZ.xti" Id="3"/>
-		<Axis File="GasNeedleX.xti" Id="4"/>
-		<Axis File="GasNeedleY.xti" Id="5"/>
-		<Axis File="GasNeedleZ.xti" Id="6"/>
-		<Axis File="SamplePaddle.xti" Id="7"/>
-		<Axis File="KTOF_X.xti" Id="8"/>
-		<Axis File="KTOF_Y.xti" Id="9"/>
-		<Axis File="KTOF_Z.xti" Id="10"/>
+		<Axis File="GasNozzleX.xti" Id="1"/>
+		<Axis File="GasNozzleY.xti" Id="2"/>
+		<Axis File="GasNozzleZ.xti" Id="3"/>
+		<Axis File="SamplePaddleX.xti" Id="4"/>
+		<Axis File="SamplePaddleY.xti" Id="5"/>
+		<Axis File="SamplePaddleZ.xti" Id="6"/>
 	</NC>
 </TcSmItem>
