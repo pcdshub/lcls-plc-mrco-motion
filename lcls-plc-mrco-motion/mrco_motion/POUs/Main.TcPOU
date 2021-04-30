@@ -5,43 +5,43 @@
 VAR
     // Motors
     // MRCO Axes
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7041]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
     M1 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle X
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzletY-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7041]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzletY-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:02
     '}
     M2 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle Y
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7041]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:03
     '}
     M3 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle Z
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7041]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:04
     '}
     M4 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle X
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7041]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7041]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:05
     '}
     M5 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle Y
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7041]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7041]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:06
     '}
