@@ -53,24 +53,9 @@ VAR
     fbMotionStageM3 : FB_MotionStage;
     fbMotionStageM4 : FB_MotionStage;
     fbMotionStageM5 : FB_MotionStage;
-    fbMotionStageM6 : FB_MotionStage;
-    
-    //persistent data
-    fbWritePersistentData : WritePersistentData;
-    bInit : BOOL := TRUE;
-    fbWriteDelay : TON;
-    mcSetPosition : ARRAY [1..10] of MC_SetPosition;
+    fbMotionStageM6 : FB_MotionStage;   
 END_VAR
-VAR PERSISTENT
-    // MRCO Axes
-    fGasNozzleXPos : LREAL;
-    fGasNozzleYPos : LREAL;
-    fGasNozzleZPos : LREAL;
-    fSamplePaddleXPos : LREAL;
-    fSamplePaddleYPos : LREAL;
-    fSamplePaddleZPos : LREAL;
- 
-END_VAR]]></Declaration>
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Hardware Enable
 //Mrco
