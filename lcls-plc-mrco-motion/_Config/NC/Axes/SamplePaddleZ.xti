@@ -1322,20 +1322,21 @@ External Setpoint Generation:
 		</DataType>
 	</DataTypes>
 	<Axis Id="6" CreateSymbols="true" AxisType="1">
-		<Name>SamplePaddleZ</Name>
+		<Name>__FILENAME__</Name>
 		<AxisPara>
 			<Dynamic Acceleration="2" Deceleration="2" DelayTime="0.008"/>
 			<Velo Maximum="1"/>
 			<OtherSettings AllowMotionCmdToSlave="true"/>
 		</AxisPara>
 		<Encoder Name="Enc" EncType="4">
-			<EncPara ScaleFactorNumerator="0.0001171875" MaxCount="#x0000ffff">
+			<EncPara ScaleFactorNumerator="0.000244140625" MaxCount="#x0000ffff">
 				<SoftEndMinControl Enable="true"/>
 				<SoftEndMaxControl Enable="true" Range="38"/>
 				<Inc RefSoftSyncMask="#x0000ffff"/>
 				<ParameterChanged>14</ParameterChanged>
 				<ParameterChanged>11</ParameterChanged>
 				<ParameterChanged>8</ParameterChanged>
+				<ParameterChanged>35</ParameterChanged>
 				<ParameterChanged>12</ParameterChanged>
 			</EncPara>
 			<Vars VarGrpType="1">
