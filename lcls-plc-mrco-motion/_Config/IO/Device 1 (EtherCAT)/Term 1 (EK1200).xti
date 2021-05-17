@@ -13,31 +13,31 @@
 		<Box File="E2 (EL6070).xti" Id="20">
 			<EtherCAT PortABoxInfo="#x01000006"/>
 		</Box>
-		<Box File="GasNozzleX (EL7047).xti" Id="21">
+		<Box File="GasNozzleX-EL7047.xti" Id="21">
 			<EtherCAT PortABoxInfo="#x01000014"/>
 		</Box>
-		<Box File="GasNozzleY (EL7047).xti" Id="22">
+		<Box File="GasNozzleY-EL7047.xti" Id="22">
 			<EtherCAT PortABoxInfo="#x01000015"/>
 		</Box>
-		<Box File="GasNozzleZ (EL7047).xti" Id="23">
+		<Box File="GasNozzleZ-EL7047.xti" Id="23">
 			<EtherCAT PortABoxInfo="#x01000016"/>
 		</Box>
-		<Box File="SamplePaddleX (EL7047).xti" Id="24">
+		<Box File="SamplePaddleX-EL7047.xti" Id="24">
 			<EtherCAT PortABoxInfo="#x01000017"/>
 		</Box>
-		<Box File="SamplePaddleY (EL7047).xti" Id="25">
+		<Box File="SamplePaddleY-EL7047.xti" Id="25">
 			<EtherCAT PortABoxInfo="#x01000018"/>
 		</Box>
-		<Box File="SamplePaddleZ (EL7047).xti" Id="26">
+		<Box File="SamplePaddleZ-EL7047.xti" Id="26">
 			<EtherCAT PortABoxInfo="#x01000019"/>
 		</Box>
-		<Box File="Enc_GasNozzleX_Y (EL5042).xti" Id="27">
+		<Box File="Enc_GasNozzleX_Y-EL5042.xti" Id="27">
 			<EtherCAT PortABoxInfo="#x0100001a"/>
 		</Box>
-		<Box File="Enc_GasNozzleZ_SamplePaddleX (EL5042).xti" Id="28">
+		<Box File="Enc_GasNozzleZ_SamplePaddleX-EL5042.xti" Id="28">
 			<EtherCAT PortABoxInfo="#x0100001b"/>
 		</Box>
-		<Box File="Enc_SamplePaddleY_Z (EL5042).xti" Id="29">
+		<Box File="Enc_SamplePaddleY_Z-EL5042.xti" Id="29">
 			<EtherCAT PortABoxInfo="#x0100001c"/>
 		</Box>
 		<Box File="Bridge_E12 (EL6695).xti" Id="30">
