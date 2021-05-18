@@ -10,42 +10,54 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
-    M1 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle X
+    M1 : DUT_MotionStage := (bPowerSelf:=TRUE,
+    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE ); // Gas Nozzle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:02
     '}
-    M2 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle Y
+    M2 : DUT_MotionStage := (bPowerSelf:=TRUE,
+    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Gas Nozzle Y
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:03
     '}
-    M3 : DUT_MotionStage := (bPowerSelf:=TRUE); // Gas Nozzle Z
+    M3 : DUT_MotionStage := (bPowerSelf:=TRUE,
+    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Gas Nozzle Z
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:04
     '}
-    M4 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle X
+    M4 : DUT_MotionStage := (bPowerSelf:=TRUE,
+    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:05
     '}
-    M5 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle Y
+    M5 : DUT_MotionStage := (bPowerSelf:=TRUE, 
+    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Y
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:06
     '}
-    M6 : DUT_MotionStage := (bPowerSelf:=TRUE); // Sample Paddle Z
+    M6 : DUT_MotionStage := (bPowerSelf:=TRUE,
+    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Z
 
     // MRCO Axes
     fbMotionStageM1 : FB_MotionStage;
@@ -53,9 +65,19 @@ VAR
     fbMotionStageM3 : FB_MotionStage;
     fbMotionStageM4 : FB_MotionStage;
     fbMotionStageM5 : FB_MotionStage;
-    fbMotionStageM6 : FB_MotionStage;   
+    fbMotionStageM6 : FB_MotionStage;  
+
+//	nEnableMode : ENUM_StageEnableMode := "ALWAYS";
+ 
 END_VAR
-]]></Declaration>
+
+(*VAR
+	M1.nEnableMode : ENUM_STAGEENABLEMODE := ALWAYS;
+END_VAR
+VAR
+	M1.nBrakeMode : ENUM_STAGEBRAKEMODE := NO_BRAKE;
+END_VAR
+*)]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Hardware Enable
 //Mrco
@@ -78,6 +100,10 @@ fbMotionStageM3(stMotionStage:=M3);
 fbMotionStageM4(stMotionStage:=M4);
 fbMotionStageM5(stMotionStage:=M5);
 fbMotionStageM6(stMotionStage:=M6);
+
+
+
+
 
     ]]></ST>
     </Implementation>
