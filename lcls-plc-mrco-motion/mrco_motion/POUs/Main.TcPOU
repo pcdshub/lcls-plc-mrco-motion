@@ -66,18 +66,8 @@ VAR
     fbMotionStageM4 : FB_MotionStage;
     fbMotionStageM5 : FB_MotionStage;
     fbMotionStageM6 : FB_MotionStage;  
-
-//	nEnableMode : ENUM_StageEnableMode := "ALWAYS";
- 
 END_VAR
-
-(*VAR
-	M1.nEnableMode : ENUM_STAGEENABLEMODE := ALWAYS;
-END_VAR
-VAR
-	M1.nBrakeMode : ENUM_STAGEBRAKEMODE := NO_BRAKE;
-END_VAR
-*)]]></Declaration>
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Hardware Enable
 //Mrco
