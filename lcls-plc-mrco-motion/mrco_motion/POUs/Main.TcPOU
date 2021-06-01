@@ -5,8 +5,8 @@
 VAR
     // Motors
     // MRCO Axes
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
@@ -14,8 +14,8 @@ VAR
     nEnableMode:=ENUM_StageEnableMode.ALWAYS,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE ); // Gas Nozzle X
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:02
     '}
@@ -50,8 +50,8 @@ VAR
     nEnableMode:=ENUM_StageEnableMode.ALWAYS,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Y
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:06
     '}
