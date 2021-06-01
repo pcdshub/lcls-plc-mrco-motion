@@ -16,11 +16,11 @@
 		<SvbTask Priority="8" CycleTime="100000" AmsPort="511">
 			<Name>NC-Task 1 SVB</Name>
 		</SvbTask>
+		<Axis File="GasNozzleX.xti" Id="1"/>
 		<Axis File="GasNozzleY.xti" Id="2"/>
 		<Axis File="GasNozzleZ.xti" Id="3"/>
 		<Axis File="SamplePaddleX.xti" Id="4"/>
 		<Axis File="SamplePaddleY.xti" Id="5"/>
 		<Axis File="SamplePaddleZ.xti" Id="6"/>
-		<Axis File="GasNozzleX.xti" Id="1"/>
 	</NC>
 </TcSmItem>
