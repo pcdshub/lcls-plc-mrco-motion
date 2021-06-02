@@ -41,8 +41,8 @@ VAR
     nEnableMode:=ENUM_StageEnableMode.ALWAYS,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle X
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:05
     '}
