@@ -5,8 +5,8 @@
 VAR
     // Motors
     // MRCO Axes
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
