@@ -5,7 +5,7 @@
 
 epicsEnvSet("ADS_IOC_TOP", "$(TOP)" )
 
-epicsEnvSet("ENGINEER", "sheppard" )
+epicsEnvSet("ENGINEER", "bosum123" )
 epicsEnvSet("LOCATION", "PLC:MRCO:MOTION" )
 epicsEnvSet("IOCSH_PS1", "$(IOC)> " )
 epicsEnvSet("ACF_FILE", "$(ADS_IOC_TOP)/iocBoot/templates/unrestricted.acf")
