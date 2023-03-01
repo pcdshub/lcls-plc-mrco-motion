@@ -1,0 +1,917 @@
+
+
+DUTs
+----
+
+
+ST_MotionTransform3D
+^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    TYPE ST_MotionTransform3D :
+        // Defines the interface required for the FB_MotionTransform3D function block.
+    STRUCT
+        // Parameters to convert from motor axis coordinate system to resultant coordinate system.
+        {attribute 'pytmc' := '
+            pv: fADeg
+            io: io
+            field: DESC alpha, the angle for the first rotation.
+        '}
+        fADeg: LREAL; // alpha, the angle for the first rotation.
+        {attribute 'pytmc' := '
+            pv: fBDeg
+            io: io
+            field: DESC beta, the angle for the second rotation.
+        '}
+        fBDeg: LREAL; // beta, the angle for the second rotation.
+        {attribute 'pytmc' := '
+            pv: fGDeg
+            io: io
+            field: DESC gamma, the angle for the third rotation.
+        '}
+        fGDeg: LREAL; // gamma, the angle for the third rotation.
+
+        // Setpoints in resultant coordinate system.
+        {attribute 'pytmc' := '
+            pv: fXSP
+            io: io
+            field: DESC The desired final x position in the resultant coordinates.
+        '}
+        fXSP: LREAL; // The desired x position in the resultant coordinate system.
+        {attribute 'pytmc' := '
+            pv: fYSP
+            io: io
+            field: DESC The desired final y position in the resultant coordinates.
+        '}
+        fYSP: LREAL; // The desired y position in the resultant coordinate system.
+        {attribute 'pytmc' := '
+            pv: fZSP
+            io: io
+            field: DESC The desired final z position in the resultant coordinates.
+        '}
+        fZSP: LREAL; // The desired z position in the resultant coordinate system.
+
+        // Measured Values in resultant coordinate system.
+        {attribute 'pytmc' := '
+            pv: fXMeas
+            io: i
+            field: DESC The measured x position in the resultant coordinates.
+        '}
+        fXMeas: LREAL; // The measured x position in the resultant coordinate system. Calculated internally.
+        {attribute 'pytmc' := '
+            pv: fYMeas
+            io: i
+            field: DESC The measured y position in the resultant coordinates.
+        '}
+        fYMeas: LREAL; // The measured y position in the resultant coordinate system. Calculated internally.
+        {attribute 'pytmc' := '
+            pv: fZMeas
+            io: i
+            field: DESC The measured y position in the resultant coordinates.
+        '}
+        fZMeas: LREAL; // The measured z position in the resultant coordinate system. Calculated internally.
+
+        // Setpoints in motor coordinate system. These values are calculated in FB_MotionTransform3D.
+        {attribute 'pytmc' := '
+            pv: fMotorXSP
+            io: i
+            field: DESC The desired x position in the motor coordinate system. Calculated internally.
+        '}
+        fMotorXSP: LREAL; // The desired x position in the motor coordinate system. Calculated internally.
+        {attribute 'pytmc' := '
+            pv: fMotorYSP
+            io: i
+            field: DESC The desired y position in the motor coordinate system. Calculated internally.
+        '}
+        fMotorYSP: LREAL; // The desired y position in the motor coordinate system. Calculated internally.
+        {attribute 'pytmc' := '
+            pv: fMotorZSP
+            io: i
+            field: DESC The desired z position in the motor coordinate system. Calculated internally.
+        '}
+        fMotorZSP: LREAL; // The desired z position in the motor coordinate system. Calculated internally.
+
+        // Measured values in motor coordinate system.
+        {attribute 'pytmc' := '
+            pv: fMotorXMeas
+            io: i
+            field: DESC The measured x position in the motor coordinate system. Intended from encoder input.
+        '}
+        fMotorXMeas: LREAL; // The measured x position in the motor coordinate system. Intended from encoder input.
+        {attribute 'pytmc' := '
+            pv: fMotorYMeas
+            io: i
+            field: DESC The measured y position in the motor coordinate system. Intended from encoder input.
+        '}
+        fMotorYMeas: LREAL; // The measured y position in the motor coordinate system. Intended from encoder input.
+        {attribute 'pytmc' := '
+            pv: fMotorZMeas
+            io: i
+            field: DESC The measured z position in the motor coordinate system. Intended from encoder input.
+        '}
+        fMotorZMeas: LREAL; // The measured z position in the motor coordinate system. Intended from encoder input.
+    END_STRUCT
+    END_TYPE
+
+
+Related:
+    * `ST_MotionTransform3D`_
+
+
+GVLs
+----
+
+
+POUs
+----
+
+
+F_UpdateMotionTransform3d
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION F_UpdateMotionTransform3d : ST_MotionTransform3D
+    VAR_INPUT
+        fAlphaDegrees : LREAL;
+        fBetaDegrees : LREAL;
+        fGammaDegrees : LREAL;
+        fbRealActVec3 : FB_Vec3;
+        fbRealTarVec3 : FB_Vec3;
+        fbVirtActVec3 : FB_Vec3;
+        fbVirtTarVec3 : FB_Vec3;
+    END_VAR
+    F_UpdateMotionTransform3d.fADeg := fAlphaDegrees;
+    F_UpdateMotionTransform3d.fBDeg := fBetaDegrees;
+    F_UpdateMotionTransform3d.fGDeg := fGammaDegrees;
+
+    F_UpdateMotionTransform3d.fMotorXMeas := fbRealActVec3.x;
+    F_UpdateMotionTransform3d.fMotorYMeas := fbRealActVec3.y;
+    F_UpdateMotionTransform3d.fMotorZMeas := fbRealActVec3.Z;
+
+    F_UpdateMotionTransform3d.fXMeas := fbVirtActVec3.x;
+    F_UpdateMotionTransform3d.fYMeas := fbVirtActVec3.y;
+    F_UpdateMotionTransform3d.fZMeas := fbVirtActVec3.Z;
+
+    F_UpdateMotionTransform3d.fXSP := fbVirtTarVec3.x;
+    F_UpdateMotionTransform3d.fYSP := fbVirtTarVec3.y;
+    F_UpdateMotionTransform3d.fZSP := fbVirtTarVec3.Z;
+
+    F_UpdateMotionTransform3d.fMotorXSP := fbRealTarVec3.x;
+    F_UpdateMotionTransform3d.fMotorYSP := fbRealTarVec3.y;
+    F_UpdateMotionTransform3d.fMotorZSP := fbRealTarVec3.Z;
+
+    END_FUNCTION
+
+
+Related:
+    * `ST_MotionTransform3D`_
+
+
+FB_EPSSamplePaddleGasNeedle
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK FB_EPSSamplePaddleGasNeedle IMPLEMENTS I_EPSSamplePaddleGasNeedle
+    VAR
+        fbEPSSamplePaddleForwardZ : FB_EPS;
+        fbEPSSamplePaddleBackwardZ : FB_EPS;
+
+        fbEPSGasNeedleForwardZ : FB_EPS;
+        fbEPSGasNeedleBackwardZ : FB_EPS;
+
+        fSamplePaddleZOut : LREAL := 100.0; // Greater than this number is out
+        fGasNeedleZOut : LREAL := 85.0; // Less than this number is out
+    END_VAR
+
+
+    END_FUNCTION_BLOCK
+
+    METHOD PRIVATE AllowGasNeedleZToMoveIn
+    fbEPSGasNeedleForwardZ.setBit(nBits := 0, bValue := TRUE);
+    fbEPSGasNeedleForwardZ.setMessage(message := 'EPS is permitting forward motion.');
+    END_METHOD
+
+    METHOD PRIVATE AllowSamplePaddleZToMoveIn
+    fbEPSSamplePaddleBackwardZ.setBit(nBits := 0, bValue := TRUE);
+    fbEPSSamplePaddleBackwardZ.setMessage(message := 'EPS is permitting backward motion.');
+    END_METHOD
+
+    METHOD CheckAndActivateIfRequired
+    VAR_IN_OUT
+        StageZSamplePaddle	: lcls_twincat_motion.ST_MotionStage;
+        StageZGasNeedle	: lcls_twincat_motion.ST_MotionStage;
+    END_VAR
+    // Sample Paddle
+    fbEPSSamplePaddleForwardZ(eps := StageZSamplePaddle.stEPSForwardEnable);
+    fbEPSSamplePaddleForwardZ.setDescription(desciption := 'Sample Paddle Stage Z Forward EPS');
+
+    fbEPSSamplePaddleBackwardZ(eps := StageZSamplePaddle.stEPSBackwardEnable);
+    fbEPSSamplePaddleBackwardZ.setDescription(desciption := 'Sample Paddle Stage Z Backward EPS');
+
+    IF GasNeedleZIsOut(StageZGasNeedle := StageZGasNeedle) THEN
+        AllowSamplePaddleZToMoveIn();
+    ELSE
+        PreventSamplePaddleZFromMovingIn();
+        StageZSamplePaddle.sCustomErrorMessage := 'Cannot move any further in because Gas Needle Z is in.';
+    END_IF
+
+    // Gas Needle
+    fbEPSGasNeedleForwardZ(eps := StageZGasNeedle.stEPSForwardEnable);
+    fbEPSGasNeedleForwardZ.setDescription(desciption := 'Gas Needle Stage Z Forward EPS');
+
+    IF SamplePaddleZIsOut(StageZSamplePaddle := StageZSamplePaddle) THEN
+        AllowGasNeedleZToMoveIn();
+    ELSE
+        PreventGasNeedleZFromMovingIn();
+        StageZGasNeedle.sCustomErrorMessage := 'Cannot move any further in because Sample Paddle Z is in.';
+    END_IF
+
+    fbEPSGasNeedleBackwardZ(eps := StageZGasNeedle.stEPSBackwardEnable);
+    fbEPSGasNeedleBackwardZ.setDescription(desciption := 'Gas Needle Stage Z Backward EPS');
+    END_METHOD
+
+    METHOD PRIVATE GasNeedleZIsOut : BOOL
+    VAR_INPUT
+        StageZGasNeedle	: lcls_twincat_motion.ST_MotionStage;
+    END_VAR
+    GasNeedleZIsOut := StageZGasNeedle.Axis.NcToPlc.ActPos <= fGasNeedleZOut;
+    END_METHOD
+
+    METHOD PRIVATE PreventGasNeedleZFromMovingIn
+    fbEPSGasNeedleForwardZ.setBit(nBits := 0, bValue := FALSE);
+    fbEPSGasNeedleForwardZ.setMessage(message := 'Cannot move in when Sample Paddle Z is not out.');
+    END_METHOD
+
+    METHOD PRIVATE PreventSamplePaddleZFromMovingIn
+    fbEPSSamplePaddleBackwardZ.setBit(nBits := 0, bValue := FALSE);
+    fbEPSSamplePaddleBackwardZ.setMessage(message := 'Cannot move in when Gas Needle Z is not out.');
+    END_METHOD
+
+    METHOD PRIVATE SamplePaddleZIsOut : BOOL
+    VAR_INPUT
+        StageZSamplePaddle	: lcls_twincat_motion.ST_MotionStage;
+    END_VAR
+    SamplePaddleZIsOut := StageZSamplePaddle.Axis.NcToPlc.ActPos >= fSamplePaddleZOut;
+    END_METHOD
+
+
+
+
+FB_MotionVirtualFrame
+^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK FB_MotionVirtualFrame
+    (*
+    Takes 3 ST_MotionStages representing real axes that are orthogonal to each other and in a base frame of reference.
+    Takes 3 ST_MotionStages representing virtual axes that are orthogonal to each other and in a new frame of reference.
+    Computes the transformation from the base to the new frame of reference using 3 euler angles and a rotation order
+    as inputs. By default, the order and angles are interpreted as going from the base to the virtual frame. Can be
+    switched to go from virtual to base frame of reference.
+    If enabled, this function block will automatically handle commanding the real axes to move when the virtual axes
+    are commanded to move. If not enabled, the function block acts as a calculator, outputing the results of
+    calculating motions in a new frame of reference, but not changing any setpoints or commanding any moves.
+    *)
+    VAR_IN_OUT
+        stMotionStageRx : ST_MotionStage; // Real X Axis in base frame of reference
+        stMotionStageRy : ST_MotionStage; // Real Y Axis in base frame of reference
+        stMotionStageRz : ST_MotionStage; // Real Z Axis in base frame of reference
+        stMotionStageVx : ST_MotionStage; // Virtual X Axis in new frame of reference
+        stMotionStageVy : ST_MotionStage; // Virtual Y Axis in new frame of reference
+        stMotionStageVz : ST_MotionStage; // Virtual Z Axis in new frame of reference
+    END_VAR
+    VAR_INPUT
+        (*TRUE to automatically overwrite real axis setpoints and command moves.
+          FALSE to use this function only as a calculator.*)
+        bEnable : BOOL;
+        fAlphaDegrees : LREAL; // Angle of rotation about first axis.
+        fBetaDegrees : LREAL; // Angle of rotation about second axis.
+        fGammaDegrees : LREAL; // Angle of rotation about third axis.
+        (*Rotation Order. E.g: XYZ to rotate alpha degrees around X axis, beta degrees around Y axis,
+          and gamma degrees around Z axis. Valid rotation orders are:
+          YZY, YXY, ZYZ, ZXZ, XYX, XZX, XYZ, YZX, ZXY, XZY, ZYX, YXZ.
+          Default order for empty or invalid input is: ZYX.*)
+        sOrder : STRING;
+        (*FALSE to define inputs as rotating the frame of reference from the new frame to the base frame.
+          TRUE to define the inputs as rotating the frame of reference from the base from to the new frame.*)
+        bBaseToNew : BOOL := TRUE;
+    END_VAR
+    VAR_OUTPUT
+        fbVirtActPositionVec3 : FB_Vec3;
+        fbVirtActVelocityVec3 : FB_Vec3;
+        fbVirtActAcceleraVec3 : FB_Vec3;
+
+        fbRealTarPositionVec3 : FB_Vec3;
+        fbRealTarVelocityVec3 : FB_Vec3;
+        fbRealTarAcceleraVec3 : FB_Vec3;
+    END_VAR
+    VAR
+        fAlphaRadians : LREAL;
+        fBetaRadians : LREAL;
+        fGammaRadians : LREAL;
+
+        rtExecuteVx : R_TRIG;
+        rtExecuteVy : R_TRIG;
+        rtExecuteVz : R_TRIG;
+
+        fbRealActPositionVec3 : FB_Vec3;
+        fbRealActVelocityVec3 : FB_Vec3;
+        fbRealActAcceleraVec3 : FB_Vec3;
+
+        sOrderReversed : STRING;
+        sLeft : STRING;
+        sMid : STRING;
+        sRight : STRING;
+
+        fbVirtTarPositionVec3 : FB_Vec3;
+        fbVirtTarVelocityVec3 : FB_Vec3;
+        fbVirtTarAcceleraVec3 : FB_Vec3;
+    END_VAR
+    fAlphaRadians := DegToRad(fAlphaDegrees);
+    fBetaRadians := DegToRad(fBetaDegrees);
+    fGammaRadians := DegToRad(fGammaDegrees);
+
+    rtExecuteVx(CLK := stMotionStageVx.bBusy);
+    rtExecuteVy(CLK := stMotionStageVy.bBusy);
+    rtExecuteVz(CLK := stMotionStageVz.bBusy);
+
+    fbRealActPositionVec3.x := stMotionStageRx.Axis.NcToPlc.ActPos;
+    fbRealActPositionVec3.y := stMotionStageRy.Axis.NcToPlc.ActPos;
+    fbRealActPositionVec3.z := stMotionStageRz.Axis.NcToPlc.ActPos;
+
+    fbRealActVelocityVec3.x := stMotionStageRx.Axis.NcToPlc.ActVelo;
+    fbRealActVelocityVec3.y := stMotionStageRy.Axis.NcToPlc.ActVelo;
+    fbRealActVelocityVec3.z := stMotionStageRz.Axis.NcToPlc.ActVelo;
+
+    fbRealActAcceleraVec3.x := stMotionStageRx.Axis.NcToPlc.ActAcc;
+    fbRealActAcceleraVec3.y := stMotionStageRy.Axis.NcToPlc.ActAcc;
+    fbRealActAcceleraVec3.z := stMotionStageRz.Axis.NcToPlc.ActAcc;
+
+    sOrderReversed := ReverseOrder(sOrder);
+
+    IF bBaseToNew THEN
+        RotatePosVelAccFrame(
+            fbBaseFramePositionVec3 := fbRealActPositionVec3,
+            fbBaseFrameVelocityVec3 := fbRealActVelocityVec3,
+            fbBaseFrameAcceleraVec3 := fbRealActAcceleraVec3,
+            fbNewFramePositionVec3 => fbVirtActPositionVec3,
+            fbNewFrameVelocityVec3 => fbVirtActVelocityVec3,
+            fbNewFrameAcceleraVec3 => fbVirtActAcceleraVec3,
+            fAlphaRadians := fAlphaRadians,
+            fBetaRadians := fBetaRadians,
+            fGammaRadians := fGammaRadians,
+            sOrder := sOrder
+        );
+    ELSE
+        RotatePosVelAccFrame(
+            fbBaseFramePositionVec3 := fbRealActPositionVec3,
+            fbBaseFrameVelocityVec3 := fbRealActVelocityVec3,
+            fbBaseFrameAcceleraVec3 := fbRealActAcceleraVec3,
+            fbNewFramePositionVec3 => fbVirtActPositionVec3,
+            fbNewFrameVelocityVec3 => fbVirtActVelocityVec3,
+            fbNewFrameAcceleraVec3 => fbVirtActAcceleraVec3,
+            fAlphaRadians := -fGammaRadians,
+            fBetaRadians := -fBetaRadians,
+            fGammaRadians := -fAlphaRadians,
+            sOrder := sOrderReversed
+        );
+    END_IF
+
+    SetTargetPosVelAcc3D(
+        stMotionStageX := stMotionStageVx,
+        stMotionStageY := stMotionStageVy,
+        stMotionStageZ := stMotionStageVz,
+        fbActPosVec3 := fbVirtActPositionVec3,
+        fbTarPosVec3 => fbVirtTarPositionVec3,
+        fbTarVelVec3 => fbVirtTarVelocityVec3,
+        fbTarAccVec3 => fbVirtTarAcceleraVec3
+    );
+
+    IF bBaseToNew THEN
+        RotatePosVelAccFrame(
+            fbBaseFramePositionVec3 := fbVirtTarPositionVec3,
+            fbBaseFrameVelocityVec3 := fbVirtTarVelocityVec3,
+            fbBaseFrameAcceleraVec3 := fbVirtTarAcceleraVec3,
+            fbNewFramePositionVec3 => fbRealTarPositionVec3,
+            fbNewFrameVelocityVec3 => fbRealTarVelocityVec3,
+            fbNewFrameAcceleraVec3 => fbRealTarAcceleraVec3,
+            fAlphaRadians := -fGammaRadians,
+            fBetaRadians := -fBetaRadians,
+            fGammaRadians := -fAlphaRadians,
+            sOrder := sOrderReversed
+        );
+    ELSE
+        RotatePosVelAccFrame(
+            fbBaseFramePositionVec3 := fbVirtTarPositionVec3,
+            fbBaseFrameVelocityVec3 := fbVirtTarVelocityVec3,
+            fbBaseFrameAcceleraVec3 := fbVirtTarAcceleraVec3,
+            fbNewFramePositionVec3 => fbRealTarPositionVec3,
+            fbNewFrameVelocityVec3 => fbRealTarVelocityVec3,
+            fbNewFrameAcceleraVec3 => fbRealTarAcceleraVec3,
+            fAlphaRadians := fAlphaRadians,
+            fBetaRadians := fBetaRadians,
+            fGammaRadians := fGammaRadians,
+            sOrder := sOrder
+        );
+    END_IF
+
+    IF bEnable THEN
+        IF rtExecuteVx.Q OR rtExecuteVy.Q OR rtExecuteVz.Q THEN
+            stMotionStageRx.fPosition := fbRealTarPositionVec3.x;
+            stMotionStageRy.fPosition := fbRealTarPositionVec3.y;
+            stMotionStageRz.fPosition := fbRealTarPositionVec3.z;
+
+            stMotionStageRx.fVelocity := ABS(fbRealTarVelocityVec3.x);
+            stMotionStageRy.fVelocity := ABS(fbRealTarVelocityVec3.y);
+            stMotionStageRz.fVelocity := ABS(fbRealTarVelocityVec3.z);
+
+            stMotionStageRx.fAcceleration := ABS(fbRealTarAcceleraVec3.x);
+            stMotionStageRy.fAcceleration := ABS(fbRealTarAcceleraVec3.y);
+            stMotionStageRz.fAcceleration := ABS(fbRealTarAcceleraVec3.z);
+
+            stMotionStageRx.fDeceleration := ABS(fbRealTarAcceleraVec3.x);
+            stMotionStageRy.fDeceleration := ABS(fbRealTarAcceleraVec3.y);
+            stMotionStageRz.fDeceleration := ABS(fbRealTarAcceleraVec3.z);
+
+            IF stMotionStageRx.fVelocity >= 0.001 THEN
+                stMotionStageRx.bMoveCmd := TRUE;
+            ELSIF ABS(stMotionStageRx.fPosition - stMotionStageRx.Axis.NcToPlc.ActPos) >
+                    stMotionStageRx.stAxisParameters.fTargetPosControlRange THEN
+                stMotionStageRx.fVelocity := 0.001;
+                stMotionStageRx.bMoveCmd := TRUE;
+            END_IF
+
+            IF stMotionStageRy.fVelocity >= 0.001 THEN
+                stMotionStageRy.bMoveCmd := TRUE;
+            ELSIF ABS(stMotionStageRy.fPosition - stMotionStageRy.Axis.NcToPlc.ActPos) >
+                    stMotionStageRy.stAxisParameters.fTargetPosControlRange THEN
+                stMotionStageRy.fVelocity := 0.001;
+                stMotionStageRy.bMoveCmd := TRUE;
+            END_IF
+
+            IF stMotionStageRz.fVelocity >= 0.001 THEN
+                stMotionStageRz.bMoveCmd := TRUE;
+            ELSIF ABS(stMotionStageRz.fPosition - stMotionStageRz.Axis.NcToPlc.ActPos) >
+                    stMotionStageRz.stAxisParameters.fTargetPosControlRange THEN
+                stMotionStageRz.fVelocity := 0.001;
+                stMotionStageRz.bMoveCmd := TRUE;
+            END_IF
+        END_IF
+
+        IF stMotionStageRx.bError OR stMotionStageRy.bError OR stMotionStageRz.bError THEN
+            stMotionStageVx.bError := TRUE;
+            stMotionStageVy.bError := TRUE;
+            stMotionStageVz.bError := TRUE;
+            stMotionStageVx.sCustomErrorMessage := 'An error occured in one of the real axes. All virtual axes stopped.';
+            stMotionStageVy.sCustomErrorMessage := 'An error occured in one of the real axes. All virtual axes stopped.';
+            stMotionStageVz.sCustomErrorMessage := 'An error occured in one of the real axes. All virtual axes stopped.';
+        END_IF
+    END_IF
+
+    END_FUNCTION_BLOCK
+
+    METHOD PUBLIC DegToRad : LREAL
+    VAR_INPUT
+        fDeg : LREAL;
+    END_VAR
+    DegToRad := fDeg  / 180.0 * lcls_twincat_math.GVL_Constants.PI;
+    END_METHOD
+
+    METHOD ReverseOrder : STRING
+    VAR_INPUT
+        sOrder : STRING;
+    END_VAR
+    IF sOrder = '' THEN
+        sOrder := 'ZYX';
+    END_IF
+    sLeft := LEFT(sOrder, 1);
+    sMid := MID(sOrder, 1, 2);
+    sRight := RIGHT(sOrder, 1);
+    ReverseOrder := CONCAT(sRight, CONCAT(sMid, sLeft));
+    END_METHOD
+
+    METHOD PUBLIC RotatePosVelAccFrame
+    VAR_INPUT
+        fbBaseFramePositionVec3 : FB_Vec3;
+        fbBaseFrameVelocityVec3 : FB_Vec3;
+        fbBaseFrameAcceleraVec3 : FB_Vec3;
+
+        fAlphaRadians : LREAL;
+        fBetaRadians : LREAL;
+        fGammaRadians : LREAL;
+        sOrder : STRING;
+    END_VAR
+    VAR_OUTPUT
+        fbNewFramePositionVec3 : FB_Vec3;
+        fbNewFrameVelocityVec3 : FB_Vec3;
+        fbNewFrameAcceleraVec3 : FB_Vec3;
+    END_VAR
+    fbNewFramePositionVec3 := F_EulerRotateVec3Frame(
+        iVec3 := fbBaseFramePositionVec3,
+        fAlphaRadians := fAlphaRadians,
+        fBetaRadians := fBetaRadians,
+        fGammaRadians := fGammaRadians,
+        sOrder := sOrder
+    );
+
+    fbNewFrameVelocityVec3 := F_EulerRotateVec3Frame(
+        iVec3 := fbBaseFrameVelocityVec3,
+        fAlphaRadians := fAlphaRadians,
+        fBetaRadians := fBetaRadians,
+        fGammaRadians := fGammaRadians,
+        sOrder := sOrder
+    );
+
+    fbNewFrameAcceleraVec3 := F_EulerRotateVec3Frame(
+        iVec3 := fbBaseFrameAcceleraVec3,
+        fAlphaRadians := fAlphaRadians,
+        fBetaRadians := fBetaRadians,
+        fGammaRadians := fGammaRadians,
+        sOrder := sOrder
+    );
+    END_METHOD
+
+    METHOD PUBLIC SetTargetPosVelAcc1D
+    VAR_INPUT
+        stMotionStage : ST_MotionStage;
+        fActPos : LREAL;
+    END_VAR
+    VAR_OUTPUT
+        fTarPos : LREAL;
+        fTarVel : LREAL;
+        fTarAcc : LREAL;
+    END_VAR
+    IF stMotionStage.bBusy THEN
+        fTarPos := stMotionStage.fPosition;
+        IF fTarPos >= fActPos THEN
+            fTarVel := stMotionStage.fVelocity;
+            fTarAcc := stMotionStage.fAcceleration;
+        ELSE
+            fTarVel := -stMotionStage.fVelocity;
+            fTarAcc := -stMotionStage.fAcceleration;
+        END_IF
+    ELSE
+        fTarPos := fActPos;
+        fTarVel := 0.0;
+        fTarAcc := 0.0;
+    END_IF
+    END_METHOD
+
+    METHOD PUBLIC SetTargetPosVelAcc3D
+    VAR_INPUT
+        stMotionStageX : ST_MotionStage;
+        stMotionStageY : ST_MotionStage;
+        stMotionStageZ : ST_MotionStage;
+        fbActPosVec3 : FB_Vec3;
+    END_VAR
+    VAR_OUTPUT
+        fbTarPosVec3 : FB_Vec3;
+        fbTarVelVec3 : FB_Vec3;
+        fbTarAccVec3 : FB_Vec3;
+    END_VAR
+    VAR
+        fTarPosX : LREAL;
+        fTarPosY : LREAL;
+        fTarPosZ : LREAL;
+
+        fTarVelX : LREAL;
+        fTarVelY : LREAL;
+        fTarVelZ : LREAL;
+
+        fTarAccX : LREAL;
+        fTarAccY : LREAL;
+        fTarAccZ : LREAL;
+    END_VAR
+    SetTargetPosVelAcc1D(
+        stMotionStage := stMotionStageX,
+        fActPos := fbActPosVec3.x,
+        fTarPos => fTarPosX,
+        fTarVel => fTarVelX,
+        fTarAcc => fTarAccX
+    );
+
+    SetTargetPosVelAcc1D(
+        stMotionStage := stMotionStageY,
+        fActPos := fbActPosVec3.y,
+        fTarPos => fTarPosY,
+        fTarVel => fTarVelY,
+        fTarAcc => fTarAccY
+    );
+
+    SetTargetPosVelAcc1D(
+        stMotionStage := stMotionStageZ,
+        fActPos := fbActPosVec3.z,
+        fTarPos => fTarPosZ,
+        fTarVel => fTarVelZ,
+        fTarAcc => fTarAccZ
+    );
+
+    fbTarPosVec3.Set(fTarPosX, fTarPosY, fTarPosZ);
+    fbTarVelVec3.Set(fTarVelX, fTarVelY, fTarVelZ);
+    fbTarAccVec3.Set(fTarAccX, fTarAccY, fTarAccZ);
+    END_METHOD
+
+
+
+
+Main
+^^^^
+
+::
+
+    PROGRAM Main
+    VAR
+        // Motors
+        // MRCO Axes
+        {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1;
+                                  .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2';
+                                  .nRawEncoderULINT     := TIIB[Enc_GasNozzleX_Y-EL5042]^FB Inputs Channel 1^Position'}
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:01
+        '}
+        M1 : ST_MotionStage; // Gas Nozzle X
+
+        {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2;
+                                  .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1';
+                                  .nRawEncoderULINT     := TIIB[Enc_GasNozzleX_Y-EL5042]^FB Inputs Channel 2^Position'}
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:02
+        '}
+        M2 : ST_MotionStage; // Gas Nozzle Y
+
+        {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2;
+                                  .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1';
+                                  .nRawEncoderULINT     := TIIB[Enc_GasNozzleZ_SamplePaddleX-EL5042]^FB Inputs Channel 1^Position'}
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:03
+        '}
+        M3 : ST_MotionStage; // Gas Nozzle Z
+
+        {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2;
+                                  .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 1';
+                                  .nRawEncoderULINT     := TIIB[Enc_GasNozzleZ_SamplePaddleX-EL5042]^FB Inputs Channel 2^Position'}
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:04
+        '}
+        M4 : ST_MotionStage; // Sample Paddle X Stage Coordinates
+
+        {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1;
+                                  .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2';
+                                  .nRawEncoderULINT     := TIIB[Enc_SamplePaddleY_Z-EL5042]^FB Inputs Channel 1^Position'}
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:05
+        '}
+        M5 : ST_MotionStage; // Sample Paddle Y Stage Coordinates
+
+        {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
+                                  .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2';
+                                  .nRawEncoderULINT     := TIIB[Enc_SamplePaddleY_Z-EL5042]^FB Inputs Channel 2^Position'}
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:06
+        '}
+        M6 : ST_MotionStage; // Sample Paddle Z Stage Coordinates
+
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:V4
+        '}
+        M7 : ST_MotionStage; // Sample Paddle X Beam Coordinates (Virtual Axis)
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:V5
+        '}
+        M8 : ST_MotionStage; // Sample Paddle Y Beam Coordinates (Virtual Axis)
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:MMS:V6
+        '}
+        M9 : ST_MotionStage; // Sample Paddle Z Beam Coordinates (Virtual Axis)
+
+        // MRCO Axes
+        fbMotionStageM1 : FB_MotionStage;
+        fbMotionStageM2 : FB_MotionStage;
+        fbMotionStageM3 : FB_MotionStage;
+        fbMotionStageM4 : FB_MotionStage;
+        fbMotionStageM5 : FB_MotionStage;
+        fbMotionStageM6 : FB_MotionStage;
+        fbMotionStageM7 : FB_MotionStage; // Virtual
+        fbMotionStageM8 : FB_MotionStage; // Virtual
+        fbMotionStageM9 : FB_MotionStage; // Virtual
+
+        bInit : BOOL := TRUE;
+
+        nVirtualEncoderUnitConversion: LREAL := 1000000; // mm to nm
+        {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplyPaddleVX^Enc^Inputs^In^nDataIn1'}
+        nVirtualEncoderM7nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
+        {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplePaddleVY^Enc^Inputs^In^nDataIn1'}
+        nVirtualEncoderM8nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
+        {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplePaddleVZ^Enc^Inputs^In^nDataIn1'}
+        nVirtualEncoderM9nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
+
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:bVirtualAxesActive
+        '}
+        bVirtualAxesActive: BOOL;
+
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:PTransform3D
+        '}
+        stPMotionTransform3D: ST_MotionTransform3D;
+
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:VTransform3D
+        '}
+        stVMotionTransform3D: ST_MotionTransform3D;
+
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:ATransform3D
+        '}
+        stAMotionTransform3D: ST_MotionTransform3D;
+
+        fDPosM7: LREAL;
+        fDPosM8: LREAL;
+        fDPosM9: LREAL;
+
+        rtM7Execute: R_TRIG;
+        rtM8Execute: R_TRIG;
+        rtM9Execute: R_TRIG;
+
+        fbMotionVirtualFrame : FB_MotionVirtualFrame;
+        bBaseToNew : BOOL;
+        sOrder : STRING := 'XYZ';
+
+        fbEPSSamplePaddleGasNeedle : FB_EPSSamplePaddleGasNeedle;
+    END_VAR
+    VAR PERSISTENT
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:Alpha
+            io: io
+            field: DESC The acute angle (in deg) between the x axis in stage coordinates and the x axis in beam coordinates.
+        '}
+        aDeg: LREAL := -22.21; // The angle between stMotionStage1 and the new axis 1. In Degrees.
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:Beta
+            io: io
+            field: DESC The acute angle (in deg) between the y axis in stage coordinates and the y axis in beam coordinates.
+        '}
+        bDeg:  LREAL := -20.7; // The angle between stMotionStage2 and the new axis 2. In Degrees.
+        {attribute 'pytmc' := '
+            pv: TMO:MRCO:SP:Gamma
+            io: io
+            field: DESC The acute angle (in deg) between the z axis in stage coordinates and the z axis in beam coordinates.
+        '}
+        gDeg: LREAL := 3.793; // The angle between stMotionStage3 and the new axis 3. In Degrees.
+    END_VAR
+    IF bInit THEN
+        bInit := FALSE;
+
+        M1.bHardwareEnable := TRUE;
+        M1.bPowerSelf := TRUE;
+        M1.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M1.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
+        M2.bHardwareEnable := TRUE;
+        M2.bPowerSelf := TRUE;
+        M2.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M2.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
+        M3.bHardwareEnable := TRUE;
+        M3.bPowerSelf := TRUE;
+        M3.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M3.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
+        M4.bHardwareEnable := TRUE;
+        M4.bPowerSelf := TRUE;
+        M4.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M4.nEnableMode := E_StageEnableMode.DURING_MOTION;
+        M4.fVelocity := 0.1;
+
+        M5.bHardwareEnable := TRUE;
+        M5.bPowerSelf := TRUE;
+        M5.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M5.nEnableMode := E_StageEnableMode.DURING_MOTION;
+        M5.fVelocity := 0.1;
+
+        M6.bHardwareEnable := TRUE;
+        M6.bPowerSelf := TRUE;
+        M6.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M6.nEnableMode := E_StageEnableMode.DURING_MOTION;
+        M6.fVelocity := 0.1;
+
+        M7.bHardwareEnable := TRUE;
+        M7.bPowerSelf := TRUE;
+        M7.bLimitBackwardEnable := TRUE;
+        M7.bLimitForwardEnable := TRUE;
+        M7.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M7.nEnableMode := E_StageEnableMode.DURING_MOTION;
+        M7.fVelocity := 0.1;
+
+        M8.bHardwareEnable := TRUE;
+        M8.bPowerSelf := TRUE;
+        M8.bLimitBackwardEnable := TRUE;
+        M8.bLimitForwardEnable := TRUE;
+        M8.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M8.nEnableMode := E_StageEnableMode.DURING_MOTION;
+        M8.fVelocity := 0.1;
+
+        M9.bHardwareEnable := TRUE;
+        M9.bPowerSelf := TRUE;
+        M9.bLimitBackwardEnable := TRUE;
+        M9.bLimitForwardEnable := TRUE;
+        M9.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+        M9.nEnableMode := E_StageEnableMode.DURING_MOTION;
+        M9.fVelocity := 0.1;
+
+        bVirtualAxesActive := FALSE;
+    END_IF
+
+    fbEPSSamplePaddleGasNeedle.CheckAndActivateIfRequired(
+        StageZSamplePaddle := M6,
+        StageZGasNeedle := M3
+    );
+
+    // MRCO
+    bVirtualAxesActive := M6.Axis.NcToPlc.ActPos <= 70.0;
+
+    fbMotionVirtualFrame(
+        stMotionStageRx := M4,
+        stMotionStageRy := M5,
+        stMotionStageRz := M6,
+        stMotionStageVx := M7,
+        stMotionStageVy := M8,
+        stMotionStageVz := M9,
+        bEnable := bVirtualAxesActive,
+        fAlphaDegrees := aDeg,
+        fBetaDegrees := bDeg,
+        fGammaDegrees := gDeg,
+        sOrder := sOrder,
+        bBaseToNew := bBaseToNew,
+        fbVirtActPositionVec3 =>,
+        fbVirtActVelocityVec3 =>,
+        fbVirtActAcceleraVec3 =>,
+        fbRealTarPositionVec3 =>,
+        fbRealTarVelocityVec3 =>,
+        fbRealTarAcceleraVec3 =>
+    );
+
+    nVirtualEncoderM7nm := LREAL_TO_UDINT((fbMotionVirtualFrame.fbVirtActPositionVec3.x + 200.0) * nVirtualEncoderUnitConversion);
+    nVirtualEncoderM8nm := LREAL_TO_UDINT((fbMotionVirtualFrame.fbVirtActPositionVec3.y + 200.0) * nVirtualEncoderUnitConversion);
+    nVirtualEncoderM9nm := LREAL_TO_UDINT((fbMotionVirtualFrame.fbVirtActPositionVec3.z + 200.0) * nVirtualEncoderUnitConversion);
+
+    stPMotionTransform3D := F_UpdateMotionTransform3d(
+        fAlphaDegrees := aDeg,
+        fBetaDegrees  := bDeg,
+        fGammaDegrees := gDeg,
+        fbVirtActVec3 := fbMotionVirtualFrame.fbVirtActPositionVec3,
+        fbVirtTarVec3 := fbMotionVirtualFrame.fbVirtTarPositionVec3,
+        fbRealActVec3 := fbMotionVirtualFrame.fbRealActPositionVec3,
+        fbRealTarVec3 := fbMotionVirtualFrame.fbRealTarPositionVec3
+    );
+
+    stVMotionTransform3D := F_UpdateMotionTransform3d(
+        fAlphaDegrees := aDeg,
+        fBetaDegrees  := bDeg,
+        fGammaDegrees := gDeg,
+        fbVirtActVec3 := fbMotionVirtualFrame.fbVirtActVelocityVec3,
+        fbVirtTarVec3 := fbMotionVirtualFrame.fbVirtTarVelocityVec3,
+        fbRealActVec3 := fbMotionVirtualFrame.fbRealActVelocityVec3,
+        fbRealTarVec3 := fbMotionVirtualFrame.fbRealTarVelocityVec3
+    );
+
+    stAMotionTransform3D := F_UpdateMotionTransform3d(
+        fAlphaDegrees := aDeg,
+        fBetaDegrees  := bDeg,
+        fGammaDegrees := gDeg,
+        fbVirtActVec3 := fbMotionVirtualFrame.fbVirtActAcceleraVec3,
+        fbVirtTarVec3 := fbMotionVirtualFrame.fbVirtTarAcceleraVec3,
+        fbRealActVec3 := fbMotionVirtualFrame.fbRealActAcceleraVec3,
+        fbRealTarVec3 := fbMotionVirtualFrame.fbRealTarAcceleraVec3
+    );
+
+    // Process FB_MotionStage for each axis.
+
+    // Gas Nozzle
+    fbMotionStageM1(stMotionStage:=M1);
+    fbMotionStageM2(stMotionStage:=M2);
+    fbMotionStageM3(stMotionStage:=M3);
+
+    // Sample Paddle
+    fbMotionStageM4(stMotionStage:=M4);
+    fbMotionStageM5(stMotionStage:=M5);
+    fbMotionStageM6(stMotionStage:=M6);
+
+    // Sample Paddle (Virtual)
+    fbMotionStageM7(stMotionStage:=M7);
+    fbMotionStageM8(stMotionStage:=M8);
+    fbMotionStageM9(stMotionStage:=M9);
+
+    END_PROGRAM
+
+
+Related:
+    * `FB_EPSSamplePaddleGasNeedle`_
+    * `FB_MotionVirtualFrame`_
+    * `F_UpdateMotionTransform3d`_
+    * `ST_MotionTransform3D`_
+

@@ -1,0 +1,21 @@
+
+Pragmas
+-------
+
+.. csv-table::
+    :header: PLC Name, Total Pragmas, Errors
+    :align: center
+
+    :ref:`mrco_motion <mrco_motion_overview_pragmas>`, 40, 0
+
+
+.. _mrco_motion_overview_pragmas:
+
+
+mrco_motion
+^^^^^^^^^^^
+
+Total pragmas found: 40
+Total linter errors: 0
+
+

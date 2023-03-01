@@ -1,0 +1,286 @@
+
+NC Settings
+-----------
+
+.. csv-table::
+    :header: Axis ID, Name
+    :align: center
+
+        1, GasNozzleX
+        2, GasNozzleY
+        3, GasNozzleZ
+        4, SamplePaddleX
+        5, SamplePaddleY
+        6, SamplePaddleZ
+        7, SamplyPaddleVX
+        8, SamplePaddleVY
+        9, SamplePaddleVZ
+
+
+
+Axis 1: GasNozzleX
+^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 1
+    Name, GasNozzleX
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Dynamic:DelayTime, 0.008
+    Enc:EncType, 19
+    Enc:Inc:RefSoftSyncMask, #x0000ffff
+    Enc:MaxCount, #xffffffff
+    Enc:ScaleFactorNumerator, 5e-05
+    Enc:SoftEndMaxControl:Range, 52
+    Enc:SoftEndMinControl:Range, 31
+    Id, 1
+    OtherSettings:AllowMotionCmdToSlave, true
+    Velo:FastManual, 1
+    Velo:Maximum, 1
+    Velo:SlowManual, 0.5
+
+
+
+Axis 2: GasNozzleY
+^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 2
+    Name, GasNozzleY
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Dynamic:DelayTime, 0.008
+    Enc:EncType, 19
+    Enc:Inc:RefSoftSyncMask, #x0000ffff
+    Enc:MaxCount, #xffffffff
+    Enc:Offset, 82.0764
+    Enc:ScaleFactorNumerator, 5e-05
+    Enc:SoftEndMaxControl:Range, 50
+    Enc:SoftEndMinControl:Range, 30
+    Id, 2
+    OtherSettings:AllowMotionCmdToSlave, true
+    Velo:FastManual, 1
+    Velo:Maximum, 1
+    Velo:SlowManual, 0.5
+
+
+
+Axis 3: GasNozzleZ
+^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 3
+    Name, GasNozzleZ
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Dynamic:DelayTime, 0.008
+    Enc:EncType, 29
+    Enc:Inc:RefSoftSyncMask, #x0000ffff
+    Enc:MaxCount, #xffffffff
+    Enc:ScaleFactorNumerator, 5e-05
+    Enc:SoftEndMaxControl:Range, 141
+    Enc:SoftEndMinControl:Range, 39
+    Id, 3
+    OtherSettings:AllowMotionCmdToSlave, true
+    TargetPosControl:Range, 0.1
+    Velo:FastManual, 1
+    Velo:Maximum, 1
+    Velo:SlowManual, 0.5
+
+
+
+Axis 4: SamplePaddleX
+^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 4
+    Name, SamplePaddleX
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Dynamic:DelayTime, 0.008
+    Enc:EncType, 29
+    Enc:Inc:RefSoftSyncMask, #x0000ffff
+    Enc:MaxCount, #xffffffff
+    Enc:ScaleFactorNumerator, 5e-05
+    Enc:SoftEndMaxControl:Range, 55
+    Enc:SoftEndMinControl:Range, 27
+    Id, 4
+    OtherSettings:AllowMotionCmdToSlave, true
+    TargetPosControl:Range, 0.001
+    Velo:FastManual, 1
+    Velo:Maximum, 1
+    Velo:SlowManual, 0.5
+
+
+
+Axis 5: SamplePaddleY
+^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 5
+    Name, SamplePaddleY
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Dynamic:DelayTime, 0.008
+    Enc:EncType, 29
+    Enc:Inc:RefSoftSyncMask, #x0000ffff
+    Enc:MaxCount, #xffffffff
+    Enc:ScaleFactorNumerator, 5e-05
+    Enc:SoftEndMaxControl:Range, 81
+    Enc:SoftEndMinControl:Range, 41
+    Id, 5
+    OtherSettings:AllowMotionCmdToSlave, true
+    TargetPosControl:Range, 0.001
+    Velo:FastManual, 1
+    Velo:Maximum, 1
+    Velo:SlowManual, 0.5
+
+
+
+Axis 6: SamplePaddleZ
+^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 6
+    Name, SamplePaddleZ
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Dynamic:DelayTime, 0.008
+    Enc:EncType, 29
+    Enc:Inc:RefSoftSyncMask, #x0000ffff
+    Enc:MaxCount, #xffffffff
+    Enc:Offset, -214568.3643
+    Enc:ScaleFactorNumerator, 5e-05
+    Enc:SoftEndMaxControl:Range, 100
+    Enc:SoftEndMinControl:Range, 12
+    Id, 6
+    OtherSettings:AllowMotionCmdToSlave, true
+    TargetPosControl:Range, 0.00625
+    Velo:FastManual, 1
+    Velo:Maximum, 1
+    Velo:SlowManual, 0.5
+
+
+
+Axis 7: SamplyPaddleVX
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 7
+    Name, SamplyPaddleVX
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Enc:EncType, 7
+    Enc:MaxCount, #xffffffff
+    Enc:Offset, -200
+    Enc:ReferenceSystem, 1
+    Enc:ScaleFactorNumerator, 1e-06
+    Id, 7
+    OtherSettings:AllowMotionCmdToSlave, true
+    OtherSettings:PulseDistanceNeg, 0.5
+    OtherSettings:PulseDistancePos, 0.5
+    TargetPosControl:Range, 0.025
+    Velo:FastManual, 0.5
+    Velo:Maximum, 1
+    Velo:RefSearch, 0.5
+    Velo:RefSync, 0.5
+    Velo:SlowManual, 0.25
+
+
+
+Axis 8: SamplePaddleVY
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 8
+    Name, SamplePaddleVY
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Enc:EncType, 7
+    Enc:MaxCount, #xffffffff
+    Enc:Offset, -200
+    Enc:ReferenceSystem, 1
+    Enc:ScaleFactorNumerator, 1e-06
+    Id, 8
+    OtherSettings:AllowMotionCmdToSlave, true
+    OtherSettings:PulseDistanceNeg, 0.5
+    OtherSettings:PulseDistancePos, 0.5
+    TargetPosControl:Range, 0.025
+    Velo:FastManual, 0.5
+    Velo:Maximum, 1
+    Velo:RefSearch, 0.5
+    Velo:RefSync, 0.5
+    Velo:SlowManual, 0.25
+
+
+
+Axis 9: SamplePaddleVZ
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table::
+    :header: Setting, Value
+    :align: center
+
+    Axis ID, 9
+    Name, SamplePaddleVZ
+    AxisType, 1
+    CreateSymbols, true
+    Dynamic:Acceleration, 2
+    Dynamic:Deceleration, 2
+    Enc:EncType, 7
+    Enc:MaxCount, #xffffffff
+    Enc:Offset, -200
+    Enc:ReferenceSystem, 1
+    Enc:ScaleFactorNumerator, 1e-06
+    Id, 9
+    OtherSettings:AllowMotionCmdToSlave, true
+    OtherSettings:PulseDistanceNeg, 0.5
+    OtherSettings:PulseDistancePos, 0.5
+    TargetPosControl:Range, 0.025
+    Velo:FastManual, 0.5
+    Velo:Maximum, 1
+    Velo:RefSearch, 0.5
+    Velo:RefSync, 0.5
+    Velo:SlowManual, 0.25
+
+

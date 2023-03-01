@@ -1,0 +1,30 @@
+lcls-plc-mrco-motion
+--------------------
+
+.. toctree::
+    :maxdepth: 2
+    :caption: lcls-plc-mrco-motion
+
+    lcls-plc-mrco-motion_pragmas
+    lcls-plc-mrco-motion_nc
+    lcls-plc-mrco-motion_ethercat
+    lcls-plc-mrco-motion_boxes
+    lcls-plc-mrco-motion_links
+
+
+.. toctree::
+    :maxdepth: 2
+    :caption: mrco_motion
+
+    lcls-plc-mrco-motion_mrco_motion_summary
+    lcls-plc-mrco-motion_mrco_motion_epics
+    lcls-plc-mrco-motion_mrco_motion_source
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
