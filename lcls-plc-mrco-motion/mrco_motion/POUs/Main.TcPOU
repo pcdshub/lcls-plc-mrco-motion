@@ -6,57 +6,63 @@ VAR
     // Motors
     // MRCO Axes
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2'}
+                              .bLimitBackwardEnable:=TIIB[GasNozzleX-EL7047]^STM Status^Status^Digital input 2';
+                              .nRawEncoderULINT     := TIIB[Enc_GasNozzleX_Y-EL5042]^FB Inputs Channel 1^Position'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
     M1 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE ); // Gas Nozzle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1'}
+                              .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1';
+                              .nRawEncoderULINT     := TIIB[Enc_GasNozzleX_Y-EL5042]^FB Inputs Channel 2^Position'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:02
     '}
     M2 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Gas Nozzle Y
 
-    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2'}
+    {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2;
+                              .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1';
+                              .nRawEncoderULINT     := TIIB[Enc_GasNozzleZ_SamplePaddleX-EL5042]^FB Inputs Channel 1^Position'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:03
     '}
     M3 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Gas Nozzle Z
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2'}
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2';
+                              .nRawEncoderULINT     := TIIB[Enc_GasNozzleZ_SamplePaddleX-EL5042]^FB Inputs Channel 2^Position'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:04
     '}
     M4 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2'}
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2';
+                              .nRawEncoderULINT     := TIIB[Enc_SamplePaddleY_Z-EL5042]^FB Inputs Channel 1^Position'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:05
     '}
     M5 : DUT_MotionStage := (bPowerSelf:=TRUE, 
-    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Y
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
-                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2'}
+                              .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2';
+                              .nRawEncoderULINT     := TIIB[Enc_SamplePaddleY_Z-EL5042]^FB Inputs Channel 2^Position'}
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:06
     '}
     M6 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.ALWAYS,
+    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
     nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Z
 
     // MRCO Axes
@@ -67,7 +73,7 @@ VAR
     fbMotionStageM5 : FB_MotionStage;
     fbMotionStageM6 : FB_MotionStage;  
 	
-	
+{*	
 	// Persistent Memory
 	fbWritePersistentData : WritePersistentData;
 	bInit : BOOL := TRUE;
@@ -80,10 +86,10 @@ VAR PERSISTENT
 	fGasNozzleZPos : LREAL;
 	fSamplePaddleXPos : LREAL;
 	fSamplePaddleYPos : LREAL;
-	fSamplePaddleZPos : LREAL;
+	fSamplePaddleZPos : LREAL;  *}
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bInit THEN
+      <ST><![CDATA[{* IF bInit THEN
 	//Sets axes positions with persistent value
 	// Gas Nozzle
 	mcSetPosition[1](Axis:=M1.Axis, Position:=fGasNozzleXPos, Mode:=FALSE, Execute:=TRUE);
@@ -107,29 +113,34 @@ END_VAR]]></Declaration>
 	  mcSetPosition[4](Axis:=M4.Axis, Execute:=FALSE);
 	  mcSetPosition[5](Axis:=M5.Axis, Execute:=FALSE);
 	  mcSetPosition[6](Axis:=M6.Axis, Execute:=FALSE);
-	END_IF
-ELSE
+	END_IF 
+ELSE  *}
 // Hardware Enable
 //Mrco
 // Gas Nozzle
 	M1.bHardwareEnable := TRUE;
 	M2.bHardwareEnable := TRUE;
 	M3.bHardwareEnable := TRUE;
+    
+    fbMotionStageM1(stMotionStage:=M1);
+	fbMotionStageM2(stMotionStage:=M2);
+	fbMotionStageM3(stMotionStage:=M3);	
+	
 // Sample Paddle
 	M4.bHardwareEnable := TRUE;
 	M5.bHardwareEnable := TRUE;
 	M6.bHardwareEnable := TRUE;
-    
-// fbMotionStage
-// MRCO
-// Gas Nozzle
-	fbMotionStageM1(stMotionStage:=M1);
-	fbMotionStageM2(stMotionStage:=M2);
-	fbMotionStageM3(stMotionStage:=M3);
-// Sample Paddle	
+	
 	fbMotionStageM4(stMotionStage:=M4);
 	fbMotionStageM5(stMotionStage:=M5);
 	fbMotionStageM6(stMotionStage:=M6);
+    
+{* // fbMotionStage
+// MRCO
+// Gas Nozzle
+	
+// Sample Paddle	
+	
 
 // Keep track of position
 // Gas Nozzle
@@ -150,7 +161,7 @@ ELSE
 	END_IF
 END_IF;
 
-
+*}
     ]]></ST>
     </Implementation>
   </POU>
