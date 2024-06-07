@@ -1905,8 +1905,8 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Inputs^Main.M3.bLimitForwardEnable" VarB="STM Status^Status^Digital input 2" AutoLink="true"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^SamplePaddleX-EL7047">
-				<Link VarA="PlcTask Inputs^Main.M4.bLimitBackwardEnable" VarB="STM Status^Status^Digital input 2" AutoLink="true"/>
-				<Link VarA="PlcTask Inputs^Main.M4.bLimitForwardEnable" VarB="STM Status^Status^Digital input 1" AutoLink="true"/>
+				<Link VarA="PlcTask Inputs^Main.M4.bLimitBackwardEnable" VarB="STM Status^Status^Digital input 1" AutoLink="true"/>
+				<Link VarA="PlcTask Inputs^Main.M4.bLimitForwardEnable" VarB="STM Status^Status^Digital input 2" AutoLink="true"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^SamplePaddleY-EL7047">
 				<Link VarA="PlcTask Inputs^Main.M5.bLimitBackwardEnable" VarB="STM Status^Status^Digital input 2" AutoLink="true"/>
