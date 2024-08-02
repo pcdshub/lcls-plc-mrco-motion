@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="FB_CoordinateTransform3D" Id="{d51993f0-483b-4be0-927a-876be7a82ac8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CoordinateTransform3D
+(*
+    Implementation of a 3 Axis coordinate transform when attempting
+    a move in one coordinate system, but the axes are in a different
+    coordinate system.
+*)
+VAR_IN_OUT
+    stMotionStageMx: ST_MotionStage;
+    stMotionStageMy: ST_MotionStage;
+    stMotionStageMz: ST_MotionStage;
+END_VAR
+VAR_INPUT
+    // The desired position in new coordinate system.
+    x: LREAL := 0;
+    y: LREAL := 0;
+    z: LREAL := 0;
+    // The angle between stMotionStage1 and the new axis 1. In Degrees.
+    aDeg: LREAL := 0;
+    // The angle between stMotionStage2 and the new axis 2. In Degrees.
+    bDeg:  LREAL := 0;
+    // The angle between stMotionStage3 and the new axis 3. In Degrees.
+    gDeg: LREAL := 0;
+END_VAR
+VAR_OUTPUT
+    // The measured positions in the new coordinate system.
+    xMeas: LREAL;
+    yMeas: LREAL;
+    zMeas: LREAL;
+    // The necessary positions in starting coordinate system.
+    mx: LREAL;
+    my: LREAL;
+    mz: LREAL;
+END_VAR
+VAR
+    // PI
+    pi: LREAL := 3.1415926535;
+    // The measured positions in starting coordinate system.
+    mxMeas: LREAL;
+    myMeas: LREAL;
+    mzMeas: LREAL;
+    // The angle between stMotionStage1 and the new axis 1. In Radians.
+    a: LREAL := 0;
+    // The angle between stMotionStage2 and the new axis 2. In Radians.
+    b:  LREAL := 0;
+    // The angle between stMotionStage3 and the new axis 3. In Radians.
+    g: LREAL := 0;
+
+    // cos(a)
+    ca: LREAL;
+    // cos(b)
+    cb:  LREAL;
+    // cos(g)
+    cg: LREAL;
+    // sin(a)
+    sa: LREAL;
+    // sin(b)
+    sb:  LREAL;
+    // sin(g)
+    sg: LREAL;
+    // cos(a)^2
+    ca2: LREAL;
+    // cos(b)^2
+    cb2:  LREAL;
+    // cos(g)^2
+    cg2: LREAL;
+    // sin(a)^2
+    sa2: LREAL;
+    // sin(b)^2
+    sb2:  LREAL;
+    // sin(g)^2
+    sg2: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Convert angles in degrees to radians.
+a := aDeg * pi / 180;
+b := bDeg * pi / 180;
+g := gDeg * pi / 180;
+
+sa := sin(a);
+sb := sin(b);
+sg := sin(g);
+ca := cos(a);
+cb := cos(b);
+cg := cos(g);
+
+sa2 := EXPT(sa,2);
+sb2 := EXPT(sb,2);
+sg2 := EXPT(sg,2);
+ca2 := EXPT(ca,2);
+cb2 := EXPT(cb,2);
+cg2 := EXPT(cg,2);
+
+// Get the current measured position for each stage in starting coordinates.
+mxMeas := stMotionStageMx.stAxisStatus.fActPosition;
+myMeas := stMotionStageMy.stAxisStatus.fActPosition;
+mzMeas := stMotionStageMz.stAxisStatus.fActPosition;
+
+// Convert the current measured position for each stage in starting coordinates to new coordinates.
+xMeas := mxMeas*(cb*cg)             + myMeas*(-cb*sg)           + mzMeas*(sb);
+yMeas := mxMeas*(ca*sg + cg*sa*sb)  + myMeas*(ca*cg - sa*sb*sg) + mzMeas*(-cb*sa);
+zMeas := mxMeas*(-ca*cg*sb + sa*sg) + myMeas*(ca*sb*sg + cg*sa) + mzMeas*(ca*cb);
+
+// Convert the desired position in new coordinates to the required position in starting coordinates.
+// This allows the individual motors to move to where they need to be to achieve the desired position in new coordinates.
+mx := x*cb*cg + y*ca*sg + y*cg*sa*sb - z*ca*cg*sb + z*sa*sg;
+my := -x*cb*sg + y*ca*cg - y*sa*sb*sg + z*ca*sb*sg + z*cg*sa;
+mz := x*sb - y*cb*sa + z*ca*cb;
+
+// Set the position for each motor to move to.
+stMotionStageMx.fPosition := mx;
+stMotionStageMy.fPosition := my;
+stMotionStageMz.fPosition := mz;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

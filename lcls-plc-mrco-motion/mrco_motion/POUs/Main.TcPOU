@@ -11,9 +11,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
-    M1 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
-    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE ); // Gas Nozzle X
+    M1 : DUT_MotionStage; // Gas Nozzle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2;
                               .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1';
@@ -21,9 +19,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:02
     '}
-    M2 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
-    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Gas Nozzle Y
+    M2 : DUT_MotionStage; // Gas Nozzle Y
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2;
                               .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1';
@@ -31,9 +27,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:03
     '}
-    M3 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
-    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Gas Nozzle Z
+    M3 : DUT_MotionStage; // Gas Nozzle Z
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 1';
@@ -41,9 +35,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:04
     '}
-    M4 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
-    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle X
+    M4 : DUT_MotionStage; // Sample Paddle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2';
@@ -51,9 +43,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:05
     '}
-    M5 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
-    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Y
+    M5 : DUT_MotionStage; // Sample Paddle Y
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2';
@@ -61,9 +51,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:06
     '}
-    M6 : DUT_MotionStage := (bPowerSelf:=TRUE,
-    nEnableMode:=ENUM_StageEnableMode.DURING_MOTION,
-    nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE); // Sample Paddle Z
+    M6 : DUT_MotionStage; // Sample Paddle Z
 
     // MRCO Axes
     fbMotionStageM1 : FB_MotionStage;
@@ -73,95 +61,78 @@ VAR
     fbMotionStageM5 : FB_MotionStage;
     fbMotionStageM6 : FB_MotionStage;
 
-{*
-    // Persistent Memory
-    fbWritePersistentData : WritePersistentData;
     bInit : BOOL := TRUE;
-    fbWriteDelay : TON;
-    mcSetPosition : ARRAY [1..6] of MC_SetPosition;
-END_VAR
-VAR PERSISTENT
-    fGasNozzleXPos : LREAL;
-    fGasNozzleYPos : LREAL;
-    fGasNozzleZPos : LREAL;
-    fSamplePaddleXPos : LREAL;
-    fSamplePaddleYPos : LREAL;
-    fSamplePaddleZPos : LREAL;  *}
+
+    // The desired position in new coordinate system.
+    x: LREAL := 0;
+    y: LREAL := 0;
+    z: LREAL := 0;
+    // The angle between stMotionStage1 and the new axis 1. In Degrees.
+    aDeg: LREAL := 0;
+    // The angle between stMotionStage2 and the new axis 2. In Degrees.
+    bDeg:  LREAL := 0;
+    // The angle between stMotionStage3 and the new axis 3. In Degrees.
+    gDeg: LREAL := 0;
+    fbCoordinateTransform3D: FB_CoordinateTransform3D;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[{* IF bInit THEN
-    //Sets axes positions with persistent value
-    // Gas Nozzle
-    mcSetPosition[1](Axis:=M1.Axis, Position:=fGasNozzleXPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[2](Axis:=M2.Axis, Position:=fGasNozzleYPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[3](Axis:=M3.Axis, Position:=fGasNozzleZPos, Mode:=FALSE, Execute:=TRUE);
-    // Sample Paddle
-    mcSetPosition[4](Axis:=M4.Axis, Position:=fSamplePaddleXPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[5](Axis:=M5.Axis, Position:=fSamplePaddleYPos, Mode:=FALSE, Execute:=TRUE);
-    mcSetPosition[6](Axis:=M6.Axis, Position:=fSamplePaddleZPos, Mode:=FALSE, Execute:=TRUE);
-    if(mcSetPosition[1].Done and NOT mcSetPosition[1].Error) AND
-      (mcSetPosition[2].Done and NOT mcSetPosition[2].Error) AND
-      (mcSetPosition[3].Done and NOT mcSetPosition[3].Error) AND
-      (mcSetPosition[4].Done and NOT mcSetPosition[4].Error) AND
-      (mcSetPosition[5].Done and NOT mcSetPosition[5].Error) AND
-      (mcSetPosition[6].Done and Not mcSetPosition[6].Error) THEN
-      bInit:=FALSE;
-
-      mcSetPosition[1](Axis:=M1.Axis, Execute:=FALSE);
-      mcSetPosition[2](Axis:=M2.Axis, Execute:=FALSE);
-      mcSetPosition[3](Axis:=M3.Axis, Execute:=FALSE);
-      mcSetPosition[4](Axis:=M4.Axis, Execute:=FALSE);
-      mcSetPosition[5](Axis:=M5.Axis, Execute:=FALSE);
-      mcSetPosition[6](Axis:=M6.Axis, Execute:=FALSE);
-    END_IF
-ELSE  *}
-// Hardware Enable
-//Mrco
-// Gas Nozzle
+      <ST><![CDATA[
+IF bInit THEN
     M1.bHardwareEnable := TRUE;
+    M1.bPowerSelf := TRUE;
+    M1.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M1.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
     M2.bHardwareEnable := TRUE;
+    M2.bPowerSelf := TRUE;
+    M2.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M2.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
     M3.bHardwareEnable := TRUE;
+    M3.bPowerSelf := TRUE;
+    M3.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M3.nEnableMode := E_StageEnableMode.DURING_MOTION;
 
-    fbMotionStageM1(stMotionStage:=M1);
-    fbMotionStageM2(stMotionStage:=M2);
-    fbMotionStageM3(stMotionStage:=M3);
-
-// Sample Paddle
     M4.bHardwareEnable := TRUE;
+    M4.bPowerSelf := TRUE;
+    M4.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M4.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
     M5.bHardwareEnable := TRUE;
+    M5.bPowerSelf := TRUE;
+    M5.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M5.nEnableMode := E_StageEnableMode.DURING_MOTION;
+
     M6.bHardwareEnable := TRUE;
+    M6.bPowerSelf := TRUE;
+    M6.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M6.nEnableMode := E_StageEnableMode.DURING_MOTION;
+END_IF
 
-    fbMotionStageM4(stMotionStage:=M4);
-    fbMotionStageM5(stMotionStage:=M5);
-    fbMotionStageM6(stMotionStage:=M6);
+// Mrco
 
-{* // fbMotionStage
-// MRCO
+// Transform Coordinates to new coordinate system before calling fbMotion so that it knows where to move to move to the new coordinates.
+fbCoordinateTransform3D(
+    stMotionStageMx:=M4,
+    stMotionStageMy:=M5,
+    stMotionStageMz:=M6,
+    x:=x,
+    y:=y,
+    z:=z,
+    aDeg:=aDeg,
+    bDeg:=bDeg,
+    gDeg:=gDeg
+);
+
 // Gas Nozzle
+fbMotionStageM1(stMotionStage:=M1);
+fbMotionStageM2(stMotionStage:=M2);
+fbMotionStageM3(stMotionStage:=M3);
 
 // Sample Paddle
-
-
-// Keep track of position
-// Gas Nozzle
-    fGasNozzleXPos := M1.Axis.NcToPlc.ActPos;
-    fGasNozzleYPos := M2.Axis.NcToPlc.ActPos;
-    fGasNozzleZPos := M3.Axis.NcToPlc.ActPos;
-// Sample Paddle
-    fSamplePaddleXPos := M4.Axis.NcToPlc.ActPos;
-    fSamplePaddleYPos := M5.Axis.NcToPlc.ActPos;
-    fSamplePaddleZPos := M6.Axis.NcToPlc.ActPos;
-
-    IF fbWriteDelay.Q THEN
-        fbWritePersistentData(NETID:='', PORT:=851, START:=TRUE, TMOUT:=T#1S);
-        fbWriteDelay(IN:=FALSE);
-    ELSE
-        fbWritePersistentData(START:=FALSE);
-        fbWriteDelay(IN:=TRUE, PT:=T#0.5S);
-    END_IF
-END_IF;
-
-*}
+fbMotionStageM4(stMotionStage:=M4);
+fbMotionStageM5(stMotionStage:=M5);
+fbMotionStageM6(stMotionStage:=M6);
     ]]></ST>
     </Implementation>
   </POU>
