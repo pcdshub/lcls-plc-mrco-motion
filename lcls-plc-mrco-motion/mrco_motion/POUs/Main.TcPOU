@@ -11,7 +11,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:01
     '}
-    M1 : DUT_MotionStage; // Gas Nozzle X
+    M1 : ST_MotionStage; // Gas Nozzle X
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 2;
                               .bLimitBackwardEnable:=TIIB[GasNozzleY-EL7047]^STM Status^Status^Digital input 1';
@@ -19,7 +19,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:02
     '}
-    M2 : DUT_MotionStage; // Gas Nozzle Y
+    M2 : ST_MotionStage; // Gas Nozzle Y
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 2;
                               .bLimitBackwardEnable:=TIIB[GasNozzleZ-EL7047]^STM Status^Status^Digital input 1';
@@ -27,7 +27,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:03
     '}
-    M3 : DUT_MotionStage; // Gas Nozzle Z
+    M3 : ST_MotionStage; // Gas Nozzle Z
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 2;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleX-EL7047]^STM Status^Status^Digital input 1';
@@ -35,7 +35,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:04
     '}
-    M4 : DUT_MotionStage; // Sample Paddle X
+    M4 : ST_MotionStage; // Sample Paddle X Stage Coordinates
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleY-EL7047]^STM Status^Status^Digital input 2';
@@ -43,7 +43,7 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:05
     '}
-    M5 : DUT_MotionStage; // Sample Paddle Y
+    M5 : ST_MotionStage; // Sample Paddle Y Stage Coordinates
 
     {attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 1;
                               .bLimitBackwardEnable:=TIIB[SamplePaddleZ-EL7047]^STM Status^Status^Digital input 2';
@@ -51,7 +51,20 @@ VAR
     {attribute 'pytmc' := '
         pv: TMO:MRCO:MMS:06
     '}
-    M6 : DUT_MotionStage; // Sample Paddle Z
+    M6 : ST_MotionStage; // Sample Paddle Z Stage Coordinates
+
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:MMS:V4
+    '}
+    M7 : ST_MotionStage; // Sample Paddle X Beam Coordinates (Virtual Axis)
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:MMS:V5
+    '}
+    M8 : ST_MotionStage; // Sample Paddle Y Beam Coordinates (Virtual Axis)
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:MMS:V6
+    '}
+    M9 : ST_MotionStage; // Sample Paddle Z Beam Coordinates (Virtual Axis)
 
     // MRCO Axes
     fbMotionStageM1 : FB_MotionStage;
@@ -60,21 +73,46 @@ VAR
     fbMotionStageM4 : FB_MotionStage;
     fbMotionStageM5 : FB_MotionStage;
     fbMotionStageM6 : FB_MotionStage;
+    fbMotionStageM7 : FB_MotionStage; // Virtual
+    fbMotionStageM8 : FB_MotionStage; // Virtual
+    fbMotionStageM9 : FB_MotionStage; // Virtual
 
     bInit : BOOL := TRUE;
 
-    // The desired position in new coordinate system.
-    x: LREAL := 0;
-    y: LREAL := 0;
-    z: LREAL := 0;
-    // The angle between stMotionStage1 and the new axis 1. In Degrees.
-    aDeg: LREAL := 0;
-    // The angle between stMotionStage2 and the new axis 2. In Degrees.
-    bDeg:  LREAL := 0;
-    // The angle between stMotionStage3 and the new axis 3. In Degrees.
-    gDeg: LREAL := 0;
-    fbCoordinateTransform3D: FB_CoordinateTransform3D;
-END_VAR]]></Declaration>
+    nVirtualEncoderUnitConversion: LREAL := 1000000; // mm to nm
+    {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplyPaddleVX^Enc^Inputs^In^nDataIn1'}
+    nVirtualEncoderM7nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
+    {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplePaddleVY^Enc^Inputs^In^nDataIn1'}
+    nVirtualEncoderM8nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
+    {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplePaddleVZ^Enc^Inputs^In^nDataIn1'}
+    nVirtualEncoderM9nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
+
+    aDeg: LREAL := 22.21; // The angle between stMotionStage1 and the new axis 1. In Degrees.
+    bDeg:  LREAL := 21.61; // The angle between stMotionStage2 and the new axis 2. In Degrees.
+    gDeg: LREAL := 37.86; // The angle between stMotionStage3 and the new axis 3. In Degrees.
+
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:bVirtualAxesActive
+    '}
+    bVirtualAxesActive: BOOL := TRUE;
+
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:PTransform3D
+    '}
+    stPMotionTransform3D: ST_MotionTransform3D;
+    fbPMotionTransform3D: FB_MotionTransform3D;
+
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:VTransform3D
+    '}
+    stVMotionTransform3D: ST_MotionTransform3D;
+    fbVMotionTransform3D: FB_MotionTransform3D;
+
+    fDPosM7: LREAL;
+    fDPosM8: LREAL;
+    fDPosM9: LREAL;
+END_VAR
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 IF bInit THEN
@@ -97,32 +135,160 @@ IF bInit THEN
     M4.bPowerSelf := TRUE;
     M4.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
     M4.nEnableMode := E_StageEnableMode.DURING_MOTION;
+    M4.fVelocity := 0.1;
 
     M5.bHardwareEnable := TRUE;
     M5.bPowerSelf := TRUE;
     M5.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
     M5.nEnableMode := E_StageEnableMode.DURING_MOTION;
+    M5.fVelocity := 0.1;
 
     M6.bHardwareEnable := TRUE;
     M6.bPowerSelf := TRUE;
     M6.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
     M6.nEnableMode := E_StageEnableMode.DURING_MOTION;
+    M6.fVelocity := 0.1;
+
+    M7.bHardwareEnable := TRUE;
+    M7.bPowerSelf := TRUE;
+    M7.bLimitBackwardEnable := TRUE;
+    M7.bLimitForwardEnable := TRUE;
+    M7.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M7.nEnableMode := E_StageEnableMode.DURING_MOTION;
+    M7.fVelocity := 0.1;
+
+    M8.bHardwareEnable := TRUE;
+    M8.bPowerSelf := TRUE;
+    M8.bLimitBackwardEnable := TRUE;
+    M8.bLimitForwardEnable := TRUE;
+    M8.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M8.nEnableMode := E_StageEnableMode.DURING_MOTION;
+    M8.fVelocity := 0.1;
+
+    M9.bHardwareEnable := TRUE;
+    M9.bPowerSelf := TRUE;
+    M9.bLimitBackwardEnable := TRUE;
+    M9.bLimitForwardEnable := TRUE;
+    M9.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
+    M9.nEnableMode := E_StageEnableMode.DURING_MOTION;
+    M9.fVelocity := 0.1;
 END_IF
 
-// Mrco
+// MRCO
 
-// Transform Coordinates to new coordinate system before calling fbMotion so that it knows where to move to move to the new coordinates.
-fbCoordinateTransform3D(
-    stMotionStageMx:=M4,
-    stMotionStageMy:=M5,
-    stMotionStageMz:=M6,
-    x:=x,
-    y:=y,
-    z:=z,
-    aDeg:=aDeg,
-    bDeg:=bDeg,
-    gDeg:=gDeg
+// Set the degree offsets for the coordinate transform from stage coordinates to beam coordinates.
+stPMotionTransform3D.fADeg := aDeg;
+stPMotionTransform3D.fBDeg := bDeg;
+stPMotionTransform3D.fGDeg := gDeg;
+stVMotionTransform3D.fADeg := aDeg;
+stVMotionTransform3D.fBDeg := bDeg;
+stVMotionTransform3D.fGDeg := gDeg;
+
+// Set the actual measured position and velocity for each axis to support the coordinate transform.
+stPMotionTransform3D.fMotorXMeas := M4.stAxisStatus.fActPosition;
+stPMotionTransform3D.fMotorYMeas := M5.stAxisStatus.fActPosition;
+stPMotionTransform3D.fMotorZMeas := M6.stAxisStatus.fActPosition;
+stVMotionTransform3D.fMotorXMeas := M4.stAxisStatus.fActVelocity;
+stVMotionTransform3D.fMotorYMeas := M5.stAxisStatus.fActVelocity;
+stVMotionTransform3D.fMotorZMeas := M6.stAxisStatus.fActVelocity;
+
+// Set the desired position in beam coordinates for each axis to support the coordinate transform.
+stPMotionTransform3D.fXSP := M7.fPosition;
+stPMotionTransform3D.fYSP := M8.fPosition;
+stPMotionTransform3D.fZSP := M9.fPosition;
+
+// Set the desired velocity in beam coordinates. First need to figure out which direction we are moving
+// so that we can apply the correct sign (positive or negative) to the velocity values.
+fDPosM7 := M7.fPosition - M7.stAxisStatus.fActPosition;
+fDPosM8 := M8.fPosition - M8.stAxisStatus.fActPosition;
+fDPosM9 := M9.fPosition - M9.stAxisStatus.fActPosition;
+
+// Apply the correct sign to the velocity value so that the coordinate transform computes correctly.
+IF fDPosM7 < 0 THEN
+    stVMotionTransform3D.fXSP := M7.fVelocity * -1;
+ELSE
+    stVMotionTransform3D.fXSP := M7.fVelocity;
+END_IF
+IF fDPosM8 < 0 THEN
+    stVMotionTransform3D.fYSP := M8.fVelocity * -1;
+ELSE
+    stVMotionTransform3D.fYSP := M8.fVelocity;
+END_IF
+IF fDPosM9 < 0 THEN
+    stVMotionTransform3D.fZSP := M9.fVelocity * -1;
+ELSE
+    stVMotionTransform3D.fZSP := M9.fVelocity;
+END_IF
+
+// Transform Coordinates to new coordinate system before calling fbMotion so that it knows where to move in stage coordinates to get to the desired beam coordinates.
+fbPMotionTransform3D(
+    stMotionTransform3D:=stPMotionTransform3D
 );
+fbVMotionTransform3D(
+    stMotionTransform3D:=stVMotionTransform3D
+);
+
+// Get the converted measured position in beam coordinates and write it to the virtual encoder we have mapped to the NC axes.
+nVirtualEncoderM7nm := LREAL_TO_UDINT(stPMotionTransform3D.fXMeas * nVirtualEncoderUnitConversion);
+nVirtualEncoderM8nm := LREAL_TO_UDINT(stPMotionTransform3D.fYMeas * nVirtualEncoderUnitConversion);
+nVirtualEncoderM9nm := LREAL_TO_UDINT(stPMotionTransform3D.fZMeas * nVirtualEncoderUnitConversion);
+
+M7.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderM7nm);
+M8.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderM8nm);
+M9.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderM9nm);
+
+// If the virtual axes are enabled, then do the following logic. Allows the user to turn off the coordinate transform and
+// run just controlling each individual motor which are in stage coordinates.
+IF bVirtualAxesActive THEN
+    // Get the result of the coordinate transform assigned as the setpoint position for each motor in stage coordinates.
+    M4.fPosition := stPMotionTransform3D.fMotorXSP;
+    M5.fPosition := stPMotionTransform3D.fMotorYSP;
+    M6.fPosition := stPMotionTransform3D.fMotorZSP;
+
+    // Get the result of the coordinate transform assigned as the setpoint velocity for each motor in stage coordinates.
+    // Take the absolute value because the velocity value is in reality just a speed setting.
+    M4.fVelocity := ABS(stVMotionTransform3D.fMotorXSP);
+    M5.fVelocity := ABS(stVMotionTransform3D.fMotorYSP);
+    M6.fVelocity := ABS(stVMotionTransform3D.fMotorZSP);
+
+    // If any virtual axis was requested to move, we have to call bExecute on all the motors,
+    // because any move in beam coordinates will likely require a move on all three motors.
+    IF M7.bExecute OR M8.bExecute OR M9.bExecute THEN
+        M4.bExecute := TRUE;
+        M5.bExecute := TRUE;
+        M6.bExecute := TRUE;
+    END_IF
+
+    // If any virtual axis detects an error, make sure to propagate the error status to the actual
+    // axes.
+    IF M7.bError OR M8.bError OR M9.bError THEN
+        M4.bExecute := FALSE;
+        M5.bExecute := FALSE;
+        M6.bExecute := FALSE;
+        M4.bError := TRUE;
+        M5.bError := TRUE;
+        M6.bError := TRUE;
+        M4.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z. Check Virtual X, Y, and Z.';
+        M5.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z, Check Virtual X, Y, and Z.';
+        M6.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z, Check Virtual X, Y, and Z.';
+    END_IF
+
+    // If any actual axis detects an error, make sure to propagate the error status to the virtual
+    // axes.
+    IF M4.bError OR M5.bError OR M6.bError THEN
+        M7.bExecute := FALSE;
+        M8.bExecute := FALSE;
+        M9.bExecute := FALSE;
+        M7.bError := TRUE;
+        M8.bError := TRUE;
+        M9.bError := TRUE;
+        M7.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z. Check X, Y, and Z.';
+        M8.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
+        M9.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
+    END_IF
+END_IF
+
+// Process FB_MotionStage for each axis.
 
 // Gas Nozzle
 fbMotionStageM1(stMotionStage:=M1);
@@ -133,6 +299,11 @@ fbMotionStageM3(stMotionStage:=M3);
 fbMotionStageM4(stMotionStage:=M4);
 fbMotionStageM5(stMotionStage:=M5);
 fbMotionStageM6(stMotionStage:=M6);
+
+// Sample Paddle (Virtual)
+fbMotionStageM7(stMotionStage:=M7);
+fbMotionStageM8(stMotionStage:=M8);
+fbMotionStageM9(stMotionStage:=M9);
     ]]></ST>
     </Implementation>
   </POU>

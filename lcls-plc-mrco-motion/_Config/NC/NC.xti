@@ -22,5 +22,8 @@
 		<Axis File="SamplePaddleX.xti" Id="4"/>
 		<Axis File="SamplePaddleY.xti" Id="5"/>
 		<Axis File="SamplePaddleZ.xti" Id="6"/>
+		<Axis File="SamplyPaddleVX.xti" Id="7"/>
+		<Axis File="SamplePaddleVY.xti" Id="8"/>
+		<Axis File="SamplePaddleVZ.xti" Id="9"/>
 	</NC>
 </TcSmItem>

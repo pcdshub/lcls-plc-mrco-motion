@@ -15,10 +15,13 @@
     <LibraryReferences>{24b5dd16-71e3-4f6c-9b1e-28ad6bea8a5f}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\ST_MotionTransform3D.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_CoordinateTransform3D.TcPOU">
+    <Compile Include="POUs\FB_MotionTransform3D.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Main.TcPOU">

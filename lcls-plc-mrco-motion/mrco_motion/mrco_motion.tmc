@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" Hash="{89C7FD7A-739D-B590-E571-6630EC5B218C}" GeneratedBy="TwinCAT XAE Plc">
+<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" Hash="{F27849DA-BCC0-D8F2-B703-11776A3154F2}" GeneratedBy="TwinCAT XAE Plc">
   <DataTypes>
     <DataType>
       <Name Namespace="Tc2_System">T_AmsNetID</Name>
@@ -3914,31 +3914,31 @@
         <Name>bBusy</Name>
         <Type>BOOL</Type>
         <BitSize>8</BitSize>
-        <GetCodeOffs>79724568</GetCodeOffs>
+        <GetCodeOffs>79847136</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>bError</Name>
         <Type>BOOL</Type>
         <BitSize>8</BitSize>
-        <GetCodeOffs>79724604</GetCodeOffs>
+        <GetCodeOffs>79847172</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>hrErrorCode</Name>
         <Type GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</Type>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79724612</GetCodeOffs>
+        <GetCodeOffs>79847180</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>nStringSize</Name>
         <Type>UDINT</Type>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79724592</GetCodeOffs>
+        <GetCodeOffs>79847160</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>sResult</Name>
         <Type>STRING(255)</Type>
         <BitSize>2048</BitSize>
-        <GetCodeOffs>79724608</GetCodeOffs>
+        <GetCodeOffs>79847176</GetCodeOffs>
       </PropertyItem>
       <Method>
         <Name RpcEnable="plc" VTableIndex="0">__getbBusy</Name>
@@ -5177,15 +5177,15 @@
         <Name>nId</Name>
         <Type>UDINT</Type>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79724508</GetCodeOffs>
-        <SetCodeOffs>79724532</SetCodeOffs>
+        <GetCodeOffs>79847076</GetCodeOffs>
+        <SetCodeOffs>79847100</SetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>sName</Name>
         <Type>STRING(255)</Type>
         <BitSize>2048</BitSize>
-        <GetCodeOffs>79724548</GetCodeOffs>
-        <SetCodeOffs>79724560</SetCodeOffs>
+        <GetCodeOffs>79847116</GetCodeOffs>
+        <SetCodeOffs>79847128</SetCodeOffs>
       </PropertyItem>
       <Method>
         <Name>ExtendName</Name>
@@ -5431,37 +5431,37 @@
         <Name>eSeverity</Name>
         <Type GUID="{B57D3F4A-0836-49B0-81C3-BED5F4817EC9}">TcEventSeverity</Type>
         <BitSize>16</BitSize>
-        <GetCodeOffs>79724660</GetCodeOffs>
+        <GetCodeOffs>79847228</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>ipSourceInfo</Name>
         <Type Namespace="lcls_twincat_motion.LCLS_General.Tc3_EventLogger">I_TcSourceInfo</Type>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79724640</GetCodeOffs>
+        <GetCodeOffs>79847208</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>nEventId</Name>
         <Type>UDINT</Type>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79724728</GetCodeOffs>
+        <GetCodeOffs>79847296</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>nUniqueId</Name>
         <Type>UDINT</Type>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79724732</GetCodeOffs>
+        <GetCodeOffs>79847300</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>sEventClassName</Name>
         <Type>STRING(255)</Type>
         <BitSize>2048</BitSize>
-        <GetCodeOffs>79724688</GetCodeOffs>
+        <GetCodeOffs>79847256</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>sEventText</Name>
         <Type>STRING(255)</Type>
         <BitSize>2048</BitSize>
-        <GetCodeOffs>79724736</GetCodeOffs>
+        <GetCodeOffs>79847304</GetCodeOffs>
       </PropertyItem>
       <Method>
         <Name>EqualsToEventClass</Name>
@@ -6060,7 +6060,7 @@
         <Name>nTimeSent</Name>
         <Type>ULINT</Type>
         <BitSize>64</BitSize>
-        <GetCodeOffs>79724760</GetCodeOffs>
+        <GetCodeOffs>79847328</GetCodeOffs>
       </PropertyItem>
       <Method>
         <Name>SetJsonAttribute</Name>
@@ -12855,6 +12855,21 @@ contributing fast faults, unless the FFO is currently vetoed.
       </EnumInfo>
     </DataType>
     <DataType>
+      <Name>USINT (USINT#1..255)</Name>
+      <BitSize>8</BitSize>
+      <BaseType>USINT</BaseType>
+      <Properties>
+        <Property>
+          <Name>LowerBorder</Name>
+          <Value>1</Value>
+        </Property>
+        <Property>
+          <Name>UpperBorder</Name>
+          <Value>255</Value>
+        </Property>
+      </Properties>
+    </DataType>
+    <DataType>
       <Name Namespace="lcls_twincat_motion.Tc3_IPCDiag">E_IPCDiag_Datatype</Name>
       <BitSize>8</BitSize>
       <BaseType>BYTE</BaseType>
@@ -13209,14 +13224,14 @@ contributing fast faults, unless the FFO is currently vetoed.
         <Type>BOOL</Type>
         <Comment> is TRUE if a buffer is available.</Comment>
         <BitSize>8</BitSize>
-        <GetCodeOffs>79726960</GetCodeOffs>
+        <GetCodeOffs>79849528</GetCodeOffs>
       </PropertyItem>
       <PropertyItem>
         <Name>nBufferSize</Name>
         <Type>UDINT</Type>
         <Comment> current buffer size in bytes.</Comment>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79726912</GetCodeOffs>
+        <GetCodeOffs>79849480</GetCodeOffs>
       </PropertyItem>
       <Method>
         <Name RpcEnable="plc" VTableIndex="3">__getnBufferSize</Name>
@@ -14308,7 +14323,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         <Type Namespace="lcls_twincat_motion.Tc3_IPCDiag.Tc3_DynamicMemory">I_DynMem_Manager</Type>
         <Comment> dynamic memory manager used in the Tc3_IPCDiag library</Comment>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79727036</GetCodeOffs>
+        <GetCodeOffs>79849604</GetCodeOffs>
       </PropertyItem>
       <Method>
         <Name>GetParameterByIdx</Name>
@@ -14450,7 +14465,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Parameter>
         <Local>
           <Name>nParameterIdx</Name>
-          <Type>USINT (1..255)</Type>
+          <Type>USINT (USINT#1..255)</Type>
           <BitSize>8</BitSize>
         </Local>
         <Local>
@@ -14966,7 +14981,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         <Type Namespace="lcls_twincat_motion.Tc3_IPCDiag.Tc3_DynamicMemory">I_DynMem_Manager</Type>
         <Comment> dynamic memory manager used in the Tc3_IPCDiag library</Comment>
         <BitSize>32</BitSize>
-        <GetCodeOffs>79727092</GetCodeOffs>
+        <GetCodeOffs>79849660</GetCodeOffs>
       </PropertyItem>
       <Method>
         <Name>Clear</Name>
@@ -16217,7 +16232,7 @@ contributing fast faults, unless the FFO is currently vetoed.
       </Method>
     </DataType>
     <DataType>
-      <Name>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Name>
+      <Name>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Name>
       <BitSize>16</BitSize>
       <BaseType>UINT</BaseType>
       <Properties>
@@ -16228,21 +16243,6 @@ contributing fast faults, unless the FFO is currently vetoed.
         <Property>
           <Name>UpperBorder</Name>
           <Value>100</Value>
-        </Property>
-      </Properties>
-    </DataType>
-    <DataType>
-      <Name>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Name>
-      <BitSize>16</BitSize>
-      <BaseType>UINT</BaseType>
-      <Properties>
-        <Property>
-          <Name>LowerBorder</Name>
-          <Value>1</Value>
-        </Property>
-        <Property>
-          <Name>UpperBorder</Name>
-          <Value>1000</Value>
         </Property>
       </Properties>
     </DataType>
@@ -16263,7 +16263,7 @@ contributing fast faults, unless the FFO is currently vetoed.
       </SubItem>
       <SubItem>
         <Name>PrintingTestSuiteResultNumber</Name>
-        <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+        <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
         <BitSize>16</BitSize>
         <BitOffs>96</BitOffs>
       </SubItem>
@@ -16301,12 +16301,12 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>TestsInTestSuiteCounter</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Type>
           <BitSize>16</BitSize>
         </Local>
         <Local>
           <Name>MaxNumberOfTestsToPrint</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Type>
           <BitSize>16</BitSize>
         </Local>
         <Local>
@@ -17137,7 +17137,7 @@ contributing fast faults, unless the FFO is currently vetoed.
       </SubItem>
       <SubItem>
         <Name>WritingTestSuiteResultNumber</Name>
-        <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+        <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
         <BitSize>16</BitSize>
         <BitOffs>530208</BitOffs>
       </SubItem>
@@ -17517,6 +17517,21 @@ contributing fast faults, unless the FFO is currently vetoed.
         <Property>
           <Name>PouType</Name>
           <Value>FunctionBlock</Value>
+        </Property>
+      </Properties>
+    </DataType>
+    <DataType>
+      <Name>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestsForEachTestSuite)</Name>
+      <BitSize>16</BitSize>
+      <BaseType>UINT</BaseType>
+      <Properties>
+        <Property>
+          <Name>LowerBorder</Name>
+          <Value>1</Value>
+        </Property>
+        <Property>
+          <Name>UpperBorder</Name>
+          <Value>100</Value>
         </Property>
       </Properties>
     </DataType>
@@ -19371,6 +19386,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>FindTestSuiteInstancePath</Name>
@@ -19486,7 +19506,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>NumberOfTestsToAnalyse</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
           <BitSize>16</BitSize>
         </Local>
         <Local>
@@ -19629,6 +19649,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>AssertArrayEquals_BYTE</Name>
@@ -19730,6 +19755,11 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>ActualsIndex</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
+        <Local>
+          <Name>__Index__0</Name>
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
@@ -19889,6 +19919,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>AssertEquals_LTIME</Name>
@@ -20011,6 +20046,11 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>ActualsIndex</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
+        <Local>
+          <Name>__Index__0</Name>
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
@@ -20152,6 +20192,11 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>ActualsIndex</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
+        <Local>
+          <Name>__Index__0</Name>
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
@@ -20913,6 +20958,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>SetHasStartedRunning</Name>
@@ -20961,7 +21011,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>NumberOfTestsToAnalyse</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
           <BitSize>16</BitSize>
         </Local>
       </Method>
@@ -21073,6 +21123,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>GetHasStartedRunning</Name>
@@ -21175,6 +21230,11 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>ActualsIndex</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
+        <Local>
+          <Name>__Index__0</Name>
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
@@ -21329,6 +21389,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>AssertEquals_DINT</Name>
@@ -21454,6 +21519,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>AssertEquals_STRING</Name>
@@ -21522,7 +21592,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>NumberOfTestsToAnalyse</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
           <BitSize>16</BitSize>
         </Local>
       </Method>
@@ -21626,6 +21696,11 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>ActualsIndex</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
+        <Local>
+          <Name>__Index__0</Name>
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
@@ -21911,6 +21986,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>CalculateAndSetNumberOfAssertsForTest</Name>
@@ -21961,7 +22041,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>NumberOfTestsToAnalyse</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
           <BitSize>16</BitSize>
         </Local>
       </Method>
@@ -22320,7 +22400,7 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>NumberOfTestsToAnalyse</Name>
-          <Type>UINT (1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
+          <Type>UINT (UINT#1..GVL_Param_TcUnit.MaxNumberOfTestSuites)</Type>
           <BitSize>16</BitSize>
         </Local>
       </Method>
@@ -22704,6 +22784,11 @@ contributing fast faults, unless the FFO is currently vetoed.
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
+        <Local>
+          <Name>__Index__0</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
       </Method>
       <Method>
         <Name>AssertArrayEquals_UDINT</Name>
@@ -22795,6 +22880,11 @@ contributing fast faults, unless the FFO is currently vetoed.
         </Local>
         <Local>
           <Name>ActualsIndex</Name>
+          <Type>DINT</Type>
+          <BitSize>32</BitSize>
+        </Local>
+        <Local>
+          <Name>__Index__0</Name>
           <Type>DINT</Type>
           <BitSize>32</BitSize>
         </Local>
@@ -29267,17 +29357,6 @@ External Setpoint Generation:
           </Property>
         </Properties>
       </SubItem>
-    </DataType>
-    <DataType>
-      <Name Namespace="lcls_twincat_motion">DUT_MotionStage</Name>
-      <BitSize>25984</BitSize>
-      <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
-      <Properties>
-        <Property>
-          <Name>obsolete</Name>
-          <Value>DUT_MotionStage has been renamed to ST_MotionStage</Value>
-        </Property>
-      </Properties>
     </DataType>
     <DataType>
       <Name Namespace="Tc2_MC2">_E_TcMC_STATES</Name>
@@ -37323,6 +37402,471 @@ External Setpoint Generation:
       </Properties>
     </DataType>
     <DataType>
+      <Name>ST_MotionTransform3D</Name>
+      <BitSize>960</BitSize>
+      <SubItem>
+        <Name>fADeg</Name>
+        <Type>LREAL</Type>
+        <Comment> "alpha" - the acute angle in degrees between motor axis "x" and resultant coordinate system "x".</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>0</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fADeg
+        io: io
+        field: DESC "alpha" - the acute angle in degrees between motor axis "x" and resultant coordinate system "x".
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fBDeg</Name>
+        <Type>LREAL</Type>
+        <Comment> "beta" - the acute angle in degrees between motor axis "y" and resultant coordinate system "y".</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>64</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fBDeg
+        io: io
+        field: DESC "beta" - the acute angle in degrees between motor axis "y" and resultant coordinate system "y".
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fGDeg</Name>
+        <Type>LREAL</Type>
+        <Comment> "gamma" - The acute angle in degrees between motor axis "z" and resultant coordinate system "z".</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>128</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fGDeg
+        io: io
+        field: DESC "gamma" - the acute angle in degrees between motor axis "z" and resultant coordinate system "z".
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fXSP</Name>
+        <Type>LREAL</Type>
+        <Comment> The desired x position in the resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>192</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fXSP
+        io: io
+        field: DESC The desired final x position in the resultant coordinates.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fYSP</Name>
+        <Type>LREAL</Type>
+        <Comment> The desired y position in the resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>256</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fYSP
+        io: io
+        field: DESC The desired final y position in the resultant coordinates.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fZSP</Name>
+        <Type>LREAL</Type>
+        <Comment> The desired z position in the resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>320</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fZSP
+        io: io
+        field: DESC The desired final z position in the resultant coordinates.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fXMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> The measured x position in the resultant coordinate system. Calculated internally.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>384</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fXMeas
+        io: i
+        field: DESC The measured x position in the resultant coordinates.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fYMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> The measured y position in the resultant coordinate system. Calculated internally.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>448</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fYMeas
+        io: i
+        field: DESC The measured y position in the resultant coordinates.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fZMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> The measured z position in the resultant coordinate system. Calculated internally.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>512</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fZMeas
+        io: i
+        field: DESC The measured z position in the resultant coordinates.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fMotorXSP</Name>
+        <Type>LREAL</Type>
+        <Comment> The desired x position in the motor coordinate system. Calculated internally.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>576</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fMotorXSP
+        io: i
+        field: DESC The desired x position in the motor coordinate system. Calculated internally.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fMotorYSP</Name>
+        <Type>LREAL</Type>
+        <Comment> The desired y position in the motor coordinate system. Calculated internally.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>640</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fMotorYSP
+        io: i
+        field: DESC The desired y position in the motor coordinate system. Calculated internally.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fMotorZSP</Name>
+        <Type>LREAL</Type>
+        <Comment> The desired z position in the motor coordinate system. Calculated internally.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>704</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fMotorZSP
+        io: i
+        field: DESC The desired z position in the motor coordinate system. Calculated internally.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fMotorXMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> The measured x position in the motor coordinate system. Intended from encoder input.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>768</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fMotorXMeas
+        io: i
+        field: DESC The measured x position in the motor coordinate system. Intended from encoder input.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fMotorYMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> The measured y position in the motor coordinate system. Intended from encoder input.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>832</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fMotorYMeas
+        io: i
+        field: DESC The measured y position in the motor coordinate system. Intended from encoder input.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>fMotorZMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> The measured z position in the motor coordinate system. Intended from encoder input.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>896</BitOffs>
+        <Properties>
+          <Property>
+            <Name>pytmc</Name>
+            <Value>
+        pv: fMotorZMeas
+        io: i
+        field: DESC The measured z position in the motor coordinate system. Intended from encoder input.
+    </Value>
+          </Property>
+        </Properties>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name>FB_MotionTransform3D</Name>
+      <BitSize>1536</BitSize>
+      <SubItem>
+        <Name>stMotionTransform3D</Name>
+        <Type ReferenceTo="true">ST_MotionTransform3D</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+        <Properties>
+          <Property>
+            <Name>ItemType</Name>
+            <Value>InOut</Value>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>bInit</Name>
+        <Type>BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>64</BitOffs>
+        <Default>
+          <Value>1</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>mx</Name>
+        <Type>LREAL</Type>
+        <Comment> Setpoint x in motor coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>my</Name>
+        <Type>LREAL</Type>
+        <Comment> Setpoint y in motor coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>mz</Name>
+        <Type>LREAL</Type>
+        <Comment> Setpoint z in motor coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>x</Name>
+        <Type>LREAL</Type>
+        <Comment> Setpoint x in resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>320</BitOffs>
+        <Default>
+          <Value>0</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>y</Name>
+        <Type>LREAL</Type>
+        <Comment> Setpoint y in resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>384</BitOffs>
+        <Default>
+          <Value>0</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>z</Name>
+        <Type>LREAL</Type>
+        <Comment> Setpoint z in resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>448</BitOffs>
+        <Default>
+          <Value>0</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>xMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> Measured x in resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>512</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>yMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> Measured y in resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>576</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>zMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> Measured z in resultant coordinate system.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>640</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>mxMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> Measured x in motor coordinates.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>704</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>myMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> Measured y in motor coordinates.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>768</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>mzMeas</Name>
+        <Type>LREAL</Type>
+        <Comment> Measured z in motor coordinates.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>832</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>a</Name>
+        <Type>LREAL</Type>
+        <Comment> Alpha in radians.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>896</BitOffs>
+        <Default>
+          <Value>0</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>b</Name>
+        <Type>LREAL</Type>
+        <Comment> Beta in radians.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>960</BitOffs>
+        <Default>
+          <Value>0</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>g</Name>
+        <Type>LREAL</Type>
+        <Comment> Gamma in radians.</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1024</BitOffs>
+        <Default>
+          <Value>0</Value>
+        </Default>
+      </SubItem>
+      <SubItem>
+        <Name>ca</Name>
+        <Type>LREAL</Type>
+        <Comment> cos(a)</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1088</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>cb</Name>
+        <Type>LREAL</Type>
+        <Comment> cos(b)</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1152</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>cg</Name>
+        <Type>LREAL</Type>
+        <Comment> cos(g)</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1216</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>sa</Name>
+        <Type>LREAL</Type>
+        <Comment> sin(a)</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1280</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>sb</Name>
+        <Type>LREAL</Type>
+        <Comment> sin(b)</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1344</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>sg</Name>
+        <Type>LREAL</Type>
+        <Comment> sin(g)</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1408</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>pi</Name>
+        <Type>LREAL</Type>
+        <Comment> pi constant</Comment>
+        <BitSize>64</BitSize>
+        <BitOffs>1472</BitOffs>
+        <Default>
+          <Value>3.1415926535</Value>
+        </Default>
+      </SubItem>
+      <Properties>
+        <Property>
+          <Name>PouType</Name>
+          <Value>FunctionBlock</Value>
+        </Property>
+      </Properties>
+    </DataType>
+    <DataType>
       <Name>VERSION</Name>
       <BitSize>64</BitSize>
       <SubItem>
@@ -38674,363 +39218,6 @@ External Setpoint Generation:
         <Hide GUID="{9E76D1D7-D744-4E3D-B111-F6F94B60E6AB}"/>
       </Hides>
     </DataType>
-    <DataType>
-      <Name>FB_CoordinateTransform3D</Name>
-      <BitSize>2112</BitSize>
-      <SubItem>
-        <Name>stMotionStageMx</Name>
-        <Type Namespace="lcls_twincat_motion" ReferenceTo="true">ST_MotionStage</Type>
-        <BitSize>32</BitSize>
-        <BitOffs>32</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>InOut</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>stMotionStageMy</Name>
-        <Type Namespace="lcls_twincat_motion" ReferenceTo="true">ST_MotionStage</Type>
-        <BitSize>32</BitSize>
-        <BitOffs>64</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>InOut</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>stMotionStageMz</Name>
-        <Type Namespace="lcls_twincat_motion" ReferenceTo="true">ST_MotionStage</Type>
-        <BitSize>32</BitSize>
-        <BitOffs>96</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>InOut</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>x</Name>
-        <Type>LREAL</Type>
-        <Comment> The desired position in new coordinate system.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>128</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>y</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>192</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>z</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>256</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>aDeg</Name>
-        <Type>LREAL</Type>
-        <Comment> The angle between stMotionStage1 and the new axis 1. In Degrees.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>320</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>bDeg</Name>
-        <Type>LREAL</Type>
-        <Comment> The angle between stMotionStage2 and the new axis 2. In Degrees.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>384</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>gDeg</Name>
-        <Type>LREAL</Type>
-        <Comment> The angle between stMotionStage3 and the new axis 3. In Degrees.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>448</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Input</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>xMeas</Name>
-        <Type>LREAL</Type>
-        <Comment> The measured positions in the new coordinate system.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>512</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Output</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>yMeas</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>576</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Output</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>zMeas</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>640</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Output</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>mx</Name>
-        <Type>LREAL</Type>
-        <Comment> The necessary positions in starting coordinate system.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>704</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Output</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>my</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>768</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Output</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>mz</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>832</BitOffs>
-        <Properties>
-          <Property>
-            <Name>ItemType</Name>
-            <Value>Output</Value>
-          </Property>
-        </Properties>
-      </SubItem>
-      <SubItem>
-        <Name>pi</Name>
-        <Type>LREAL</Type>
-        <Comment> PI</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>896</BitOffs>
-        <Default>
-          <Value>3.1415926535</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>mxMeas</Name>
-        <Type>LREAL</Type>
-        <Comment> The measured positions in starting coordinate system.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>960</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>myMeas</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>1024</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>mzMeas</Name>
-        <Type>LREAL</Type>
-        <BitSize>64</BitSize>
-        <BitOffs>1088</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>a</Name>
-        <Type>LREAL</Type>
-        <Comment> The angle between stMotionStage1 and the new axis 1. In Radians.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1152</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>b</Name>
-        <Type>LREAL</Type>
-        <Comment> The angle between stMotionStage2 and the new axis 2. In Radians.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1216</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>g</Name>
-        <Type>LREAL</Type>
-        <Comment> The angle between stMotionStage3 and the new axis 3. In Radians.</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1280</BitOffs>
-        <Default>
-          <Value>0</Value>
-        </Default>
-      </SubItem>
-      <SubItem>
-        <Name>ca</Name>
-        <Type>LREAL</Type>
-        <Comment> cos(a)</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1344</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>cb</Name>
-        <Type>LREAL</Type>
-        <Comment> cos(b)</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1408</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>cg</Name>
-        <Type>LREAL</Type>
-        <Comment> cos(g)</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1472</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>sa</Name>
-        <Type>LREAL</Type>
-        <Comment> sin(a)</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1536</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>sb</Name>
-        <Type>LREAL</Type>
-        <Comment> sin(b)</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1600</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>sg</Name>
-        <Type>LREAL</Type>
-        <Comment> sin(g)</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1664</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>ca2</Name>
-        <Type>LREAL</Type>
-        <Comment> cos(a)^2</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1728</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>cb2</Name>
-        <Type>LREAL</Type>
-        <Comment> cos(b)^2</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1792</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>cg2</Name>
-        <Type>LREAL</Type>
-        <Comment> cos(g)^2</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1856</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>sa2</Name>
-        <Type>LREAL</Type>
-        <Comment> sin(a)^2</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1920</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>sb2</Name>
-        <Type>LREAL</Type>
-        <Comment> sin(b)^2</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>1984</BitOffs>
-      </SubItem>
-      <SubItem>
-        <Name>sg2</Name>
-        <Type>LREAL</Type>
-        <Comment> sin(g)^2</Comment>
-        <BitSize>64</BitSize>
-        <BitOffs>2048</BitOffs>
-      </SubItem>
-      <Properties>
-        <Property>
-          <Name>PouType</Name>
-          <Value>FunctionBlock</Value>
-        </Property>
-      </Properties>
-    </DataType>
   </DataTypes>
   <Modules>
     <Module GUID="{661B40ED-AEC3-4C67-9C61-2B71CC714620}" TcSmClass="TComPlcObjDef">
@@ -39052,7 +39239,7 @@ External Setpoint Generation:
           <AreaNo AreaType="InputDst" CreateSymbols="true">0</AreaNo>
           <Name>PlcTask Inputs</Name>
           <ContextId>0</ContextId>
-          <ByteSize>80412672</ByteSize>
+          <ByteSize>80478208</ByteSize>
           <Symbol>
             <Name>Main.M1.Axis.NcToPlc</Name>
             <BitSize>2048</BitSize>
@@ -39732,6 +39919,345 @@ External Setpoint Generation:
             <BitOffs>635818832</BitOffs>
           </Symbol>
           <Symbol>
+            <Name>Main.M7.Axis.NcToPlc</Name>
+            <BitSize>2048</BitSize>
+            <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635836672</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.bLimitForwardEnable</Name>
+            <Comment> NC Forward Limit Switch: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844672</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.bLimitBackwardEnable</Name>
+            <Comment> NC Backward Limit Switch: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844680</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.bHome</Name>
+            <Comment> NO Home Switch: TRUE if at home</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844688</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.bHardwareEnable</Name>
+            <Comment> NC STO Input: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: PLC:bHardwareEnable
+        io: i
+        field: ZNAM FALSE
+        field: ONAM TRUE
+        field: DESC TRUE if STO not hit
+    </Value>
+              </Property>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844704</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.nRawEncoderULINT</Name>
+            <Comment> Raw encoder IO for ULINT (Biss-C)</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>ULINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844736</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.nRawEncoderUINT</Name>
+            <Comment> Raw encoder IO for UINT (Relative Encoders)</Comment>
+            <BitSize>16</BitSize>
+            <BaseType>UINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844800</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.nRawEncoderINT</Name>
+            <Comment> Raw encoder IO for INT (LVDT)</Comment>
+            <BitSize>16</BitSize>
+            <BaseType>INT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844816</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.Axis.NcToPlc</Name>
+            <BitSize>2048</BitSize>
+            <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635862656</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.bLimitForwardEnable</Name>
+            <Comment> NC Forward Limit Switch: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870656</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.bLimitBackwardEnable</Name>
+            <Comment> NC Backward Limit Switch: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870664</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.bHome</Name>
+            <Comment> NO Home Switch: TRUE if at home</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870672</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.bHardwareEnable</Name>
+            <Comment> NC STO Input: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: PLC:bHardwareEnable
+        io: i
+        field: ZNAM FALSE
+        field: ONAM TRUE
+        field: DESC TRUE if STO not hit
+    </Value>
+              </Property>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870688</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.nRawEncoderULINT</Name>
+            <Comment> Raw encoder IO for ULINT (Biss-C)</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>ULINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870720</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.nRawEncoderUINT</Name>
+            <Comment> Raw encoder IO for UINT (Relative Encoders)</Comment>
+            <BitSize>16</BitSize>
+            <BaseType>UINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870784</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.nRawEncoderINT</Name>
+            <Comment> Raw encoder IO for INT (LVDT)</Comment>
+            <BitSize>16</BitSize>
+            <BaseType>INT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870800</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.Axis.NcToPlc</Name>
+            <BitSize>2048</BitSize>
+            <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635888640</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.bLimitForwardEnable</Name>
+            <Comment> NC Forward Limit Switch: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896640</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.bLimitBackwardEnable</Name>
+            <Comment> NC Backward Limit Switch: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896648</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.bHome</Name>
+            <Comment> NO Home Switch: TRUE if at home</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896656</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.bHardwareEnable</Name>
+            <Comment> NC STO Input: TRUE if ok to move</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: PLC:bHardwareEnable
+        io: i
+        field: ZNAM FALSE
+        field: ONAM TRUE
+        field: DESC TRUE if STO not hit
+    </Value>
+              </Property>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896672</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.nRawEncoderULINT</Name>
+            <Comment> Raw encoder IO for ULINT (Biss-C)</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>ULINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896704</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.nRawEncoderUINT</Name>
+            <Comment> Raw encoder IO for UINT (Relative Encoders)</Comment>
+            <BitSize>16</BitSize>
+            <BaseType>UINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896768</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.nRawEncoderINT</Name>
+            <Comment> Raw encoder IO for INT (LVDT)</Comment>
+            <BitSize>16</BitSize>
+            <BaseType>INT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896784</BitOffs>
+          </Symbol>
+          <Symbol>
             <Name>Main.fbMotionStageM1.fbDriveVirtual.MasterAxis.NcToPlc</Name>
             <BitSize>2048</BitSize>
             <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
@@ -39741,7 +40267,7 @@ External Setpoint Generation:
                 <Value>Input</Value>
               </Property>
             </Properties>
-            <BitOffs>635838080</BitOffs>
+            <BitOffs>635916032</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM2.fbDriveVirtual.MasterAxis.NcToPlc</Name>
@@ -39753,7 +40279,7 @@ External Setpoint Generation:
                 <Value>Input</Value>
               </Property>
             </Properties>
-            <BitOffs>636137472</BitOffs>
+            <BitOffs>636215424</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM3.fbDriveVirtual.MasterAxis.NcToPlc</Name>
@@ -39765,7 +40291,7 @@ External Setpoint Generation:
                 <Value>Input</Value>
               </Property>
             </Properties>
-            <BitOffs>636436864</BitOffs>
+            <BitOffs>636514816</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM4.fbDriveVirtual.MasterAxis.NcToPlc</Name>
@@ -39777,7 +40303,7 @@ External Setpoint Generation:
                 <Value>Input</Value>
               </Property>
             </Properties>
-            <BitOffs>636736256</BitOffs>
+            <BitOffs>636814208</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM5.fbDriveVirtual.MasterAxis.NcToPlc</Name>
@@ -39789,7 +40315,7 @@ External Setpoint Generation:
                 <Value>Input</Value>
               </Property>
             </Properties>
-            <BitOffs>637035648</BitOffs>
+            <BitOffs>637113600</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM6.fbDriveVirtual.MasterAxis.NcToPlc</Name>
@@ -39801,14 +40327,50 @@ External Setpoint Generation:
                 <Value>Input</Value>
               </Property>
             </Properties>
-            <BitOffs>637335040</BitOffs>
+            <BitOffs>637412992</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM7.fbDriveVirtual.MasterAxis.NcToPlc</Name>
+            <BitSize>2048</BitSize>
+            <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>637712384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM8.fbDriveVirtual.MasterAxis.NcToPlc</Name>
+            <BitSize>2048</BitSize>
+            <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638011776</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM9.fbDriveVirtual.MasterAxis.NcToPlc</Name>
+            <BitSize>2048</BitSize>
+            <BaseType GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}">NCTOPLC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Input</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638311168</BitOffs>
           </Symbol>
         </DataArea>
         <DataArea>
           <AreaNo AreaType="OutputSrc" CreateSymbols="true">1</AreaNo>
           <Name>PlcTask Outputs</Name>
           <ContextId>0</ContextId>
-          <ByteSize>80412672</ByteSize>
+          <ByteSize>80478208</ByteSize>
           <Symbol>
             <Name>Main.M1.Axis.PlcToNc</Name>
             <BitSize>1024</BitSize>
@@ -39960,6 +40522,81 @@ External Setpoint Generation:
             <BitOffs>635818712</BitOffs>
           </Symbol>
           <Symbol>
+            <Name>Main.M7.Axis.PlcToNc</Name>
+            <BitSize>1024</BitSize>
+            <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635835648</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M7.bBrakeRelease</Name>
+            <Comment> NC Brake Output: TRUE to release brake</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635844696</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.Axis.PlcToNc</Name>
+            <BitSize>1024</BitSize>
+            <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635861632</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8.bBrakeRelease</Name>
+            <Comment> NC Brake Output: TRUE to release brake</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635870680</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.Axis.PlcToNc</Name>
+            <BitSize>1024</BitSize>
+            <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635887616</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9.bBrakeRelease</Name>
+            <Comment> NC Brake Output: TRUE to release brake</Comment>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>635896664</BitOffs>
+          </Symbol>
+          <Symbol>
             <Name>Main.fbMotionStageM1.fbDriveVirtual.MasterAxis.PlcToNc</Name>
             <BitSize>1024</BitSize>
             <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
@@ -39969,7 +40606,7 @@ External Setpoint Generation:
                 <Value>Output</Value>
               </Property>
             </Properties>
-            <BitOffs>635837056</BitOffs>
+            <BitOffs>635915008</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM2.fbDriveVirtual.MasterAxis.PlcToNc</Name>
@@ -39981,7 +40618,7 @@ External Setpoint Generation:
                 <Value>Output</Value>
               </Property>
             </Properties>
-            <BitOffs>636136448</BitOffs>
+            <BitOffs>636214400</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM3.fbDriveVirtual.MasterAxis.PlcToNc</Name>
@@ -39993,7 +40630,7 @@ External Setpoint Generation:
                 <Value>Output</Value>
               </Property>
             </Properties>
-            <BitOffs>636435840</BitOffs>
+            <BitOffs>636513792</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM4.fbDriveVirtual.MasterAxis.PlcToNc</Name>
@@ -40005,7 +40642,7 @@ External Setpoint Generation:
                 <Value>Output</Value>
               </Property>
             </Properties>
-            <BitOffs>636735232</BitOffs>
+            <BitOffs>636813184</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM5.fbDriveVirtual.MasterAxis.PlcToNc</Name>
@@ -40017,7 +40654,7 @@ External Setpoint Generation:
                 <Value>Output</Value>
               </Property>
             </Properties>
-            <BitOffs>637034624</BitOffs>
+            <BitOffs>637112576</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM6.fbDriveVirtual.MasterAxis.PlcToNc</Name>
@@ -40029,14 +40666,101 @@ External Setpoint Generation:
                 <Value>Output</Value>
               </Property>
             </Properties>
-            <BitOffs>637334016</BitOffs>
+            <BitOffs>637411968</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM7.fbDriveVirtual.MasterAxis.PlcToNc</Name>
+            <BitSize>1024</BitSize>
+            <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>637711360</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM8.fbDriveVirtual.MasterAxis.PlcToNc</Name>
+            <BitSize>1024</BitSize>
+            <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638010752</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM9.fbDriveVirtual.MasterAxis.PlcToNc</Name>
+            <BitSize>1024</BitSize>
+            <BaseType GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}">PLCTONC_AXIS_REF</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638310144</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.nVirtualEncoderM7nm</Name>
+            <Comment> Virtual Encoder to map to NC axis encoder data input. In 1 nm/count</Comment>
+            <BitSize>32</BitSize>
+            <BaseType>UDINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcLinkTo</Name>
+                <Value>TINC^NC-Task 1 SAF^Axes^SamplyPaddleVX^Enc^Inputs^In^nDataIn1</Value>
+              </Property>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638608128</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.nVirtualEncoderM8nm</Name>
+            <Comment> Virtual Encoder to map to NC axis encoder data input. In 1 nm/count</Comment>
+            <BitSize>32</BitSize>
+            <BaseType>UDINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcLinkTo</Name>
+                <Value>TINC^NC-Task 1 SAF^Axes^SamplePaddleVY^Enc^Inputs^In^nDataIn1</Value>
+              </Property>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638608160</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.nVirtualEncoderM9nm</Name>
+            <Comment> Virtual Encoder to map to NC axis encoder data input. In 1 nm/count</Comment>
+            <BitSize>32</BitSize>
+            <BaseType>UDINT</BaseType>
+            <Properties>
+              <Property>
+                <Name>TcLinkTo</Name>
+                <Value>TINC^NC-Task 1 SAF^Axes^SamplePaddleVZ^Enc^Inputs^In^nDataIn1</Value>
+              </Property>
+              <Property>
+                <Name>TcAddressType</Name>
+                <Value>Output</Value>
+              </Property>
+            </Properties>
+            <BitOffs>638608192</BitOffs>
           </Symbol>
         </DataArea>
         <DataArea>
           <AreaNo AreaType="Internal" CreateSymbols="true">3</AreaNo>
           <Name>PlcTask Internal</Name>
           <ContextId>0</ContextId>
-          <ByteSize>80412672</ByteSize>
+          <ByteSize>80478208</ByteSize>
           <Symbol>
             <Name>MOTION_GVL.fbPmpsFileReader</Name>
             <Comment> Global file reader instance, used in fbStandardPMPSDB</Comment>
@@ -46069,10 +46793,27 @@ External Setpoint Generation:
             <BitOffs>635672080</BitOffs>
           </Symbol>
           <Symbol>
+            <Name>Main.bVirtualAxesActive</Name>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Default>
+              <Value>1</Value>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: TMO:MRCO:SP:bVirtualAxesActive
+    </Value>
+              </Property>
+            </Properties>
+            <BitOffs>635672088</BitOffs>
+          </Symbol>
+          <Symbol>
             <Name>Main.M1</Name>
             <Comment> Gas Nozzle X</Comment>
             <BitSize>25984</BitSize>
-            <BaseType Namespace="lcls_twincat_motion">DUT_MotionStage</BaseType>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
             <Properties>
               <Property>
                 <Name>TcLinkTo</Name>
@@ -46092,7 +46833,7 @@ External Setpoint Generation:
             <Name>Main.M2</Name>
             <Comment> Gas Nozzle Y</Comment>
             <BitSize>25984</BitSize>
-            <BaseType Namespace="lcls_twincat_motion">DUT_MotionStage</BaseType>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
             <Properties>
               <Property>
                 <Name>TcLinkTo</Name>
@@ -46112,7 +46853,7 @@ External Setpoint Generation:
             <Name>Main.M3</Name>
             <Comment> Gas Nozzle Z</Comment>
             <BitSize>25984</BitSize>
-            <BaseType Namespace="lcls_twincat_motion">DUT_MotionStage</BaseType>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
             <Properties>
               <Property>
                 <Name>TcLinkTo</Name>
@@ -46130,9 +46871,9 @@ External Setpoint Generation:
           </Symbol>
           <Symbol>
             <Name>Main.M4</Name>
-            <Comment> Sample Paddle X</Comment>
+            <Comment> Sample Paddle X Stage Coordinates</Comment>
             <BitSize>25984</BitSize>
-            <BaseType Namespace="lcls_twincat_motion">DUT_MotionStage</BaseType>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
             <Properties>
               <Property>
                 <Name>TcLinkTo</Name>
@@ -46150,9 +46891,9 @@ External Setpoint Generation:
           </Symbol>
           <Symbol>
             <Name>Main.M5</Name>
-            <Comment> Sample Paddle Y</Comment>
+            <Comment> Sample Paddle Y Stage Coordinates</Comment>
             <BitSize>25984</BitSize>
-            <BaseType Namespace="lcls_twincat_motion">DUT_MotionStage</BaseType>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
             <Properties>
               <Property>
                 <Name>TcLinkTo</Name>
@@ -46170,9 +46911,9 @@ External Setpoint Generation:
           </Symbol>
           <Symbol>
             <Name>Main.M6</Name>
-            <Comment> Sample Paddle Z</Comment>
+            <Comment> Sample Paddle Z Stage Coordinates</Comment>
             <BitSize>25984</BitSize>
-            <BaseType Namespace="lcls_twincat_motion">DUT_MotionStage</BaseType>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
             <Properties>
               <Property>
                 <Name>TcLinkTo</Name>
@@ -46189,99 +46930,117 @@ External Setpoint Generation:
             <BitOffs>635809600</BitOffs>
           </Symbol>
           <Symbol>
+            <Name>Main.M7</Name>
+            <Comment> Sample Paddle X Beam Coordinates (Virtual Axis)</Comment>
+            <BitSize>25984</BitSize>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: TMO:MRCO:MMS:V4
+    </Value>
+              </Property>
+            </Properties>
+            <BitOffs>635835584</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M8</Name>
+            <Comment> Sample Paddle Y Beam Coordinates (Virtual Axis)</Comment>
+            <BitSize>25984</BitSize>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: TMO:MRCO:MMS:V5
+    </Value>
+              </Property>
+            </Properties>
+            <BitOffs>635861568</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.M9</Name>
+            <Comment> Sample Paddle Z Beam Coordinates (Virtual Axis)</Comment>
+            <BitSize>25984</BitSize>
+            <BaseType Namespace="lcls_twincat_motion">ST_MotionStage</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: TMO:MRCO:MMS:V6
+    </Value>
+              </Property>
+            </Properties>
+            <BitOffs>635887552</BitOffs>
+          </Symbol>
+          <Symbol>
             <Name>Main.fbMotionStageM1</Name>
             <Comment> MRCO Axes</Comment>
             <BitSize>299392</BitSize>
             <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
-            <BitOffs>635835584</BitOffs>
+            <BitOffs>635913536</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM2</Name>
             <BitSize>299392</BitSize>
             <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
-            <BitOffs>636134976</BitOffs>
+            <BitOffs>636212928</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM3</Name>
             <BitSize>299392</BitSize>
             <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
-            <BitOffs>636434368</BitOffs>
+            <BitOffs>636512320</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM4</Name>
             <BitSize>299392</BitSize>
             <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
-            <BitOffs>636733760</BitOffs>
+            <BitOffs>636811712</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM5</Name>
             <BitSize>299392</BitSize>
             <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
-            <BitOffs>637033152</BitOffs>
+            <BitOffs>637111104</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Main.fbMotionStageM6</Name>
             <BitSize>299392</BitSize>
             <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
-            <BitOffs>637332544</BitOffs>
+            <BitOffs>637410496</BitOffs>
           </Symbol>
           <Symbol>
-            <Name>Main.x</Name>
-            <Comment> The desired position in new coordinate system.</Comment>
+            <Name>Main.fbMotionStageM7</Name>
+            <Comment> Virtual</Comment>
+            <BitSize>299392</BitSize>
+            <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
+            <BitOffs>637709888</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM8</Name>
+            <Comment> Virtual</Comment>
+            <BitSize>299392</BitSize>
+            <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
+            <BitOffs>638009280</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbMotionStageM9</Name>
+            <Comment> Virtual</Comment>
+            <BitSize>299392</BitSize>
+            <BaseType Namespace="lcls_twincat_motion">FB_MotionStage</BaseType>
+            <BitOffs>638308672</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.nVirtualEncoderUnitConversion</Name>
+            <Comment> mm to nm</Comment>
             <BitSize>64</BitSize>
             <BaseType>LREAL</BaseType>
             <Default>
-              <Value>0</Value>
+              <Value>1000000</Value>
             </Default>
-            <BitOffs>637631936</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Main.y</Name>
-            <BitSize>64</BitSize>
-            <BaseType>LREAL</BaseType>
-            <Default>
-              <Value>0</Value>
-            </Default>
-            <BitOffs>637632000</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Main.z</Name>
-            <BitSize>64</BitSize>
-            <BaseType>LREAL</BaseType>
-            <Default>
-              <Value>0</Value>
-            </Default>
-            <BitOffs>637632064</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Main.aDeg</Name>
-            <Comment> The angle between stMotionStage1 and the new axis 1. In Degrees.</Comment>
-            <BitSize>64</BitSize>
-            <BaseType>LREAL</BaseType>
-            <Default>
-              <Value>0</Value>
-            </Default>
-            <BitOffs>637632128</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Main.bDeg</Name>
-            <Comment> The angle between stMotionStage2 and the new axis 2. In Degrees.</Comment>
-            <BitSize>64</BitSize>
-            <BaseType>LREAL</BaseType>
-            <Default>
-              <Value>0</Value>
-            </Default>
-            <BitOffs>637632192</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Main.gDeg</Name>
-            <Comment> The angle between stMotionStage3 and the new axis 3. In Degrees.</Comment>
-            <BitSize>64</BitSize>
-            <BaseType>LREAL</BaseType>
-            <Default>
-              <Value>0</Value>
-            </Default>
-            <BitOffs>637632256</BitOffs>
+            <BitOffs>638608064</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.bLittleEndian</Name>
@@ -46296,7 +47055,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633568</BitOffs>
+            <BitOffs>638608232</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.bSimulationMode</Name>
@@ -46311,7 +47070,109 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633576</BitOffs>
+            <BitOffs>638608240</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Constants.bFPUSupport</Name>
+            <BitSize>8</BitSize>
+            <BaseType>BOOL</BaseType>
+            <Default>
+              <Value>1</Value>
+            </Default>
+            <Properties>
+              <Property>
+                <Name>TcVarGlobal</Name>
+              </Property>
+            </Properties>
+            <BitOffs>638608248</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.aDeg</Name>
+            <Comment> The angle between stMotionStage1 and the new axis 1. In Degrees.</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <Default>
+              <Value>22.21</Value>
+            </Default>
+            <BitOffs>638608256</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.bDeg</Name>
+            <Comment> The angle between stMotionStage2 and the new axis 2. In Degrees.</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <Default>
+              <Value>21.61</Value>
+            </Default>
+            <BitOffs>638608320</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.gDeg</Name>
+            <Comment> The angle between stMotionStage3 and the new axis 3. In Degrees.</Comment>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <Default>
+              <Value>37.86</Value>
+            </Default>
+            <BitOffs>638608384</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.stPMotionTransform3D</Name>
+            <BitSize>960</BitSize>
+            <BaseType>ST_MotionTransform3D</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: TMO:MRCO:SP:PTransform3D
+    </Value>
+              </Property>
+            </Properties>
+            <BitOffs>638608448</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbPMotionTransform3D</Name>
+            <BitSize>1536</BitSize>
+            <BaseType>FB_MotionTransform3D</BaseType>
+            <BitOffs>638609408</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.stVMotionTransform3D</Name>
+            <BitSize>960</BitSize>
+            <BaseType>ST_MotionTransform3D</BaseType>
+            <Properties>
+              <Property>
+                <Name>pytmc</Name>
+                <Value>
+        pv: TMO:MRCO:SP:VTransform3D
+    </Value>
+              </Property>
+            </Properties>
+            <BitOffs>638610944</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fbVMotionTransform3D</Name>
+            <BitSize>1536</BitSize>
+            <BaseType>FB_MotionTransform3D</BaseType>
+            <BitOffs>638611904</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fDPosM7</Name>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <BitOffs>638613440</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fDPosM8</Name>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <BitOffs>638613504</BitOffs>
+          </Symbol>
+          <Symbol>
+            <Name>Main.fDPosM9</Name>
+            <BitSize>64</BitSize>
+            <BaseType>LREAL</BaseType>
+            <BitOffs>638613568</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.RuntimeVersion</Name>
@@ -46341,7 +47202,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633584</BitOffs>
+            <BitOffs>638614144</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.CompilerVersion</Name>
@@ -46371,7 +47232,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633648</BitOffs>
+            <BitOffs>638614208</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.nRegisterSize</Name>
@@ -46386,7 +47247,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633712</BitOffs>
+            <BitOffs>638614272</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.nPackMode</Name>
@@ -46401,21 +47262,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633728</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Constants.bFPUSupport</Name>
-            <BitSize>8</BitSize>
-            <BaseType>BOOL</BaseType>
-            <Default>
-              <Value>1</Value>
-            </Default>
-            <Properties>
-              <Property>
-                <Name>TcVarGlobal</Name>
-              </Property>
-            </Properties>
-            <BitOffs>637633744</BitOffs>
+            <BitOffs>638614288</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.RuntimeVersionNumeric</Name>
@@ -46429,7 +47276,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633760</BitOffs>
+            <BitOffs>638614304</BitOffs>
           </Symbol>
           <Symbol>
             <Name>Constants.CompilerVersionNumeric</Name>
@@ -46443,7 +47290,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633792</BitOffs>
+            <BitOffs>638614336</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList._AppInfo</Name>
@@ -46457,7 +47304,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637633824</BitOffs>
+            <BitOffs>638614368</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList._TaskPouOid_PlcTask</Name>
@@ -46471,7 +47318,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637635872</BitOffs>
+            <BitOffs>638616416</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList._TaskInfo</Name>
@@ -46489,7 +47336,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637635904</BitOffs>
+            <BitOffs>638616448</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList._TaskOid_PlcTask</Name>
@@ -46503,7 +47350,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637636928</BitOffs>
+            <BitOffs>638617472</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TwinCAT_SystemInfoVarList.__PlcTask</Name>
@@ -46524,7 +47371,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637636960</BitOffs>
+            <BitOffs>638617504</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENT_CLASSES.TcSystemEventClass</Name>
@@ -46593,7 +47440,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637653152</BitOffs>
+            <BitOffs>638633696</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENT_CLASSES.TcGeneralAdsEventClass</Name>
@@ -46662,7 +47509,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637653280</BitOffs>
+            <BitOffs>638633824</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENT_CLASSES.TcRouterEventClass</Name>
@@ -46731,7 +47578,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637653408</BitOffs>
+            <BitOffs>638633952</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENT_CLASSES.Win32EventClass</Name>
@@ -46800,7 +47647,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637653664</BitOffs>
+            <BitOffs>638634208</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENT_CLASSES.TcIPCDiagEventClass</Name>
@@ -46869,7 +47716,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637653920</BitOffs>
+            <BitOffs>638634464</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENT_CLASSES.TcIPCDiagPlcApiEventClass</Name>
@@ -46938,7 +47785,7 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637654048</BitOffs>
+            <BitOffs>638634592</BitOffs>
           </Symbol>
           <Symbol>
             <Name>TC_EVENTS.LCLSGeneralEventClass</Name>
@@ -46961,20 +47808,14 @@ External Setpoint Generation:
                 <Name>TcVarGlobal</Name>
               </Property>
             </Properties>
-            <BitOffs>637684512</BitOffs>
-          </Symbol>
-          <Symbol>
-            <Name>Main.fbCoordinateTransform3D</Name>
-            <BitSize>2112</BitSize>
-            <BaseType>FB_CoordinateTransform3D</BaseType>
-            <BitOffs>642468480</BitOffs>
+            <BitOffs>638665056</BitOffs>
           </Symbol>
         </DataArea>
         <DataArea>
           <AreaNo AreaType="RetainSrc" CreateSymbols="true">4</AreaNo>
           <Name>PlcTask Retains</Name>
           <ContextId>0</ContextId>
-          <ByteSize>80412672</ByteSize>
+          <ByteSize>80478208</ByteSize>
           <Symbol>
             <Name>PMPS_GVL.SuccessfulPreemption</Name>
             <Comment> Any time BPTM applies a new BP request which is confirmed</Comment>
@@ -47057,15 +47898,15 @@ External Setpoint Generation:
         </Property>
         <Property>
           <Name>ChangeDate</Name>
-          <Value>2024-08-01T17:28:17</Value>
+          <Value>2024-08-19T18:06:20</Value>
         </Property>
         <Property>
           <Name>GeneratedCodeSize</Name>
-          <Value>528384</Value>
+          <Value>581632</Value>
         </Property>
         <Property>
           <Name>GlobalDataSize</Name>
-          <Value>79228928</Value>
+          <Value>79392768</Value>
         </Property>
       </Properties>
     </Module>
