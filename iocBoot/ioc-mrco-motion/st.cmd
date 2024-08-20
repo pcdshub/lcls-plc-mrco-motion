@@ -41,7 +41,7 @@ epicsEnvSet("ASYN_PORT",        "ASYN_PLC")
 epicsEnvSet("IPADDR",           "172.21.132.121")
 epicsEnvSet("AMSID",            "172.21.132.121.1.1")
 epicsEnvSet("AMS_PORT",         "851")
-epicsEnvSet("ADS_MAX_PARAMS",   "1489")
+epicsEnvSet("ADS_MAX_PARAMS",   "1495")
 epicsEnvSet("ADS_SAMPLE_MS",    "50")
 epicsEnvSet("ADS_MAX_DELAY_MS", "100")
 epicsEnvSet("ADS_TIMEOUT_MS",   "1000")
@@ -275,8 +275,8 @@ cd "$(IOC_TOP)"
 ## PLC Project Database files ##
 dbLoadRecords("mrco_motion.db", "PORT=$(ASYN_PORT),PREFIX=PLC:MRCO:MOTION:,IOCNAME=$(IOC),IOC=$(IOC)")
 
-# Total records: 489
-callbackSetQueueSize(2978)
+# Total records: 495
+callbackSetQueueSize(2990)
 
 # Autosave and archive settings:
 save_restoreSet_status_prefix("PLC:MRCO:MOTION:")

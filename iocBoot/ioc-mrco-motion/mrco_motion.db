@@ -4480,6 +4480,54 @@ record(waveform, "TMO:MRCO:MMS:V6:PLC:stEPSP:sMessage_RBV") {
   info(archive, "VAL")
 }
 
+record(ai, "TMO:MRCO:SP:Alpha_RBV") {
+  # The acute angle (in deg) between the x axis in stage coordinates and the x axis in beam coordinates.
+  field(DESC, "The acute angle (in ...beam coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.aDeg?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ao, "TMO:MRCO:SP:Alpha") {
+  # The acute angle (in deg) between the x axis in stage coordinates and the x axis in beam coordinates.
+  field(DESC, "The acute angle (in ...beam coordinates.")
+  field(DTYP, "asynFloat64")
+  field(UDFS, "0")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.aDeg=")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
+  info(archive, "VAL")
+}
+
+record(ai, "TMO:MRCO:SP:Beta_RBV") {
+  # The acute angle (in deg) between the y axis in stage coordinates and the y axis in beam coordinates.
+  field(DESC, "The acute angle (in ...beam coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.bDeg?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ao, "TMO:MRCO:SP:Beta") {
+  # The acute angle (in deg) between the y axis in stage coordinates and the y axis in beam coordinates.
+  field(DESC, "The acute angle (in ...beam coordinates.")
+  field(DTYP, "asynFloat64")
+  field(UDFS, "0")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.bDeg=")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
+  info(archive, "VAL")
+}
+
 record(bi, "TMO:MRCO:SP:bVirtualAxesActive_RBV") {
   field(DESC, "Main.bVirtualAxesActive")
   field(SCAN, "I/O Intr")
@@ -4501,6 +4549,30 @@ record(bo, "TMO:MRCO:SP:bVirtualAxesActive") {
   field(ZNAM, "FALSE")
   field(ONAM, "TRUE")
   info(autosaveFields_pass0, "COSV DESC DISS OSV SIMS UDFS VAL ZSV")
+  info(archive, "VAL")
+}
+
+record(ai, "TMO:MRCO:SP:Gamma_RBV") {
+  # The acute angle (in deg) between the z axis in stage coordinates and the z axis in beam coordinates.
+  field(DESC, "The acute angle (in ...beam coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.gDeg?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ao, "TMO:MRCO:SP:Gamma") {
+  # The acute angle (in deg) between the z axis in stage coordinates and the z axis in beam coordinates.
+  field(DESC, "The acute angle (in ...beam coordinates.")
+  field(DTYP, "asynFloat64")
+  field(UDFS, "0")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.gDeg=")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
   info(archive, "VAL")
 }
 

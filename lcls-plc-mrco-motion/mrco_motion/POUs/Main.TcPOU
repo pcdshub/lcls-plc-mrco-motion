@@ -87,10 +87,6 @@ VAR
     {attribute 'TcLinkTo' := 'TINC^NC-Task 1 SAF^Axes^SamplePaddleVZ^Enc^Inputs^In^nDataIn1'}
     nVirtualEncoderM9nm AT %Q*: UDINT; // Virtual Encoder to map to NC axis encoder data input. In 1 nm/count
 
-    aDeg: LREAL := 22.21; // The angle between stMotionStage1 and the new axis 1. In Degrees.
-    bDeg:  LREAL := 21.61; // The angle between stMotionStage2 and the new axis 2. In Degrees.
-    gDeg: LREAL := 37.86; // The angle between stMotionStage3 and the new axis 3. In Degrees.
-
     {attribute 'pytmc' := '
         pv: TMO:MRCO:SP:bVirtualAxesActive
     '}
@@ -111,6 +107,26 @@ VAR
     fDPosM7: LREAL;
     fDPosM8: LREAL;
     fDPosM9: LREAL;
+END_VAR
+VAR PERSISTENT
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:Alpha
+        io: io
+        field: DESC The acute angle (in deg) between the x axis in stage coordinates and the x axis in beam coordinates.
+    '}
+    aDeg: LREAL := 22.21; // The angle between stMotionStage1 and the new axis 1. In Degrees.
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:Beta
+        io: io
+        field: DESC The acute angle (in deg) between the y axis in stage coordinates and the y axis in beam coordinates.
+    '}
+    bDeg:  LREAL := 21.61; // The angle between stMotionStage2 and the new axis 2. In Degrees.
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:Gamma
+        io: io
+        field: DESC The acute angle (in deg) between the z axis in stage coordinates and the z axis in beam coordinates.
+    '}
+    gDeg: LREAL := 37.86; // The angle between stMotionStage3 and the new axis 3. In Degrees.
 END_VAR
 ]]></Declaration>
     <Implementation>

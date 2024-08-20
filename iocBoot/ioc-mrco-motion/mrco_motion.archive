@@ -349,8 +349,14 @@ TMO:MRCO:MMS:V6:PLC:stEPSP:bEPS_OK_RBV.VAL	1	scan
 TMO:MRCO:MMS:V6:PLC:stEPSP:nFlags_RBV.VAL	1	scan
 TMO:MRCO:MMS:V6:PLC:stEPSP:sFlagDesc_RBV.VAL	1	scan
 TMO:MRCO:MMS:V6:PLC:stEPSP:sMessage_RBV.VAL	1	scan
+TMO:MRCO:SP:Alpha_RBV.VAL	1	scan
+TMO:MRCO:SP:Alpha.VAL	1	scan
+TMO:MRCO:SP:Beta_RBV.VAL	1	scan
+TMO:MRCO:SP:Beta.VAL	1	scan
 TMO:MRCO:SP:bVirtualAxesActive_RBV.VAL	1	scan
 TMO:MRCO:SP:bVirtualAxesActive.VAL	1	scan
+TMO:MRCO:SP:Gamma_RBV.VAL	1	scan
+TMO:MRCO:SP:Gamma.VAL	1	scan
 TMO:MRCO:SP:PTransform3D:fADeg_RBV.VAL	1	scan
 TMO:MRCO:SP:PTransform3D:fADeg.VAL	1	scan
 TMO:MRCO:SP:PTransform3D:fBDeg_RBV.VAL	1	scan
