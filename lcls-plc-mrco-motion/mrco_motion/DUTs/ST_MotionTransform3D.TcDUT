@@ -8,19 +8,19 @@ STRUCT
     {attribute 'pytmc' := '
         pv: fADeg
         io: io
-        field: DESC alpha, the acute angle in degrees between motor axis "x" and resultant coordinate system "x".
+        field: DESC alpha, the acute angle in degrees between motor axis x and resultant coordinate system x.
     '}
     fADeg: LREAL; // "alpha" - the acute angle in degrees between motor axis "x" and resultant coordinate system "x".
     {attribute 'pytmc' := '
         pv: fBDeg
         io: io
-        field: DESC beta, the acute angle in degrees between motor axis "y" and resultant coordinate system "y".
+        field: DESC beta, the acute angle in degrees between motor axis y and resultant coordinate system y.
     '}
     fBDeg: LREAL; // "beta" - the acute angle in degrees between motor axis "y" and resultant coordinate system "y".
     {attribute 'pytmc' := '
         pv: fGDeg
         io: io
-        field: DESC gamma, the acute angle in degrees between motor axis "z" and resultant coordinate system "z".
+        field: DESC gamma, the acute angle in degrees between motor axis z and resultant coordinate system z.
     '}
     fGDeg: LREAL; // "gamma" - The acute angle in degrees between motor axis "z" and resultant coordinate system "z".
 
