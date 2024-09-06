@@ -107,6 +107,10 @@ VAR
     fDPosM7: LREAL;
     fDPosM8: LREAL;
     fDPosM9: LREAL;
+
+    rtM7Execute: R_TRIG;
+    rtM8Execute: R_TRIG;
+    rtM9Execute: R_TRIG;
 END_VAR
 VAR PERSISTENT
     {attribute 'pytmc' := '
@@ -132,6 +136,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[
 IF bInit THEN
+    bInit := FALSE;
+
     M1.bHardwareEnable := TRUE;
     M1.bPowerSelf := TRUE;
     M1.nBrakeMode := E_StageBrakeMode.NO_BRAKE;
@@ -201,39 +207,60 @@ stVMotionTransform3D.fBDeg := bDeg;
 stVMotionTransform3D.fGDeg := gDeg;
 
 // Set the actual measured position and velocity for each axis to support the coordinate transform.
-stPMotionTransform3D.fMotorXMeas := M4.stAxisStatus.fActPosition;
-stPMotionTransform3D.fMotorYMeas := M5.stAxisStatus.fActPosition;
-stPMotionTransform3D.fMotorZMeas := M6.stAxisStatus.fActPosition;
-stVMotionTransform3D.fMotorXMeas := M4.stAxisStatus.fActVelocity;
-stVMotionTransform3D.fMotorYMeas := M5.stAxisStatus.fActVelocity;
-stVMotionTransform3D.fMotorZMeas := M6.stAxisStatus.fActVelocity;
+stPMotionTransform3D.fMotorXMeas := M4.Axis.NcToPlc.ActPos;
+stPMotionTransform3D.fMotorYMeas := M5.Axis.NcToPlc.ActPos;
+stPMotionTransform3D.fMotorZMeas := M6.Axis.NcToPlc.ActPos;
+stVMotionTransform3D.fMotorXMeas := M4.Axis.NcToPlc.ActVelo;
+stVMotionTransform3D.fMotorYMeas := M5.Axis.NcToPlc.ActVelo;
+stVMotionTransform3D.fMotorZMeas := M6.Axis.NcToPlc.ActVelo;
 
 // Set the desired position in beam coordinates for each axis to support the coordinate transform.
-stPMotionTransform3D.fXSP := M7.fPosition;
-stPMotionTransform3D.fYSP := M8.fPosition;
-stPMotionTransform3D.fZSP := M9.fPosition;
+rtM7Execute(CLK:=M7.bExecute);
+rtM8Execute(CLK:=M8.bExecute);
+rtM9Execute(CLK:=M9.bExecute);
+IF rtM7Execute.Q THEN
+    stPMotionTransform3D.fXSP := M7.fPosition;
+    stVMotionTransform3D.fXSP := M7.fVelocity;
+ELSIF rtM8Execute.Q OR rtM9Execute.Q THEN
+    stPMotionTransform3D.fXSP := M7.Axis.NcToPlc.ActPos;
+    stVMotionTransform3D.fXSP := 0;
+    M7.fPosition := M7.Axis.NcToPlc.ActPos;
+    M7.fVelocity := 0;
+END_IF
+IF rtM8Execute.Q THEN
+    stPMotionTransform3D.fYSP := M8.fPosition;
+    stVMotionTransform3D.fYSP := M8.fVelocity;
+ELSIF rtM7Execute.Q OR rtM9Execute.Q THEN
+    stPMotionTransform3D.fYSP := M8.Axis.NcToPlc.ActPos;
+    stVMotionTransform3D.fYSP := 0;
+    M8.fPosition := M8.Axis.NcToPlc.ActPos;
+    M8.fVelocity := 0;
+END_IF
+IF rtM9Execute.Q THEN
+    stPMotionTransform3D.fZSP := M9.fPosition;
+    stVMotionTransform3D.fYSP := M9.fVelocity;
+ELSIF rtM7Execute.Q OR rtM8Execute.Q THEN
+    stPMotionTransform3D.fZSP := M9.Axis.NcToPlc.ActPos;
+    stVMotionTransform3D.fZSP := 0;
+    M9.fPosition := M9.Axis.NcToPlc.ActPos;
+    M9.fVelocity := 0;
+END_IF
 
 // Set the desired velocity in beam coordinates. First need to figure out which direction we are moving
 // so that we can apply the correct sign (positive or negative) to the velocity values.
-fDPosM7 := M7.fPosition - M7.stAxisStatus.fActPosition;
-fDPosM8 := M8.fPosition - M8.stAxisStatus.fActPosition;
-fDPosM9 := M9.fPosition - M9.stAxisStatus.fActPosition;
+fDPosM7 := stPMotionTransform3D.fXSP - M7.Axis.NcToPlc.ActPos;
+fDPosM8 := stPMotionTransform3D.fYSP - M8.Axis.NcToPlc.ActPos;
+fDPosM9 := stPMotionTransform3D.fZSP - M9.Axis.NcToPlc.ActPos;
 
 // Apply the correct sign to the velocity value so that the coordinate transform computes correctly.
 IF fDPosM7 < 0 THEN
-    stVMotionTransform3D.fXSP := M7.fVelocity * -1;
-ELSE
-    stVMotionTransform3D.fXSP := M7.fVelocity;
+    stVMotionTransform3D.fXSP := stVMotionTransform3D.fXSP * -1;
 END_IF
 IF fDPosM8 < 0 THEN
-    stVMotionTransform3D.fYSP := M8.fVelocity * -1;
-ELSE
-    stVMotionTransform3D.fYSP := M8.fVelocity;
+    stVMotionTransform3D.fYSP := stVMotionTransform3D.fYSP * -1;
 END_IF
 IF fDPosM9 < 0 THEN
-    stVMotionTransform3D.fZSP := M9.fVelocity * -1;
-ELSE
-    stVMotionTransform3D.fZSP := M9.fVelocity;
+    stVMotionTransform3D.fZSP := stVMotionTransform3D.fZSP * -1;
 END_IF
 
 // Transform Coordinates to new coordinate system before calling fbMotion so that it knows where to move in stage coordinates to get to the desired beam coordinates.
@@ -269,10 +296,10 @@ IF bVirtualAxesActive THEN
 
     // If any virtual axis was requested to move, we have to call bExecute on all the motors,
     // because any move in beam coordinates will likely require a move on all three motors.
-    IF M7.bExecute OR M8.bExecute OR M9.bExecute THEN
-        M4.bExecute := TRUE;
-        M5.bExecute := TRUE;
-        M6.bExecute := TRUE;
+    IF rtM7Execute.Q OR rtM8Execute.Q OR rtM9Execute.Q THEN
+        M4.bMoveCmd := TRUE;
+        M5.bMoveCmd := TRUE;
+        M6.bMoveCmd := TRUE;
     END_IF
 
     // If any virtual axis detects an error, make sure to propagate the error status to the actual

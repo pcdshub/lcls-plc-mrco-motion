@@ -39,11 +39,12 @@ END_VAR
     <Implementation>
       <ST><![CDATA[
 IF bInit THEN
+    bInit := FALSE;
+
     stMotionTransform3D.fXSP := stMotionTransform3D.fXMeas;
     stMotionTransform3D.fYSP := stMotionTransform3D.fYMeas;
     stMotionTransform3D.fZSP := stMotionTransform3D.fZMeas;
 END_IF
-
 
 // Convert angles in degrees to radians.
 a := stMotionTransform3D.fADeg * pi / 180;
@@ -63,16 +64,24 @@ myMeas := stMotionTransform3D.fMotorYMeas;
 mzMeas := stMotionTransform3D.fMotorZMeas;
 
 // Convert the current measured position for each stage in starting coordinates to new coordinates.
-xMeas := mxMeas*(cb*cg)             + myMeas*(-cb*sg)           + mzMeas*(sb);
-yMeas := mxMeas*(ca*sg + cg*sa*sb)  + myMeas*(ca*cg - sa*sb*sg) + mzMeas*(-cb*sa);
-zMeas := mxMeas*(-ca*cg*sb + sa*sg) + myMeas*(ca*sb*sg + cg*sa) + mzMeas*(ca*cb);
+stMotionTransform3D.fXMeas := mxMeas*(cb*cg)             + myMeas*(-cb*sg)           + mzMeas*(sb);
+stMotionTransform3D.fYMeas := mxMeas*(ca*sg + cg*sa*sb)  + myMeas*(ca*cg - sa*sb*sg) + mzMeas*(-cb*sa);
+stMotionTransform3D.fZMeas := mxMeas*(-ca*cg*sb + sa*sg) + myMeas*(ca*sb*sg + cg*sa) + mzMeas*(ca*cb);
+
+// Get the current desired position in new coordinates
+x := stMotionTransform3D.fXSP;
+y := stMotionTransform3D.fYSP;
+z := stMotionTransform3D.fZSP;
 
 // Convert the desired position in new coordinates to the required position in starting coordinates.
 // This allows the individual motors to move to where they need to be to achieve the desired position in new coordinates.
-stMotionTransform3D.fMotorXSP :=  x*cb*cg + y*ca*sg + y*cg*sa*sb - z*ca*cg*sb + z*sa*sg;
-stMotionTransform3D.fMotorYSP := -x*cb*sg + y*ca*cg - y*sa*sb*sg + z*ca*sb*sg + z*cg*sa;
-stMotionTransform3D.fMotorZSP :=  x*sb    - y*cb*sa + z*ca*cb;
+mx :=  x*cb*cg + y*ca*sg + y*cg*sa*sb - z*ca*cg*sb + z*sa*sg;
+my := -x*cb*sg + y*ca*cg - y*sa*sb*sg + z*ca*sb*sg + z*cg*sa;
+mz :=  x*sb    - y*cb*sa + z*ca*cb;
 
+stMotionTransform3D.fMotorXSP := mx;
+stMotionTransform3D.fMotorYSP := my;
+stMotionTransform3D.fMotorZSP := mz;
 ]]></ST>
     </Implementation>
   </POU>
