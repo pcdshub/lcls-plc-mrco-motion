@@ -215,9 +215,9 @@ fbMotionStageTransform3D(
     firstRotationAngle := aDeg,
     secondRotationAngle := bDeg,
     thirdRotationAngle := gDeg,
-    nVirtualEncoderMotionStageRealFirstRotationnm => nVirtualEncoderM9nm,
-    nVirtualEncoderMotionStageRealSecondRotationnm => nVirtualEncoderM8nm,
-    nVirtualEncoderMotionStageRealThirdRotationnm => nVirtualEncoderM7nm
+    nVirtualEncoderMotionStageVirtFirstRotationnm => nVirtualEncoderM9nm,
+    nVirtualEncoderMotionStageVirtSecondRotationnm => nVirtualEncoderM8nm,
+    nVirtualEncoderMotionStageVirtThirdRotationnm => nVirtualEncoderM7nm
 );
 
 (*
