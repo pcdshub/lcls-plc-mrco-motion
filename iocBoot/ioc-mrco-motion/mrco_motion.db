@@ -4577,8 +4577,7 @@ record(ao, "TMO:MRCO:SP:Gamma") {
 }
 
 record(ai, "TMO:MRCO:SP:PTransform3D:fADeg_RBV") {
-  # alpha, the acute angle in degrees between motor axis x and resultant coordinate system x.
-  field(DESC, "alpha, the acute ang...rdinate system x.")
+  field(DESC, "alpha, the angle for the first rotation.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
@@ -4590,8 +4589,7 @@ record(ai, "TMO:MRCO:SP:PTransform3D:fADeg_RBV") {
 }
 
 record(ao, "TMO:MRCO:SP:PTransform3D:fADeg") {
-  # alpha, the acute angle in degrees between motor axis x and resultant coordinate system x.
-  field(DESC, "alpha, the acute ang...rdinate system x.")
+  field(DESC, "alpha, the angle for the first rotation.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
   field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fADeg=")
@@ -4601,8 +4599,7 @@ record(ao, "TMO:MRCO:SP:PTransform3D:fADeg") {
 }
 
 record(ai, "TMO:MRCO:SP:PTransform3D:fBDeg_RBV") {
-  # beta, the acute angle in degrees between motor axis y and resultant coordinate system y.
-  field(DESC, "beta, the acute angl...rdinate system y.")
+  field(DESC, "beta, the angle for the second rotation.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
@@ -4614,8 +4611,7 @@ record(ai, "TMO:MRCO:SP:PTransform3D:fBDeg_RBV") {
 }
 
 record(ao, "TMO:MRCO:SP:PTransform3D:fBDeg") {
-  # beta, the acute angle in degrees between motor axis y and resultant coordinate system y.
-  field(DESC, "beta, the acute angl...rdinate system y.")
+  field(DESC, "beta, the angle for the second rotation.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
   field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fBDeg=")
@@ -4624,9 +4620,45 @@ record(ao, "TMO:MRCO:SP:PTransform3D:fBDeg") {
   info(archive, "VAL")
 }
 
+record(ai, "TMO:MRCO:SP:PTransform3D:fFirstAxisMeas_RBV") {
+  # The measured FirstAxis position in the resultant coordinates.
+  field(DESC, "The measured FirstAx...tant coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fFirstAxisMeas?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ai, "TMO:MRCO:SP:PTransform3D:fFirstAxisSP_RBV") {
+  # The desired final FirstAxis position in the resultant coordinates.
+  field(DESC, "The desired final Fi...tant coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fFirstAxisSP?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ao, "TMO:MRCO:SP:PTransform3D:fFirstAxisSP") {
+  # The desired final FirstAxis position in the resultant coordinates.
+  field(DESC, "The desired final Fi...tant coordinates.")
+  field(DTYP, "asynFloat64")
+  field(UDFS, "0")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fFirstAxisSP=")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
+  info(archive, "VAL")
+}
+
 record(ai, "TMO:MRCO:SP:PTransform3D:fGDeg_RBV") {
-  # gamma, the acute angle in degrees between motor axis z and resultant coordinate system z.
-  field(DESC, "gamma, the acute ang...rdinate system z.")
+  field(DESC, "gamma, the angle for the third rotation.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
@@ -4638,8 +4670,7 @@ record(ai, "TMO:MRCO:SP:PTransform3D:fGDeg_RBV") {
 }
 
 record(ao, "TMO:MRCO:SP:PTransform3D:fGDeg") {
-  # gamma, the acute angle in degrees between motor axis z and resultant coordinate system z.
-  field(DESC, "gamma, the acute ang...rdinate system z.")
+  field(DESC, "gamma, the angle for the third rotation.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
   field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fGDeg=")
@@ -4648,198 +4679,160 @@ record(ao, "TMO:MRCO:SP:PTransform3D:fGDeg") {
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fMotorXMeas_RBV") {
-  # The measured x position in the motor coordinate system. Intended from encoder input.
-  field(DESC, "The measured x posit...om encoder input.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fMotorFirstAxisMeas_RBV") {
+  # The measured FirstAxis position in the motor coordinate system. Intended from encoder input.
+  field(DESC, "The measured FirstAx...om encoder input.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorXMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorFirstAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fMotorXSP_RBV") {
-  # The desired x position in the motor coordinate system. Calculated internally.
-  field(DESC, "The desired x positi...lated internally.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fMotorFirstAxisSP_RBV") {
+  # The desired FirstAxis position in the motor coordinate system. Calculated internally.
+  field(DESC, "The desired FirstAxi...lated internally.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorXSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorFirstAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fMotorYMeas_RBV") {
+record(ai, "TMO:MRCO:SP:PTransform3D:fMotorSecondAxisMeas_RBV") {
   # The measured y position in the motor coordinate system. Intended from encoder input.
   field(DESC, "The measured y posit...om encoder input.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorYMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorSecondAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fMotorYSP_RBV") {
-  # The desired y position in the motor coordinate system. Calculated internally.
-  field(DESC, "The desired y positi...lated internally.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fMotorSecondAxisSP_RBV") {
+  # The desired SecondAxis position in the motor coordinate system. Calculated internally.
+  field(DESC, "The desired SecondAx...lated internally.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorYSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorSecondAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fMotorZMeas_RBV") {
-  # The measured z position in the motor coordinate system. Intended from encoder input.
-  field(DESC, "The measured z posit...om encoder input.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fMotorThirdAxisMeas_RBV") {
+  # The measured ThirdAxis position in the motor coordinate system. Intended from encoder input.
+  field(DESC, "The measured ThirdAx...om encoder input.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorZMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorThirdAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fMotorZSP_RBV") {
-  # The desired z position in the motor coordinate system. Calculated internally.
-  field(DESC, "The desired z positi...lated internally.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fMotorThirdAxisSP_RBV") {
+  # The desired ThirdAxis position in the motor coordinate system. Calculated internally.
+  field(DESC, "The desired ThirdAxi...lated internally.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorZSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fMotorThirdAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fXMeas_RBV") {
-  # The measured x position in the resultant coordinates.
-  field(DESC, "The measured x posit...tant coordinates.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fSecondAxisMeas_RBV") {
+  # The measured SecondAxis position in the resultant coordinates.
+  field(DESC, "The measured SecondA...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fXMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fSecondAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fXSP_RBV") {
-  # The desired final x position in the resultant coordinates.
-  field(DESC, "The desired final x ...tant coordinates.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fSecondAxisSP_RBV") {
+  # The desired final SecondAxis position in the resultant coordinates.
+  field(DESC, "The desired final Se...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fXSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fSecondAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ao, "TMO:MRCO:SP:PTransform3D:fXSP") {
-  # The desired final x position in the resultant coordinates.
-  field(DESC, "The desired final x ...tant coordinates.")
+record(ao, "TMO:MRCO:SP:PTransform3D:fSecondAxisSP") {
+  # The desired final SecondAxis position in the resultant coordinates.
+  field(DESC, "The desired final Se...tant coordinates.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
-  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fXSP=")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fSecondAxisSP=")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fYMeas_RBV") {
-  # The measured y position in the resultant coordinates.
-  field(DESC, "The measured y posit...tant coordinates.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fThirdAxisMeas_RBV") {
+  # The measured ThirdAxis position in the resultant coordinates.
+  field(DESC, "The measured ThirdAx...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fYMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fThirdAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:PTransform3D:fYSP_RBV") {
-  # The desired final y position in the resultant coordinates.
-  field(DESC, "The desired final y ...tant coordinates.")
+record(ai, "TMO:MRCO:SP:PTransform3D:fThirdAxisSP_RBV") {
+  # The desired final ThirdAxis position in the resultant coordinates.
+  field(DESC, "The desired final Th...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fYSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fThirdAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ao, "TMO:MRCO:SP:PTransform3D:fYSP") {
-  # The desired final y position in the resultant coordinates.
-  field(DESC, "The desired final y ...tant coordinates.")
+record(ao, "TMO:MRCO:SP:PTransform3D:fThirdAxisSP") {
+  # The desired final ThirdAxis position in the resultant coordinates.
+  field(DESC, "The desired final Th...tant coordinates.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
-  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fYSP=")
-  field(PREC, "3")
-  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
-  info(archive, "VAL")
-}
-
-record(ai, "TMO:MRCO:SP:PTransform3D:fZMeas_RBV") {
-  # The measured z position in the resultant coordinates.
-  field(DESC, "The measured z posit...tant coordinates.")
-  field(SCAN, "I/O Intr")
-  field(PINI, "1")
-  field(TSE, "-2")
-  field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fZMeas?")
-  field(PREC, "3")
-  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
-  info(archive, "VAL")
-}
-
-record(ai, "TMO:MRCO:SP:PTransform3D:fZSP_RBV") {
-  # The desired final z position in the resultant coordinates.
-  field(DESC, "The desired final z ...tant coordinates.")
-  field(SCAN, "I/O Intr")
-  field(PINI, "1")
-  field(TSE, "-2")
-  field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stPMotionTransform3D.fZSP?")
-  field(PREC, "3")
-  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
-  info(archive, "VAL")
-}
-
-record(ao, "TMO:MRCO:SP:PTransform3D:fZSP") {
-  # The desired final z position in the resultant coordinates.
-  field(DESC, "The desired final z ...tant coordinates.")
-  field(DTYP, "asynFloat64")
-  field(UDFS, "0")
-  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fZSP=")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stPMotionTransform3D.fThirdAxisSP=")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
   info(archive, "VAL")
 }
 
 record(ai, "TMO:MRCO:SP:VTransform3D:fADeg_RBV") {
-  # alpha, the acute angle in degrees between motor axis x and resultant coordinate system x.
-  field(DESC, "alpha, the acute ang...rdinate system x.")
+  field(DESC, "alpha, the angle for the first rotation.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
@@ -4851,8 +4844,7 @@ record(ai, "TMO:MRCO:SP:VTransform3D:fADeg_RBV") {
 }
 
 record(ao, "TMO:MRCO:SP:VTransform3D:fADeg") {
-  # alpha, the acute angle in degrees between motor axis x and resultant coordinate system x.
-  field(DESC, "alpha, the acute ang...rdinate system x.")
+  field(DESC, "alpha, the angle for the first rotation.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
   field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fADeg=")
@@ -4862,8 +4854,7 @@ record(ao, "TMO:MRCO:SP:VTransform3D:fADeg") {
 }
 
 record(ai, "TMO:MRCO:SP:VTransform3D:fBDeg_RBV") {
-  # beta, the acute angle in degrees between motor axis y and resultant coordinate system y.
-  field(DESC, "beta, the acute angl...rdinate system y.")
+  field(DESC, "beta, the angle for the second rotation.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
@@ -4875,8 +4866,7 @@ record(ai, "TMO:MRCO:SP:VTransform3D:fBDeg_RBV") {
 }
 
 record(ao, "TMO:MRCO:SP:VTransform3D:fBDeg") {
-  # beta, the acute angle in degrees between motor axis y and resultant coordinate system y.
-  field(DESC, "beta, the acute angl...rdinate system y.")
+  field(DESC, "beta, the angle for the second rotation.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
   field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fBDeg=")
@@ -4885,9 +4875,45 @@ record(ao, "TMO:MRCO:SP:VTransform3D:fBDeg") {
   info(archive, "VAL")
 }
 
+record(ai, "TMO:MRCO:SP:VTransform3D:fFirstAxisMeas_RBV") {
+  # The measured FirstAxis position in the resultant coordinates.
+  field(DESC, "The measured FirstAx...tant coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fFirstAxisMeas?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ai, "TMO:MRCO:SP:VTransform3D:fFirstAxisSP_RBV") {
+  # The desired final FirstAxis position in the resultant coordinates.
+  field(DESC, "The desired final Fi...tant coordinates.")
+  field(SCAN, "I/O Intr")
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fFirstAxisSP?")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
+  info(archive, "VAL")
+}
+
+record(ao, "TMO:MRCO:SP:VTransform3D:fFirstAxisSP") {
+  # The desired final FirstAxis position in the resultant coordinates.
+  field(DESC, "The desired final Fi...tant coordinates.")
+  field(DTYP, "asynFloat64")
+  field(UDFS, "0")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fFirstAxisSP=")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
+  info(archive, "VAL")
+}
+
 record(ai, "TMO:MRCO:SP:VTransform3D:fGDeg_RBV") {
-  # gamma, the acute angle in degrees between motor axis z and resultant coordinate system z.
-  field(DESC, "gamma, the acute ang...rdinate system z.")
+  field(DESC, "gamma, the angle for the third rotation.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
@@ -4899,8 +4925,7 @@ record(ai, "TMO:MRCO:SP:VTransform3D:fGDeg_RBV") {
 }
 
 record(ao, "TMO:MRCO:SP:VTransform3D:fGDeg") {
-  # gamma, the acute angle in degrees between motor axis z and resultant coordinate system z.
-  field(DESC, "gamma, the acute ang...rdinate system z.")
+  field(DESC, "gamma, the angle for the third rotation.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
   field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fGDeg=")
@@ -4909,190 +4934,153 @@ record(ao, "TMO:MRCO:SP:VTransform3D:fGDeg") {
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fMotorXMeas_RBV") {
-  # The measured x position in the motor coordinate system. Intended from encoder input.
-  field(DESC, "The measured x posit...om encoder input.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fMotorFirstAxisMeas_RBV") {
+  # The measured FirstAxis position in the motor coordinate system. Intended from encoder input.
+  field(DESC, "The measured FirstAx...om encoder input.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorXMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorFirstAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fMotorXSP_RBV") {
-  # The desired x position in the motor coordinate system. Calculated internally.
-  field(DESC, "The desired x positi...lated internally.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fMotorFirstAxisSP_RBV") {
+  # The desired FirstAxis position in the motor coordinate system. Calculated internally.
+  field(DESC, "The desired FirstAxi...lated internally.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorXSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorFirstAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fMotorYMeas_RBV") {
+record(ai, "TMO:MRCO:SP:VTransform3D:fMotorSecondAxisMeas_RBV") {
   # The measured y position in the motor coordinate system. Intended from encoder input.
   field(DESC, "The measured y posit...om encoder input.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorYMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorSecondAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fMotorYSP_RBV") {
-  # The desired y position in the motor coordinate system. Calculated internally.
-  field(DESC, "The desired y positi...lated internally.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fMotorSecondAxisSP_RBV") {
+  # The desired SecondAxis position in the motor coordinate system. Calculated internally.
+  field(DESC, "The desired SecondAx...lated internally.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorYSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorSecondAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fMotorZMeas_RBV") {
-  # The measured z position in the motor coordinate system. Intended from encoder input.
-  field(DESC, "The measured z posit...om encoder input.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fMotorThirdAxisMeas_RBV") {
+  # The measured ThirdAxis position in the motor coordinate system. Intended from encoder input.
+  field(DESC, "The measured ThirdAx...om encoder input.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorZMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorThirdAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fMotorZSP_RBV") {
-  # The desired z position in the motor coordinate system. Calculated internally.
-  field(DESC, "The desired z positi...lated internally.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fMotorThirdAxisSP_RBV") {
+  # The desired ThirdAxis position in the motor coordinate system. Calculated internally.
+  field(DESC, "The desired ThirdAxi...lated internally.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorZSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fMotorThirdAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fXMeas_RBV") {
-  # The measured x position in the resultant coordinates.
-  field(DESC, "The measured x posit...tant coordinates.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fSecondAxisMeas_RBV") {
+  # The measured SecondAxis position in the resultant coordinates.
+  field(DESC, "The measured SecondA...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fXMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fSecondAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fXSP_RBV") {
-  # The desired final x position in the resultant coordinates.
-  field(DESC, "The desired final x ...tant coordinates.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fSecondAxisSP_RBV") {
+  # The desired final SecondAxis position in the resultant coordinates.
+  field(DESC, "The desired final Se...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fXSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fSecondAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ao, "TMO:MRCO:SP:VTransform3D:fXSP") {
-  # The desired final x position in the resultant coordinates.
-  field(DESC, "The desired final x ...tant coordinates.")
+record(ao, "TMO:MRCO:SP:VTransform3D:fSecondAxisSP") {
+  # The desired final SecondAxis position in the resultant coordinates.
+  field(DESC, "The desired final Se...tant coordinates.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
-  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fXSP=")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fSecondAxisSP=")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fYMeas_RBV") {
-  # The measured y position in the resultant coordinates.
-  field(DESC, "The measured y posit...tant coordinates.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fThirdAxisMeas_RBV") {
+  # The measured ThirdAxis position in the resultant coordinates.
+  field(DESC, "The measured ThirdAx...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fYMeas?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fThirdAxisMeas?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ai, "TMO:MRCO:SP:VTransform3D:fYSP_RBV") {
-  # The desired final y position in the resultant coordinates.
-  field(DESC, "The desired final y ...tant coordinates.")
+record(ai, "TMO:MRCO:SP:VTransform3D:fThirdAxisSP_RBV") {
+  # The desired final ThirdAxis position in the resultant coordinates.
+  field(DESC, "The desired final Th...tant coordinates.")
   field(SCAN, "I/O Intr")
   field(PINI, "1")
   field(TSE, "-2")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fYSP?")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fThirdAxisSP?")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
   info(archive, "VAL")
 }
 
-record(ao, "TMO:MRCO:SP:VTransform3D:fYSP") {
-  # The desired final y position in the resultant coordinates.
-  field(DESC, "The desired final y ...tant coordinates.")
+record(ao, "TMO:MRCO:SP:VTransform3D:fThirdAxisSP") {
+  # The desired final ThirdAxis position in the resultant coordinates.
+  field(DESC, "The desired final Th...tant coordinates.")
   field(DTYP, "asynFloat64")
   field(UDFS, "0")
-  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fYSP=")
-  field(PREC, "3")
-  info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
-  info(archive, "VAL")
-}
-
-record(ai, "TMO:MRCO:SP:VTransform3D:fZMeas_RBV") {
-  # The measured z position in the resultant coordinates.
-  field(DESC, "The measured z posit...tant coordinates.")
-  field(SCAN, "I/O Intr")
-  field(PINI, "1")
-  field(TSE, "-2")
-  field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fZMeas?")
-  field(PREC, "3")
-  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
-  info(archive, "VAL")
-}
-
-record(ai, "TMO:MRCO:SP:VTransform3D:fZSP_RBV") {
-  # The desired final z position in the resultant coordinates.
-  field(DESC, "The desired final z ...tant coordinates.")
-  field(SCAN, "I/O Intr")
-  field(PINI, "1")
-  field(TSE, "-2")
-  field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/POLL_RATE=1/Main.stVMotionTransform3D.fZSP?")
-  field(PREC, "3")
-  info(autosaveFields_pass0, "DESC DISS HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS")
-  info(archive, "VAL")
-}
-
-record(ao, "TMO:MRCO:SP:VTransform3D:fZSP") {
-  # The desired final z position in the resultant coordinates.
-  field(DESC, "The desired final z ...tant coordinates.")
-  field(DTYP, "asynFloat64")
-  field(UDFS, "0")
-  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fZSP=")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stVMotionTransform3D.fThirdAxisSP=")
   field(PREC, "3")
   info(autosaveFields_pass0, "DESC DISS DRVH DRVL HHSV HIGH HIHI HSV LLSV LOLO LOW LSV PREC SIMS UDFS VAL")
   info(archive, "VAL")

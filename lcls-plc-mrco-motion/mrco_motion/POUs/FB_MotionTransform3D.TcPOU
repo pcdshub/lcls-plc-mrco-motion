@@ -41,9 +41,9 @@ END_VAR
 IF bInit THEN
     bInit := FALSE;
 
-    stMotionTransform3D.fXSP := stMotionTransform3D.fXMeas;
-    stMotionTransform3D.fYSP := stMotionTransform3D.fYMeas;
-    stMotionTransform3D.fZSP := stMotionTransform3D.fZMeas;
+    stMotionTransform3D.fFirstAxisSP := stMotionTransform3D.fFirstAxisMeas;
+    stMotionTransform3D.fSecondAxisSP := stMotionTransform3D.fSecondAxisMeas;
+    stMotionTransform3D.fThirdAxisSP := stMotionTransform3D.fThirdAxisMeas;
 END_IF
 
 // Convert angles in degrees to radians.
@@ -59,19 +59,19 @@ cb := cos(b);
 cg := cos(g);
 
 // Get the current measured position for each stage in starting coordinates.
-mxMeas := stMotionTransform3D.fMotorXMeas;
-myMeas := stMotionTransform3D.fMotorYMeas;
-mzMeas := stMotionTransform3D.fMotorZMeas;
+mxMeas := stMotionTransform3D.fMotorFirstAxisMeas;
+myMeas := stMotionTransform3D.fMotorSecondAxisMeas;
+mzMeas := stMotionTransform3D.fMotorThirdAxisMeas;
 
 // Convert the current measured position for each stage in starting coordinates to new coordinates.
-stMotionTransform3D.fXMeas := mxMeas*(cb*cg)             + myMeas*(-cb*sg)           + mzMeas*(sb);
-stMotionTransform3D.fYMeas := mxMeas*(ca*sg + cg*sa*sb)  + myMeas*(ca*cg - sa*sb*sg) + mzMeas*(-cb*sa);
-stMotionTransform3D.fZMeas := mxMeas*(-ca*cg*sb + sa*sg) + myMeas*(ca*sb*sg + cg*sa) + mzMeas*(ca*cb);
+stMotionTransform3D.fFirstAxisMeas := mxMeas*(cb*cg)             + myMeas*(-cb*sg)           + mzMeas*(sb);
+stMotionTransform3D.fSecondAxisMeas := mxMeas*(ca*sg + cg*sa*sb)  + myMeas*(ca*cg - sa*sb*sg) + mzMeas*(-cb*sa);
+stMotionTransform3D.fThirdAxisMeas := mxMeas*(-ca*cg*sb + sa*sg) + myMeas*(ca*sb*sg + cg*sa) + mzMeas*(ca*cb);
 
 // Get the current desired position in new coordinates
-x := stMotionTransform3D.fXSP;
-y := stMotionTransform3D.fYSP;
-z := stMotionTransform3D.fZSP;
+x := stMotionTransform3D.fFirstAxisSP;
+y := stMotionTransform3D.fSecondAxisSP;
+z := stMotionTransform3D.fThirdAxisSP;
 
 // Convert the desired position in new coordinates to the required position in starting coordinates.
 // This allows the individual motors to move to where they need to be to achieve the desired position in new coordinates.
@@ -79,9 +79,9 @@ mx :=  x*cb*cg + y*ca*sg + y*cg*sa*sb - z*ca*cg*sb + z*sa*sg;
 my := -x*cb*sg + y*ca*cg - y*sa*sb*sg + z*ca*sb*sg + z*cg*sa;
 mz :=  x*sb    - y*cb*sa + z*ca*cb;
 
-stMotionTransform3D.fMotorXSP := mx;
-stMotionTransform3D.fMotorYSP := my;
-stMotionTransform3D.fMotorZSP := mz;
+stMotionTransform3D.fMotorFirstAxisSP := mx;
+stMotionTransform3D.fMotorSecondAxisSP := my;
+stMotionTransform3D.fMotorThirdAxisSP := mz;
 ]]></ST>
     </Implementation>
   </POU>

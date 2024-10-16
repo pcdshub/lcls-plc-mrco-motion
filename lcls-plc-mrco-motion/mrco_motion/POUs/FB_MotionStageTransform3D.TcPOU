@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="FB_MotionStageTransform3D" Id="{f80a8b05-41ce-4a1a-897a-4dae9eac98fd}" SpecialFunc="None">
+    <Declaration><![CDATA[
+FUNCTION_BLOCK FB_MotionStageTransform3D
+VAR_IN_OUT
+    stMotionTransformPosition3D : ST_MotionTransform3D;
+    stMotionTransformVelocity3D : ST_MotionTransform3D;
+    stMotionStageRealFirstRotation : ST_MotionStage;
+    stMotionStageRealSecondRotation : ST_MotionStage;
+    stMotionStageRealThirdRotation : ST_MotionStage;
+    stMotionStageVirtFirstRotation : ST_MotionStage;
+    stMotionStageVirtSecondRotation : ST_MotionStage;
+    stMotionStageVirtThirdRotation : ST_MotionStage;
+END_VAR
+VAR_INPUT
+    bVirtualAxesActive : BOOL;
+    nVirtualEncoderUnitConversion: LREAL := 1000000; // mm to nm
+    firstRotationAngle : LREAL;
+    secondRotationAngle : LREAL;
+    thirdRotationAngle : LREAL;
+END_VAR
+VAR_OUTPUT
+    nVirtualEncoderMotionStageRealFirstRotationnm : UDINT;
+    nVirtualEncoderMotionStageRealSecondRotationnm : UDINT;
+    nVirtualEncoderMotionStageRealThirdRotationnm : UDINT;
+END_VAR
+VAR
+    fbPMotionTransform3D : FB_MotionTransform3D;
+    fbVMotionTransform3D : FB_MotionTransform3D;
+    fDPosMotionStageRealFirstRotation : LREAL;
+    fDPosMotionStageRealSecondRotation : LREAL;
+    fDPosMotionStageRealThirdRotation : LREAL;
+    rtMotionStageRealFirstRotationExecute: R_TRIG;
+    rtMotionStageRealSecondRotationExecute: R_TRIG;
+    rtMotionStageRealThirdRotationExecute: R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Set the degree offsets for the coordinate transform from stage coordinates to beam coordinates.
+stMotionTransformPosition3D.fADeg := firstRotationAngle;
+stMotionTransformPosition3D.fBDeg := secondRotationAngle;
+stMotionTransformPosition3D.fGDeg := thirdRotationAngle;
+stMotionTransformVelocity3D.fADeg := firstRotationAngle;
+stMotionTransformVelocity3D.fBDeg := secondRotationAngle;
+stMotionTransformVelocity3D.fGDeg := thirdRotationAngle;
+
+// Set the actual measured position and velocity for each axis to support the coordinate transform.
+stMotionTransformPosition3D.fMotorFirstAxisMeas := stMotionStageRealFirstRotation.Axis.NcToPlc.ActPos;
+stMotionTransformPosition3D.fMotorSecondAxisMeas := stMotionStageRealSecondRotation.Axis.NcToPlc.ActPos;
+stMotionTransformPosition3D.fMotorThirdAxisMeas := stMotionStageRealThirdRotation.Axis.NcToPlc.ActPos;
+stMotionTransformVelocity3D.fMotorFirstAxisMeas := stMotionStageRealFirstRotation.Axis.NcToPlc.ActVelo;
+stMotionTransformVelocity3D.fMotorSecondAxisMeas := stMotionStageRealSecondRotation.Axis.NcToPlc.ActVelo;
+stMotionTransformVelocity3D.fMotorThirdAxisMeas := stMotionStageRealThirdRotation.Axis.NcToPlc.ActVelo;
+
+// Set the desired position in beam coordinates for each axis to support the coordinate transform.
+rtMotionStageRealFirstRotationExecute(CLK:=stMotionStageRealFirstRotation.bExecute);
+rtMotionStageRealSecondRotationExecute(CLK:=stMotionStageRealSecondRotation.bExecute);
+rtMotionStageRealThirdRotationExecute(CLK:=stMotionStageRealThirdRotation.bExecute);
+IF rtMotionStageRealFirstRotationExecute.Q THEN
+    stMotionTransformPosition3D.fFirstAxisSP := stMotionStageRealFirstRotation.fPosition;
+    stMotionTransformVelocity3D.fFirstAxisSP := stMotionStageRealFirstRotation.fVelocity;
+ELSIF rtMotionStageRealSecondRotationExecute.Q OR rtMotionStageRealThirdRotationExecute.Q THEN
+    stMotionTransformPosition3D.fFirstAxisSP := stMotionStageRealFirstRotation.Axis.NcToPlc.ActPos;
+    stMotionTransformVelocity3D.fFirstAxisSP := 0;
+    stMotionStageRealFirstRotation.fPosition := stMotionStageRealFirstRotation.Axis.NcToPlc.ActPos;
+    stMotionStageRealFirstRotation.fVelocity := 0;
+END_IF
+IF rtMotionStageRealSecondRotationExecute.Q THEN
+    stMotionTransformPosition3D.fSecondAxisSP := stMotionStageRealSecondRotation.fPosition;
+    stMotionTransformVelocity3D.fSecondAxisSP := stMotionStageRealSecondRotation.fVelocity;
+ELSIF rtMotionStageRealFirstRotationExecute.Q OR rtMotionStageRealThirdRotationExecute.Q THEN
+    stMotionTransformPosition3D.fSecondAxisSP := stMotionStageRealSecondRotation.Axis.NcToPlc.ActPos;
+    stMotionTransformVelocity3D.fSecondAxisSP := 0;
+    stMotionStageRealSecondRotation.fPosition := stMotionStageRealSecondRotation.Axis.NcToPlc.ActPos;
+    stMotionStageRealSecondRotation.fVelocity := 0;
+END_IF
+IF rtMotionStageRealThirdRotationExecute.Q THEN
+    stMotionTransformPosition3D.fThirdAxisSP := stMotionStageRealThirdRotation.fPosition;
+    stMotionTransformVelocity3D.fSecondAxisSP := stMotionStageRealThirdRotation.fVelocity;
+ELSIF rtMotionStageRealFirstRotationExecute.Q OR rtMotionStageRealSecondRotationExecute.Q THEN
+    stMotionTransformPosition3D.fThirdAxisSP := stMotionStageRealThirdRotation.Axis.NcToPlc.ActPos;
+    stMotionTransformVelocity3D.fThirdAxisSP := 0;
+    stMotionStageRealThirdRotation.fPosition := stMotionStageRealThirdRotation.Axis.NcToPlc.ActPos;
+    stMotionStageRealThirdRotation.fVelocity := 0;
+END_IF
+
+// Set the desired velocity in beam coordinates. First need to figure out which direction we are moving
+// so that we can apply the correct sign (positive or negative) to the velocity values.
+fDPosMotionStageRealFirstRotation := stMotionTransformPosition3D.fFirstAxisSP - stMotionStageRealFirstRotation.Axis.NcToPlc.ActPos;
+fDPosMotionStageRealSecondRotation := stMotionTransformPosition3D.fSecondAxisSP - stMotionStageRealSecondRotation.Axis.NcToPlc.ActPos;
+fDPosMotionStageRealThirdRotation := stMotionTransformPosition3D.fThirdAxisSP - stMotionStageRealThirdRotation.Axis.NcToPlc.ActPos;
+
+// Apply the correct sign to the velocity value so that the coordinate transform computes correctly.
+IF fDPosMotionStageRealFirstRotation < 0 THEN
+    stMotionTransformVelocity3D.fFirstAxisSP := stMotionTransformVelocity3D.fFirstAxisSP * -1;
+END_IF
+IF fDPosMotionStageRealSecondRotation < 0 THEN
+    stMotionTransformVelocity3D.fSecondAxisSP := stMotionTransformVelocity3D.fSecondAxisSP * -1;
+END_IF
+IF fDPosMotionStageRealThirdRotation < 0 THEN
+    stMotionTransformVelocity3D.fThirdAxisSP := stMotionTransformVelocity3D.fThirdAxisSP * -1;
+END_IF
+
+// Transform Coordinates to new coordinate system before calling fbMotion so that it knows where to move in stage coordinates to get to the desired beam coordinates.
+fbPMotionTransform3D(
+    stMotionTransform3D:=stMotionTransformPosition3D
+);
+fbVMotionTransform3D(
+    stMotionTransform3D:=stMotionTransformVelocity3D
+);
+
+// Get the converted measured position in beam coordinates and write it to the virtual encoder we have mapped to the NC axes.
+nVirtualEncoderMotionStageRealFirstRotationnm := LREAL_TO_UDINT(stMotionTransformPosition3D.fFirstAxisMeas * nVirtualEncoderUnitConversion);
+nVirtualEncoderMotionStageRealSecondRotationnm := LREAL_TO_UDINT(stMotionTransformPosition3D.fSecondAxisMeas * nVirtualEncoderUnitConversion);
+nVirtualEncoderMotionStageRealThirdRotationnm := LREAL_TO_UDINT(stMotionTransformPosition3D.fThirdAxisMeas * nVirtualEncoderUnitConversion);
+
+stMotionStageRealFirstRotation.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderMotionStageRealFirstRotationnm);
+stMotionStageRealSecondRotation.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderMotionStageRealSecondRotationnm);
+stMotionStageRealThirdRotation.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderMotionStageRealThirdRotationnm);
+
+// If the virtual axes are enabled, then do the following logic. Allows the user to turn off the coordinate transform and
+// run just controlling each individual motor which are in stage coordinates.
+IF bVirtualAxesActive THEN
+    // Get the result of the coordinate transform assigned as the setpoint position for each motor in stage coordinates.
+    stMotionStageRealFirstRotation.fPosition := stMotionTransformPosition3D.fMotorFirstAxisSP;
+    stMotionStageRealSecondRotation.fPosition := stMotionTransformPosition3D.fMotorSecondAxisSP;
+    stMotionStageRealThirdRotation.fPosition := stMotionTransformPosition3D.fMotorThirdAxisSP;
+
+    // Get the result of the coordinate transform assigned as the setpoint velocity for each motor in stage coordinates.
+    // Take the absolute value because the velocity value is in reality just a speed setting.
+    stMotionStageRealFirstRotation.fVelocity := ABS(stMotionTransformVelocity3D.fMotorFirstAxisSP);
+    stMotionStageRealSecondRotation.fVelocity := ABS(stMotionTransformVelocity3D.fMotorSecondAxisSP);
+    stMotionStageRealThirdRotation.fVelocity := ABS(stMotionTransformVelocity3D.fMotorThirdAxisSP);
+
+    // If any virtual axis was requested to move, we have to call bExecute on all the motors,
+    // because any move in beam coordinates will likely require a move on all three motors.
+    IF rtMotionStageRealFirstRotationExecute.Q OR rtMotionStageRealSecondRotationExecute.Q OR rtMotionStageRealThirdRotationExecute.Q THEN
+        stMotionStageRealFirstRotation.bMoveCmd := TRUE;
+        stMotionStageRealSecondRotation.bMoveCmd := TRUE;
+        stMotionStageRealThirdRotation.bMoveCmd := TRUE;
+    END_IF
+
+    // If any virtual axis detects an error, make sure to propagate the error status to the actual
+    // axes.
+    IF stMotionStageRealFirstRotation.bError OR stMotionStageRealSecondRotation.bError OR stMotionStageRealThirdRotation.bError THEN
+        stMotionStageRealFirstRotation.bExecute := FALSE;
+        stMotionStageRealSecondRotation.bExecute := FALSE;
+        stMotionStageRealThirdRotation.bExecute := FALSE;
+        stMotionStageRealFirstRotation.bError := TRUE;
+        stMotionStageRealSecondRotation.bError := TRUE;
+        stMotionStageRealThirdRotation.bError := TRUE;
+        stMotionStageRealFirstRotation.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z. Check Virtual X, Y, and Z.';
+        stMotionStageRealSecondRotation.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z, Check Virtual X, Y, and Z.';
+        stMotionStageRealThirdRotation.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z, Check Virtual X, Y, and Z.';
+    END_IF
+
+    // If any actual axis detects an error, make sure to propagate the error status to the virtual
+    // axes.
+    IF stMotionStageRealFirstRotation.bError OR stMotionStageRealSecondRotation.bError OR stMotionStageRealThirdRotation.bError THEN
+        stMotionStageRealFirstRotation.bExecute := FALSE;
+        stMotionStageRealSecondRotation.bExecute := FALSE;
+        stMotionStageRealThirdRotation.bExecute := FALSE;
+        stMotionStageRealFirstRotation.bError := TRUE;
+        stMotionStageRealSecondRotation.bError := TRUE;
+        stMotionStageRealThirdRotation.bError := TRUE;
+        stMotionStageRealFirstRotation.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z. Check X, Y, and Z.';
+        stMotionStageRealSecondRotation.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
+        stMotionStageRealThirdRotation.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
+    END_IF
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

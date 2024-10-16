@@ -111,8 +111,6 @@ VAR
     rtM7Execute: R_TRIG;
     rtM8Execute: R_TRIG;
     rtM9Execute: R_TRIG;
-
-    fbMotionStageTransform3D : FB_MotionStageTransform3D;
 END_VAR
 VAR PERSISTENT
     {attribute 'pytmc' := '
@@ -120,19 +118,19 @@ VAR PERSISTENT
         io: io
         field: DESC The acute angle (in deg) between the x axis in stage coordinates and the x axis in beam coordinates.
     '}
-    aDeg: LREAL := -22.21; // The angle between stMotionStage1 and the new axis 1. In Degrees.
+    aDeg: LREAL := 22.21; // The angle between stMotionStage1 and the new axis 1. In Degrees.
     {attribute 'pytmc' := '
         pv: TMO:MRCO:SP:Beta
         io: io
         field: DESC The acute angle (in deg) between the y axis in stage coordinates and the y axis in beam coordinates.
     '}
-    bDeg:  LREAL := -20.7; // The angle between stMotionStage2 and the new axis 2. In Degrees.
+    bDeg:  LREAL := 21.61; // The angle between stMotionStage2 and the new axis 2. In Degrees.
     {attribute 'pytmc' := '
         pv: TMO:MRCO:SP:Gamma
         io: io
         field: DESC The acute angle (in deg) between the z axis in stage coordinates and the z axis in beam coordinates.
     '}
-    gDeg: LREAL := 3.793; // The angle between stMotionStage3 and the new axis 3. In Degrees.
+    gDeg: LREAL := 37.86; // The angle between stMotionStage3 and the new axis 3. In Degrees.
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -201,26 +199,7 @@ IF bInit THEN
 END_IF
 
 // MRCO
-fbMotionStageTransform3D(
-    stMotionTransformPosition3D := stPMotionTransform3D,
-    stMotionTransformVelocity3D := stVMotionTransform3D,
-    stMotionStageRealFirstRotation := M6,
-    stMotionStageRealSecondRotation := M5,
-    stMotionStageRealThirdRotation := M4,
-    stMotionStageVirtFirstRotation := M9,
-    stMotionStageVirtSecondRotation := M8,
-    stMotionStageVirtThirdRotation := M7,
-    bVirtualAxesActive := bVirtualAxesActive,
-    nVirtualEncoderUnitConversion := nVirtualEncoderUnitConversion,
-    firstRotationAngle := aDeg,
-    secondRotationAngle := bDeg,
-    thirdRotationAngle := gDeg,
-    nVirtualEncoderMotionStageRealFirstRotationnm => nVirtualEncoderM9nm,
-    nVirtualEncoderMotionStageRealSecondRotationnm => nVirtualEncoderM8nm,
-    nVirtualEncoderMotionStageRealThirdRotationnm => nVirtualEncoderM7nm
-);
 
-(*
 // Set the degree offsets for the coordinate transform from stage coordinates to beam coordinates.
 stPMotionTransform3D.fADeg := aDeg;
 stPMotionTransform3D.fBDeg := bDeg;
@@ -353,7 +332,6 @@ IF bVirtualAxesActive THEN
         M9.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
     END_IF
 END_IF
-*)
 
 // Process FB_MotionStage for each axis.
 
