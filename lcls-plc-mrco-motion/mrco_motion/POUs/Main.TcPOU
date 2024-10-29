@@ -116,6 +116,8 @@ VAR
     rtM9Execute: R_TRIG;
 
     fbMotionVirtualFrame : FB_MotionVirtualFrame;
+    bBaseToNew : BOOL;
+    sOrder : STRING := 'XYZ';
 END_VAR
 VAR PERSISTENT
     {attribute 'pytmc' := '
@@ -215,8 +217,8 @@ fbMotionVirtualFrame(
     fAlphaDegrees := aDeg,
     fBetaDegrees := bDeg,
     fGammaDegrees := gDeg,
-    sOrder := 'XYZ',
-    bBaseToNew := FALSE,
+    sOrder := sOrder,
+    bBaseToNew := bBaseToNew,
     fbVirtActPositionVec3 =>,
     fbVirtActVelocityVec3 =>,
     fbVirtActAcceleraVec3 =>,
