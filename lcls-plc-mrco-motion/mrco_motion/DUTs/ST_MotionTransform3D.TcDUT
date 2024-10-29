@@ -26,84 +26,83 @@ STRUCT
 
     // Setpoints in resultant coordinate system.
     {attribute 'pytmc' := '
-        pv: fFirstAxisSP
+        pv: fXSP
         io: io
-        field: DESC The desired final FirstAxis position in the resultant coordinates.
+        field: DESC The desired final x position in the resultant coordinates.
     '}
-    fFirstAxisSP: LREAL; // The desired FirstAxis position in the resultant coordinate system.
+    fXSP: LREAL; // The desired x position in the resultant coordinate system.
     {attribute 'pytmc' := '
-        pv: fSecondAxisSP
+        pv: fYSP
         io: io
-        field: DESC The desired final SecondAxis position in the resultant coordinates.
+        field: DESC The desired final y position in the resultant coordinates.
     '}
-    fSecondAxisSP: LREAL; // The desired SecondAxis position in the resultant coordinate system.
+    fYSP: LREAL; // The desired y position in the resultant coordinate system.
     {attribute 'pytmc' := '
-        pv: fThirdAxisSP
+        pv: fZSP
         io: io
-        field: DESC The desired final ThirdAxis position in the resultant coordinates.
+        field: DESC The desired final z position in the resultant coordinates.
     '}
-    fThirdAxisSP: LREAL; // The desired ThirdAxis position in the resultant coordinate system.
+    fZSP: LREAL; // The desired z position in the resultant coordinate system.
 
     // Measured Values in resultant coordinate system.
     {attribute 'pytmc' := '
-        pv: fFirstAxisMeas
+        pv: fXMeas
         io: i
-        field: DESC The measured FirstAxis position in the resultant coordinates.
+        field: DESC The measured x position in the resultant coordinates.
     '}
-    fFirstAxisMeas: LREAL; // The measured FirstAxis position in the resultant coordinate system. Calculated internally.
+    fXMeas: LREAL; // The measured x position in the resultant coordinate system. Calculated internally.
     {attribute 'pytmc' := '
-        pv: fSecondAxisMeas
+        pv: fYMeas
         io: i
-        field: DESC The measured SecondAxis position in the resultant coordinates.
+        field: DESC The measured y position in the resultant coordinates.
     '}
-    fSecondAxisMeas: LREAL; // The measured SecondAxis position in the resultant coordinate system. Calculated internally.
+    fYMeas: LREAL; // The measured y position in the resultant coordinate system. Calculated internally.
     {attribute 'pytmc' := '
-        pv: fThirdAxisMeas
+        pv: fZMeas
         io: i
-        field: DESC The measured ThirdAxis position in the resultant coordinates.
+        field: DESC The measured y position in the resultant coordinates.
     '}
-    fThirdAxisMeas: LREAL; // The measured ThirdAxis position in the resultant coordinate system. Calculated internally.
+    fZMeas: LREAL; // The measured z position in the resultant coordinate system. Calculated internally.
 
     // Setpoints in motor coordinate system. These values are calculated in FB_MotionTransform3D.
     {attribute 'pytmc' := '
-        pv: fMotorFirstAxisSP
+        pv: fMotorXSP
         io: i
-        field: DESC The desired FirstAxis position in the motor coordinate system. Calculated internally.
+        field: DESC The desired x position in the motor coordinate system. Calculated internally.
     '}
-    fMotorFirstAxisSP: LREAL; // The desired FirstAxis position in the motor coordinate system. Calculated internally.
+    fMotorXSP: LREAL; // The desired x position in the motor coordinate system. Calculated internally.
     {attribute 'pytmc' := '
-        pv: fMotorSecondAxisSP
+        pv: fMotorYSP
         io: i
-        field: DESC The desired SecondAxis position in the motor coordinate system. Calculated internally.
+        field: DESC The desired y position in the motor coordinate system. Calculated internally.
     '}
-    fMotorSecondAxisSP: LREAL; // The desired SecondAxis position in the motor coordinate system. Calculated internally.
+    fMotorYSP: LREAL; // The desired y position in the motor coordinate system. Calculated internally.
     {attribute 'pytmc' := '
-        pv: fMotorThirdAxisSP
+        pv: fMotorZSP
         io: i
-        field: DESC The desired ThirdAxis position in the motor coordinate system. Calculated internally.
+        field: DESC The desired z position in the motor coordinate system. Calculated internally.
     '}
-    fMotorThirdAxisSP: LREAL; // The desired ThirdAxis position in the motor coordinate system. Calculated internally.
+    fMotorZSP: LREAL; // The desired z position in the motor coordinate system. Calculated internally.
 
     // Measured values in motor coordinate system.
     {attribute 'pytmc' := '
-        pv: fMotorFirstAxisMeas
+        pv: fMotorXMeas
         io: i
-        field: DESC The measured FirstAxis position in the motor coordinate system. Intended from encoder input.
+        field: DESC The measured x position in the motor coordinate system. Intended from encoder input.
     '}
-    fMotorFirstAxisMeas: LREAL; // The measured FirstAxis position in the motor coordinate system. Intended from encoder input.
+    fMotorXMeas: LREAL; // The measured x position in the motor coordinate system. Intended from encoder input.
     {attribute 'pytmc' := '
-        pv: fMotorSecondAxisMeas
+        pv: fMotorYMeas
         io: i
         field: DESC The measured y position in the motor coordinate system. Intended from encoder input.
     '}
-    fMotorSecondAxisMeas: LREAL; // The measured SecondAxis position in the motor coordinate system. Intended from encoder input.
+    fMotorYMeas: LREAL; // The measured y position in the motor coordinate system. Intended from encoder input.
     {attribute 'pytmc' := '
-        pv: fMotorThirdAxisMeas
+        pv: fMotorZMeas
         io: i
-        field: DESC The measured ThirdAxis position in the motor coordinate system. Intended from encoder input.
+        field: DESC The measured z position in the motor coordinate system. Intended from encoder input.
     '}
-    fMotorThirdAxisMeas: LREAL; // The measured ThirdAxis position in the motor coordinate system. Intended from encoder input.
-
+    fMotorZMeas: LREAL; // The measured z position in the motor coordinate system. Intended from encoder input.
 END_STRUCT
 END_TYPE
 ]]></Declaration>

@@ -13,7 +13,8 @@
 #
 # Libraries:
 #
-#   lcls-twincat-motion: * -> * (SLAC)
+#   lcls-twincat-math: * -> * (SLAC - LCLS)
+#   lcls-twincat-motion: * -> 0.0.0 (SLAC)
 #   Tc2_MC2: * (Beckhoff Automation GmbH)
 #   Tc2_Standard: * (Beckhoff Automation GmbH)
 #   Tc2_System: * (Beckhoff Automation GmbH)
@@ -41,7 +42,7 @@ epicsEnvSet("ASYN_PORT",        "ASYN_PLC")
 epicsEnvSet("IPADDR",           "172.21.132.121")
 epicsEnvSet("AMSID",            "172.21.132.121.1.1")
 epicsEnvSet("AMS_PORT",         "851")
-epicsEnvSet("ADS_MAX_PARAMS",   "1495")
+epicsEnvSet("ADS_MAX_PARAMS",   "1516")
 epicsEnvSet("ADS_SAMPLE_MS",    "50")
 epicsEnvSet("ADS_MAX_DELAY_MS", "100")
 epicsEnvSet("ADS_TIMEOUT_MS",   "1000")
@@ -257,8 +258,10 @@ dbLoadRecords("TwinCAT_AppInfo.db", "PORT=$(ASYN_PORT), PREFIX=PLC:MRCO:MOTION")
 
 dbLoadRecords("TwinCAT_Project.db", "PREFIX=PLC:MRCO:MOTION,PROJECT=lcls-plc-mrco-motion.tsproj,HASH=unknown,VERSION=unknown,PYTMC=2.15.2.dev0+g73bd2d9.d20230727,PLC_HOST=172.21.132.121")
 
-#   lcls-twincat-motion: * -> * (SLAC)
-dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=lcls-twincat-motion,VERSION=*,VENDOR=SLAC")
+#   lcls-twincat-math: * -> * (SLAC - LCLS)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=lcls-twincat-math,VERSION=*,VENDOR=SLAC - LCLS")
+#   lcls-twincat-motion: * -> 0.0.0 (SLAC)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=lcls-twincat-motion,VERSION=0.0.0,VENDOR=SLAC")
 #   Tc2_MC2: * (Beckhoff Automation GmbH)
 dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=Tc2_MC2,VERSION=*,VENDOR=Beckhoff Automation GmbH")
 #   Tc2_Standard: * (Beckhoff Automation GmbH)
@@ -275,8 +278,8 @@ cd "$(IOC_TOP)"
 ## PLC Project Database files ##
 dbLoadRecords("mrco_motion.db", "PORT=$(ASYN_PORT),PREFIX=PLC:MRCO:MOTION:,IOCNAME=$(IOC),IOC=$(IOC)")
 
-# Total records: 495
-callbackSetQueueSize(2990)
+# Total records: 516
+callbackSetQueueSize(3032)
 
 # Autosave and archive settings:
 save_restoreSet_status_prefix("PLC:MRCO:MOTION:")

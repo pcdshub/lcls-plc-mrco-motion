@@ -21,10 +21,7 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_MotionStageTransform3D.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_MotionTransform3D.TcPOU">
+    <Compile Include="POUs\F_UpdateMotionTransform3d.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Main.TcPOU">
@@ -38,6 +35,10 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="lcls-twincat-math">
+      <DefaultResolution>lcls-twincat-math, * (SLAC - LCLS)</DefaultResolution>
+      <Namespace>lcls_twincat_math</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="lcls-twincat-motion">
       <DefaultResolution>lcls-twincat-motion, * (SLAC)</DefaultResolution>
       <Namespace>lcls_twincat_motion</Namespace>
@@ -69,8 +70,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="lcls-twincat-math">
+      <Resolution>lcls-twincat-math, * (SLAC - LCLS)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="lcls-twincat-motion">
-      <Resolution>lcls-twincat-motion, * (SLAC)</Resolution>
+      <Resolution>lcls-twincat-motion, 0.0.0 (SLAC)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

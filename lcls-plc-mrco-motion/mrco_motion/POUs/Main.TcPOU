@@ -96,13 +96,16 @@ VAR
         pv: TMO:MRCO:SP:PTransform3D
     '}
     stPMotionTransform3D: ST_MotionTransform3D;
-    fbPMotionTransform3D: FB_MotionTransform3D;
 
     {attribute 'pytmc' := '
         pv: TMO:MRCO:SP:VTransform3D
     '}
     stVMotionTransform3D: ST_MotionTransform3D;
-    fbVMotionTransform3D: FB_MotionTransform3D;
+
+    {attribute 'pytmc' := '
+        pv: TMO:MRCO:SP:ATransform3D
+    '}
+    stAMotionTransform3D: ST_MotionTransform3D;
 
     fDPosM7: LREAL;
     fDPosM8: LREAL;
@@ -112,7 +115,7 @@ VAR
     rtM8Execute: R_TRIG;
     rtM9Execute: R_TRIG;
 
-    fbMotionStageTransform3D : FB_MotionStageTransform3D;
+    fbMotionVirtualFrame : FB_MotionVirtualFrame;
 END_VAR
 VAR PERSISTENT
     {attribute 'pytmc' := '
@@ -201,159 +204,60 @@ IF bInit THEN
 END_IF
 
 // MRCO
-fbMotionStageTransform3D(
-    stMotionTransformPosition3D := stPMotionTransform3D,
-    stMotionTransformVelocity3D := stVMotionTransform3D,
-    stMotionStageRealFirstRotation := M6,
-    stMotionStageRealSecondRotation := M5,
-    stMotionStageRealThirdRotation := M4,
-    stMotionStageVirtFirstRotation := M9,
-    stMotionStageVirtSecondRotation := M8,
-    stMotionStageVirtThirdRotation := M7,
-    bVirtualAxesActive := bVirtualAxesActive,
-    nVirtualEncoderUnitConversion := nVirtualEncoderUnitConversion,
-    firstRotationAngle := aDeg,
-    secondRotationAngle := bDeg,
-    thirdRotationAngle := gDeg,
-    nVirtualEncoderMotionStageVirtFirstRotationnm => nVirtualEncoderM9nm,
-    nVirtualEncoderMotionStageVirtSecondRotationnm => nVirtualEncoderM8nm,
-    nVirtualEncoderMotionStageVirtThirdRotationnm => nVirtualEncoderM7nm
+fbMotionVirtualFrame(
+    stMotionStageRx := M4,
+    stMotionStageRy := M5,
+    stMotionStageRz := M6,
+    stMotionStageVx := M7,
+    stMotionStageVy := M8,
+    stMotionStageVz := M9,
+    bEnable := bVirtualAxesActive,
+    fAlphaDegrees := aDeg,
+    fBetaDegrees := bDeg,
+    fGammaDegrees := gDeg,
+    sOrder := 'XYZ',
+    bBaseToNew := FALSE,
+    fbVirtActPositionVec3 =>,
+    fbVirtActVelocityVec3 =>,
+    fbVirtActAcceleraVec3 =>,
+    fbRealTarPositionVec3 =>,
+    fbRealTarVelocityVec3 =>,
+    fbRealTarAcceleraVec3 =>
 );
 
-(*
-// Set the degree offsets for the coordinate transform from stage coordinates to beam coordinates.
-stPMotionTransform3D.fADeg := aDeg;
-stPMotionTransform3D.fBDeg := bDeg;
-stPMotionTransform3D.fGDeg := gDeg;
-stVMotionTransform3D.fADeg := aDeg;
-stVMotionTransform3D.fBDeg := bDeg;
-stVMotionTransform3D.fGDeg := gDeg;
+nVirtualEncoderM7nm := LREAL_TO_UDINT((fbMotionVirtualFrame.fbVirtActPositionVec3.x + 200.0) * nVirtualEncoderUnitConversion);
+nVirtualEncoderM8nm := LREAL_TO_UDINT((fbMotionVirtualFrame.fbVirtActPositionVec3.y + 200.0) * nVirtualEncoderUnitConversion);
+nVirtualEncoderM9nm := LREAL_TO_UDINT((fbMotionVirtualFrame.fbVirtActPositionVec3.z + 200.0) * nVirtualEncoderUnitConversion);
 
-// Set the actual measured position and velocity for each axis to support the coordinate transform.
-stPMotionTransform3D.fMotorXMeas := M4.Axis.NcToPlc.ActPos;
-stPMotionTransform3D.fMotorYMeas := M5.Axis.NcToPlc.ActPos;
-stPMotionTransform3D.fMotorZMeas := M6.Axis.NcToPlc.ActPos;
-stVMotionTransform3D.fMotorXMeas := M4.Axis.NcToPlc.ActVelo;
-stVMotionTransform3D.fMotorYMeas := M5.Axis.NcToPlc.ActVelo;
-stVMotionTransform3D.fMotorZMeas := M6.Axis.NcToPlc.ActVelo;
-
-// Set the desired position in beam coordinates for each axis to support the coordinate transform.
-rtM7Execute(CLK:=M7.bExecute);
-rtM8Execute(CLK:=M8.bExecute);
-rtM9Execute(CLK:=M9.bExecute);
-IF rtM7Execute.Q THEN
-    stPMotionTransform3D.fXSP := M7.fPosition;
-    stVMotionTransform3D.fXSP := M7.fVelocity;
-ELSIF rtM8Execute.Q OR rtM9Execute.Q THEN
-    stPMotionTransform3D.fXSP := M7.Axis.NcToPlc.ActPos;
-    stVMotionTransform3D.fXSP := 0;
-    M7.fPosition := M7.Axis.NcToPlc.ActPos;
-    M7.fVelocity := 0;
-END_IF
-IF rtM8Execute.Q THEN
-    stPMotionTransform3D.fYSP := M8.fPosition;
-    stVMotionTransform3D.fYSP := M8.fVelocity;
-ELSIF rtM7Execute.Q OR rtM9Execute.Q THEN
-    stPMotionTransform3D.fYSP := M8.Axis.NcToPlc.ActPos;
-    stVMotionTransform3D.fYSP := 0;
-    M8.fPosition := M8.Axis.NcToPlc.ActPos;
-    M8.fVelocity := 0;
-END_IF
-IF rtM9Execute.Q THEN
-    stPMotionTransform3D.fZSP := M9.fPosition;
-    stVMotionTransform3D.fYSP := M9.fVelocity;
-ELSIF rtM7Execute.Q OR rtM8Execute.Q THEN
-    stPMotionTransform3D.fZSP := M9.Axis.NcToPlc.ActPos;
-    stVMotionTransform3D.fZSP := 0;
-    M9.fPosition := M9.Axis.NcToPlc.ActPos;
-    M9.fVelocity := 0;
-END_IF
-
-// Set the desired velocity in beam coordinates. First need to figure out which direction we are moving
-// so that we can apply the correct sign (positive or negative) to the velocity values.
-fDPosM7 := stPMotionTransform3D.fXSP - M7.Axis.NcToPlc.ActPos;
-fDPosM8 := stPMotionTransform3D.fYSP - M8.Axis.NcToPlc.ActPos;
-fDPosM9 := stPMotionTransform3D.fZSP - M9.Axis.NcToPlc.ActPos;
-
-// Apply the correct sign to the velocity value so that the coordinate transform computes correctly.
-IF fDPosM7 < 0 THEN
-    stVMotionTransform3D.fXSP := stVMotionTransform3D.fXSP * -1;
-END_IF
-IF fDPosM8 < 0 THEN
-    stVMotionTransform3D.fYSP := stVMotionTransform3D.fYSP * -1;
-END_IF
-IF fDPosM9 < 0 THEN
-    stVMotionTransform3D.fZSP := stVMotionTransform3D.fZSP * -1;
-END_IF
-
-// Transform Coordinates to new coordinate system before calling fbMotion so that it knows where to move in stage coordinates to get to the desired beam coordinates.
-fbPMotionTransform3D(
-    stMotionTransform3D:=stPMotionTransform3D
-);
-fbVMotionTransform3D(
-    stMotionTransform3D:=stVMotionTransform3D
+stPMotionTransform3D := F_UpdateMotionTransform3d(
+    fAlphaDegrees := aDeg,
+    fBetaDegrees  := bDeg,
+    fGammaDegrees := gDeg,
+    fbVirtActVec3 := fbMotionVirtualFrame.fbVirtActPositionVec3,
+    fbVirtTarVec3 := fbMotionVirtualFrame.fbVirtTarPositionVec3,
+    fbRealActVec3 := fbMotionVirtualFrame.fbRealActPositionVec3,
+    fbRealTarVec3 := fbMotionVirtualFrame.fbRealTarPositionVec3
 );
 
-// Get the converted measured position in beam coordinates and write it to the virtual encoder we have mapped to the NC axes.
-nVirtualEncoderM7nm := LREAL_TO_UDINT(stPMotionTransform3D.fXMeas * nVirtualEncoderUnitConversion);
-nVirtualEncoderM8nm := LREAL_TO_UDINT(stPMotionTransform3D.fYMeas * nVirtualEncoderUnitConversion);
-nVirtualEncoderM9nm := LREAL_TO_UDINT(stPMotionTransform3D.fZMeas * nVirtualEncoderUnitConversion);
+stVMotionTransform3D := F_UpdateMotionTransform3d(
+    fAlphaDegrees := aDeg,
+    fBetaDegrees  := bDeg,
+    fGammaDegrees := gDeg,
+    fbVirtActVec3 := fbMotionVirtualFrame.fbVirtActVelocityVec3,
+    fbVirtTarVec3 := fbMotionVirtualFrame.fbVirtTarVelocityVec3,
+    fbRealActVec3 := fbMotionVirtualFrame.fbRealActVelocityVec3,
+    fbRealTarVec3 := fbMotionVirtualFrame.fbRealTarVelocityVec3
+);
 
-M7.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderM7nm);
-M8.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderM8nm);
-M9.nRawEncoderULINT := UDINT_TO_ULINT(nVirtualEncoderM9nm);
-
-// If the virtual axes are enabled, then do the following logic. Allows the user to turn off the coordinate transform and
-// run just controlling each individual motor which are in stage coordinates.
-IF bVirtualAxesActive THEN
-    // Get the result of the coordinate transform assigned as the setpoint position for each motor in stage coordinates.
-    M4.fPosition := stPMotionTransform3D.fMotorXSP;
-    M5.fPosition := stPMotionTransform3D.fMotorYSP;
-    M6.fPosition := stPMotionTransform3D.fMotorZSP;
-
-    // Get the result of the coordinate transform assigned as the setpoint velocity for each motor in stage coordinates.
-    // Take the absolute value because the velocity value is in reality just a speed setting.
-    M4.fVelocity := ABS(stVMotionTransform3D.fMotorXSP);
-    M5.fVelocity := ABS(stVMotionTransform3D.fMotorYSP);
-    M6.fVelocity := ABS(stVMotionTransform3D.fMotorZSP);
-
-    // If any virtual axis was requested to move, we have to call bExecute on all the motors,
-    // because any move in beam coordinates will likely require a move on all three motors.
-    IF rtM7Execute.Q OR rtM8Execute.Q OR rtM9Execute.Q THEN
-        M4.bMoveCmd := TRUE;
-        M5.bMoveCmd := TRUE;
-        M6.bMoveCmd := TRUE;
-    END_IF
-
-    // If any virtual axis detects an error, make sure to propagate the error status to the actual
-    // axes.
-    IF M7.bError OR M8.bError OR M9.bError THEN
-        M4.bExecute := FALSE;
-        M5.bExecute := FALSE;
-        M6.bExecute := FALSE;
-        M4.bError := TRUE;
-        M5.bError := TRUE;
-        M6.bError := TRUE;
-        M4.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z. Check Virtual X, Y, and Z.';
-        M5.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z, Check Virtual X, Y, and Z.';
-        M6.sCustomErrorMessage := 'An error occured in Sample Paddle Virtual X, Y, or Z, Check Virtual X, Y, and Z.';
-    END_IF
-
-    // If any actual axis detects an error, make sure to propagate the error status to the virtual
-    // axes.
-    IF M4.bError OR M5.bError OR M6.bError THEN
-        M7.bExecute := FALSE;
-        M8.bExecute := FALSE;
-        M9.bExecute := FALSE;
-        M7.bError := TRUE;
-        M8.bError := TRUE;
-        M9.bError := TRUE;
-        M7.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z. Check X, Y, and Z.';
-        M8.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
-        M9.sCustomErrorMessage := 'An error occured in Sample Paddle X, Y, or Z, Check X, Y, and Z.';
-    END_IF
-END_IF
-*)
+stAMotionTransform3D := F_UpdateMotionTransform3d(
+    fAlphaDegrees := aDeg,
+    fBetaDegrees  := bDeg,
+    fGammaDegrees := gDeg,
+    fbVirtActVec3 := fbMotionVirtualFrame.fbVirtActAcceleraVec3,
+    fbVirtTarVec3 := fbMotionVirtualFrame.fbVirtTarAcceleraVec3,
+    fbRealActVec3 := fbMotionVirtualFrame.fbRealActAcceleraVec3,
+    fbRealTarVec3 := fbMotionVirtualFrame.fbRealTarAcceleraVec3
+);
 
 // Process FB_MotionStage for each axis.
 
