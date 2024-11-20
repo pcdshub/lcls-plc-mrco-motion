@@ -118,6 +118,8 @@ VAR
     fbMotionVirtualFrame : FB_MotionVirtualFrame;
     bBaseToNew : BOOL;
     sOrder : STRING := 'XYZ';
+
+    fbEPSSamplePaddleGasNeedle : FB_EPSSamplePaddleGasNeedle;
 END_VAR
 VAR PERSISTENT
     {attribute 'pytmc' := '
@@ -205,7 +207,14 @@ IF bInit THEN
     bVirtualAxesActive := FALSE;
 END_IF
 
+fbEPSSamplePaddleGasNeedle.CheckAndActivateIfRequired(
+    StageZSamplePaddle := M6,
+    StageZGasNeedle := M3
+);
+
 // MRCO
+bVirtualAxesActive := M6.Axis.NcToPlc.ActPos <= 70.0;
+
 fbMotionVirtualFrame(
     stMotionStageRx := M4,
     stMotionStageRy := M5,

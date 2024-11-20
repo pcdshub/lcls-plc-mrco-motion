@@ -18,7 +18,13 @@
     <Compile Include="DUTs\ST_MotionTransform3D.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ITFs\I_EPSSamplePaddleGasNeedle.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_EPSSamplePaddleGasNeedle.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_UpdateMotionTransform3d.TcPOU">
@@ -31,10 +37,15 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="ITFs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="LCLS General">
+      <DefaultResolution>LCLS General, * (SLAC)</DefaultResolution>
+      <Namespace>LCLS_General</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="lcls-twincat-math">
       <DefaultResolution>lcls-twincat-math, * (SLAC - LCLS)</DefaultResolution>
       <Namespace>lcls_twincat_math</Namespace>
@@ -70,6 +81,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="LCLS General">
+      <Resolution>LCLS General, * (SLAC)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="lcls-twincat-math">
       <Resolution>lcls-twincat-math, * (SLAC - LCLS)</Resolution>
     </PlaceholderResolution>

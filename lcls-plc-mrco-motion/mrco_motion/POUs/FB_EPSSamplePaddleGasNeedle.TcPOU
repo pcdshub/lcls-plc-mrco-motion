@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="FB_EPSSamplePaddleGasNeedle" Id="{2e0cf1df-b00b-4bd4-b07c-167344109ad0}" SpecialFunc="None">
+    <Declaration><![CDATA[
+FUNCTION_BLOCK FB_EPSSamplePaddleGasNeedle IMPLEMENTS I_EPSSamplePaddleGasNeedle
+VAR
+    fbEPSSamplePaddleForwardZ : FB_EPS;
+    fbEPSSamplePaddleBackwardZ : FB_EPS;
+
+    fbEPSGasNeedleForwardZ : FB_EPS;
+    fbEPSGasNeedleBackwardZ : FB_EPS;
+
+    fSamplePaddleZOut : LREAL := 100.0; // Greater than this number is out
+    fGasNeedleZOut : LREAL := 85.0; // Less than this number is out
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AllowGasNeedleZToMoveIn" Id="{aea5ef35-815f-4db6-9bd5-85f20ecb5f31}">
+      <Declaration><![CDATA[
+METHOD PRIVATE AllowGasNeedleZToMoveIn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+fbEPSGasNeedleForwardZ.setBit(nBits := 0, bValue := TRUE);
+fbEPSGasNeedleForwardZ.setMessage(message := 'EPS is permitting forward motion.');
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AllowSamplePaddleZToMoveIn" Id="{df323478-dad5-4e44-ac80-db0ff4f4c6bc}">
+      <Declaration><![CDATA[
+METHOD PRIVATE AllowSamplePaddleZToMoveIn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+fbEPSSamplePaddleBackwardZ.setBit(nBits := 0, bValue := TRUE);
+fbEPSSamplePaddleBackwardZ.setMessage(message := 'EPS is permitting backward motion.');]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CheckAndActivateIfRequired" Id="{daed7d29-9c62-4a7b-a62b-88629e881b75}">
+      <Declaration><![CDATA[
+METHOD CheckAndActivateIfRequired
+VAR_IN_OUT
+    StageZSamplePaddle	: lcls_twincat_motion.ST_MotionStage;
+    StageZGasNeedle	: lcls_twincat_motion.ST_MotionStage;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Sample Paddle
+fbEPSSamplePaddleForwardZ(eps := StageZSamplePaddle.stEPSForwardEnable);
+fbEPSSamplePaddleForwardZ.setDescription(desciption := 'Sample Paddle Stage Z Forward EPS');
+
+fbEPSSamplePaddleBackwardZ(eps := StageZSamplePaddle.stEPSBackwardEnable);
+fbEPSSamplePaddleBackwardZ.setDescription(desciption := 'Sample Paddle Stage Z Backward EPS');
+
+IF GasNeedleZIsOut(StageZGasNeedle := StageZGasNeedle) THEN
+    AllowSamplePaddleZToMoveIn();
+ELSE
+    PreventSamplePaddleZFromMovingIn();
+    StageZSamplePaddle.sCustomErrorMessage := 'Cannot move any further in because Gas Needle Z is in.';
+END_IF
+
+// Gas Needle
+fbEPSGasNeedleForwardZ(eps := StageZGasNeedle.stEPSForwardEnable);
+fbEPSGasNeedleForwardZ.setDescription(desciption := 'Gas Needle Stage Z Forward EPS');
+
+IF SamplePaddleZIsOut(StageZSamplePaddle := StageZSamplePaddle) THEN
+    AllowGasNeedleZToMoveIn();
+ELSE
+    PreventGasNeedleZFromMovingIn();
+    StageZGasNeedle.sCustomErrorMessage := 'Cannot move any further in because Sample Paddle Z is in.';
+END_IF
+
+fbEPSGasNeedleBackwardZ(eps := StageZGasNeedle.stEPSBackwardEnable);
+fbEPSGasNeedleBackwardZ.setDescription(desciption := 'Gas Needle Stage Z Backward EPS');
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GasNeedleZIsOut" Id="{e47d70b8-9a9d-4b55-9c9a-a5bc868700cd}">
+      <Declaration><![CDATA[
+METHOD PRIVATE GasNeedleZIsOut : BOOL
+VAR_INPUT
+    StageZGasNeedle	: lcls_twincat_motion.ST_MotionStage;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+GasNeedleZIsOut := StageZGasNeedle.Axis.NcToPlc.ActPos <= fGasNeedleZOut;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PreventGasNeedleZFromMovingIn" Id="{a702c8da-f7fe-47c9-9879-886e32025bfd}">
+      <Declaration><![CDATA[
+METHOD PRIVATE PreventGasNeedleZFromMovingIn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+fbEPSGasNeedleForwardZ.setBit(nBits := 0, bValue := FALSE);
+fbEPSGasNeedleForwardZ.setMessage(message := 'Cannot move in when Sample Paddle Z is not out.');
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PreventSamplePaddleZFromMovingIn" Id="{1083b9a6-3c04-46ec-bc72-bcfd74bf3154}">
+      <Declaration><![CDATA[
+METHOD PRIVATE PreventSamplePaddleZFromMovingIn
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+fbEPSSamplePaddleBackwardZ.setBit(nBits := 0, bValue := FALSE);
+fbEPSSamplePaddleBackwardZ.setMessage(message := 'Cannot move in when Gas Needle Z is not out.');
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SamplePaddleZIsOut" Id="{28504932-4cc0-4aa9-8e94-e0ee04d036be}">
+      <Declaration><![CDATA[
+METHOD PRIVATE SamplePaddleZIsOut : BOOL
+VAR_INPUT
+    StageZSamplePaddle	: lcls_twincat_motion.ST_MotionStage;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+SamplePaddleZIsOut := StageZSamplePaddle.Axis.NcToPlc.ActPos >= fSamplePaddleZOut;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

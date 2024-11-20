@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <Itf Name="I_EPSSamplePaddleGasNeedle" Id="{debb4a44-0f7b-4d07-a00c-44fef871f029}">
+    <Declaration><![CDATA[
+INTERFACE I_EPSSamplePaddleGasNeedle
+]]></Declaration>
+    <Method Name="CheckAndActivateIfRequired" Id="{d5099148-0ad2-4c97-a699-5b94edabef05}">
+      <Declaration><![CDATA[
+METHOD CheckAndActivateIfRequired
+VAR_IN_OUT
+	StageZSamplePaddle	: lcls_twincat_motion.ST_MotionStage;
+	StageZGasNeedle	: lcls_twincat_motion.ST_MotionStage;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
