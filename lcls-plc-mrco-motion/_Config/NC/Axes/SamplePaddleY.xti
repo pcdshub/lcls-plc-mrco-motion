@@ -1352,12 +1352,13 @@ External Setpoint Generation:
 		<AxisPara>
 			<Dynamic Acceleration="2" Deceleration="2" DelayTime="0.008"/>
 			<Velo SlowManual="0.5" FastManual="1" Maximum="1"/>
+			<TargetPosControl Range="0.1"/>
 			<OtherSettings AllowMotionCmdToSlave="true"/>
 		</AxisPara>
 		<Encoder Name="Enc" EncType="29">
 			<EncPara ScaleFactorNumerator="5e-05" MaxCount="#xffffffff">
-				<SoftEndMinControl Enable="true" Range="41"/>
-				<SoftEndMaxControl Enable="true" Range="81"/>
+				<SoftEndMinControl Range="41"/>
+				<SoftEndMaxControl Range="81"/>
 				<Inc RefSoftSyncMask="#x0000ffff"/>
 			</EncPara>
 			<Vars VarGrpType="1">
@@ -1400,7 +1401,7 @@ External Setpoint Generation:
 			</Vars>
 		</Encoder>
 		<Drive Name="Drive" DrvType="24">
-			<DrvPara>
+			<DrvPara Inverse="true">
 				<Analog VeloReferenz="12.7" ScaleFactorActTorque="0.1"/>
 				<TimeComp TaskDelayCycles="1"/>
 			</DrvPara>

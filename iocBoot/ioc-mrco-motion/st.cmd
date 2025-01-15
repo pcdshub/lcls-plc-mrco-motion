@@ -1,11 +1,32 @@
-#!/reg/g/pcds/epics/ioc/common/ads-ioc/R0.4.1/bin/rhel7-x86_64/adsIoc
-###### AUTO-GENERATED DO NOT EDIT ##############
-
+#!c:/Repos/ads-ioc/R0.6.1///bin/rhel7-x86_64/adsIoc
+################### AUTO-GENERATED DO NOT EDIT ###################
+#
+#         Project: lcls-plc-mrco-motion.tsproj
+#        PLC name: mrco_motion (mrco_motion Instance)
+# Generated using: pytmc 2.15.2.dev0+g73bd2d9.d20230727
+# Project version: unknown
+#    Project hash: unknown
+#     PLC IP/host: 172.21.132.121
+#      PLC Net ID: 172.21.132.121.1.1
+#  ** Production mode IOC **
+#  Using /cds/data/iocData for autosave and archiver settings.
+#
+# Libraries:
+#
+#   lcls-twincat-math: * -> * (SLAC - LCLS)
+#   lcls-twincat-motion: * -> 0.0.0 (SLAC)
+#   Tc2_MC2: * (Beckhoff Automation GmbH)
+#   Tc2_Standard: * (Beckhoff Automation GmbH)
+#   Tc2_System: * (Beckhoff Automation GmbH)
+#   Tc2_Utilities: * (Beckhoff Automation GmbH)
+#   Tc3_Module: * (Beckhoff Automation GmbH)
+#
+################### AUTO-GENERATED DO NOT EDIT ###################
 < envPaths
 
 epicsEnvSet("ADS_IOC_TOP", "$(TOP)" )
 
-epicsEnvSet("ENGINEER", "bosum123" )
+epicsEnvSet("ENGINEER", "" )
 epicsEnvSet("LOCATION", "PLC:MRCO:MOTION" )
 epicsEnvSet("IOCSH_PS1", "$(IOC)> " )
 epicsEnvSet("ACF_FILE", "$(ADS_IOC_TOP)/iocBoot/templates/unrestricted.acf")
@@ -21,11 +42,14 @@ epicsEnvSet("ASYN_PORT",        "ASYN_PLC")
 epicsEnvSet("IPADDR",           "172.21.132.121")
 epicsEnvSet("AMSID",            "172.21.132.121.1.1")
 epicsEnvSet("AMS_PORT",         "851")
-epicsEnvSet("ADS_MAX_PARAMS",   "10000")
+epicsEnvSet("ADS_MAX_PARAMS",   "1516")
 epicsEnvSet("ADS_SAMPLE_MS",    "50")
 epicsEnvSet("ADS_MAX_DELAY_MS", "100")
 epicsEnvSet("ADS_TIMEOUT_MS",   "1000")
 epicsEnvSet("ADS_TIME_SOURCE",  "0")
+
+# Add a route to the PLC automatically:
+system("${ADS_IOC_TOP}/scripts/add_route.sh 172.21.132.121 ^172.*$")
 
 # adsAsynPortDriverConfigure(portName, ipaddr, amsaddr, amsport,
 #    asynParamTableSize, priority, noAutoConnect, defaultSampleTimeMS,
@@ -57,7 +81,7 @@ cd "$(ADS_IOC_TOP)/db"
 
 epicsEnvSet("MOTOR_PORT",     "PLC_ADS")
 epicsEnvSet("PREFIX",         "PLC:MRCO:MOTION:")
-epicsEnvSet("NUMAXES",        "6")
+epicsEnvSet("NUMAXES",        "9")
 epicsEnvSet("MOVE_POLL_RATE", "200")
 epicsEnvSet("IDLE_POLL_RATE", "1000")
 
@@ -178,37 +202,107 @@ dbLoadRecords("EthercatMC.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR
 dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC) ")
 dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
 
+epicsEnvSet("AXIS_NO",         "7")
+epicsEnvSet("MOTOR_PREFIX",    "TMO:MRCO:MMS:")
+epicsEnvSet("MOTOR_NAME",      "V4")
+epicsEnvSet("DESC",            "Main.M7 / SamplyPaddleVX")
+epicsEnvSet("EGU",             "mm")
+epicsEnvSet("PREC",            "3")
+epicsEnvSet("AXISCONFIG",      "")
+epicsEnvSet("ECAXISFIELDINIT", "")
+epicsEnvSet("AMPLIFIER_FLAGS", "")
+
+EthercatMCCreateAxis("$(MOTOR_PORT)", "$(AXIS_NO)", "$(AMPLIFIER_FLAGS)", "$(AXISCONFIG)")
+dbLoadRecords("EthercatMC.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC), EGU=$(EGU) $(ECAXISFIELDINIT)")
+dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC) ")
+dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
+
+epicsEnvSet("AXIS_NO",         "8")
+epicsEnvSet("MOTOR_PREFIX",    "TMO:MRCO:MMS:")
+epicsEnvSet("MOTOR_NAME",      "V5")
+epicsEnvSet("DESC",            "Main.M8 / SamplePaddleVY")
+epicsEnvSet("EGU",             "mm")
+epicsEnvSet("PREC",            "3")
+epicsEnvSet("AXISCONFIG",      "")
+epicsEnvSet("ECAXISFIELDINIT", "")
+epicsEnvSet("AMPLIFIER_FLAGS", "")
+
+EthercatMCCreateAxis("$(MOTOR_PORT)", "$(AXIS_NO)", "$(AMPLIFIER_FLAGS)", "$(AXISCONFIG)")
+dbLoadRecords("EthercatMC.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC), EGU=$(EGU) $(ECAXISFIELDINIT)")
+dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC) ")
+dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
+
+epicsEnvSet("AXIS_NO",         "9")
+epicsEnvSet("MOTOR_PREFIX",    "TMO:MRCO:MMS:")
+epicsEnvSet("MOTOR_NAME",      "V6")
+epicsEnvSet("DESC",            "Main.M9 / SamplePaddleVZ")
+epicsEnvSet("EGU",             "mm")
+epicsEnvSet("PREC",            "3")
+epicsEnvSet("AXISCONFIG",      "")
+epicsEnvSet("ECAXISFIELDINIT", "")
+epicsEnvSet("AMPLIFIER_FLAGS", "")
+
+EthercatMCCreateAxis("$(MOTOR_PORT)", "$(AXIS_NO)", "$(AMPLIFIER_FLAGS)", "$(AXISCONFIG)")
+dbLoadRecords("EthercatMC.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC), EGU=$(EGU) $(ECAXISFIELDINIT)")
+dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), R=$(MOTOR_NAME)-, MOTOR_PORT=$(MOTOR_PORT), ASYN_PORT=$(ASYN_PORT), AXIS_NO=$(AXIS_NO), DESC=$(DESC), PREC=$(PREC) ")
+dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
+
 
 dbLoadRecords("iocSoft.db", "IOC=PLC:MRCO:MOTION")
 dbLoadRecords("save_restoreStatus.db", "P=PLC:MRCO:MOTION:")
-dbLoadRecords("caPutLog.db", "IOC=${IOC}")
+dbLoadRecords("caPutLog.db", "IOC=$(IOC)")
 
-## TwinCat System Databse files ##
-dbLoadRecords("TwinCAT_TaskInfo.db", "PORT=ASYN_PLC, PREFIX=PLC:MRCO:MOTION")
-dbLoadRecords("TwinCAT_AppInfo.db", "PORT=ASYN_PLC, PREFIX=PLC:MRCO:MOTION")
+## TwinCAT task, application, and project information databases ##
+dbLoadRecords("TwinCAT_TaskInfo.db", "PORT=$(ASYN_PORT),PREFIX=PLC:MRCO:MOTION,IDX=1")
+dbLoadRecords("TwinCAT_AppInfo.db", "PORT=$(ASYN_PORT), PREFIX=PLC:MRCO:MOTION")
+
+dbLoadRecords("TwinCAT_Project.db", "PREFIX=PLC:MRCO:MOTION,PROJECT=lcls-plc-mrco-motion.tsproj,HASH=unknown,VERSION=unknown,PYTMC=2.15.2.dev0+g73bd2d9.d20230727,PLC_HOST=172.21.132.121")
+
+#   lcls-twincat-math: * -> * (SLAC - LCLS)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=lcls-twincat-math,VERSION=*,VENDOR=SLAC - LCLS")
+#   lcls-twincat-motion: * -> 0.0.0 (SLAC)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=lcls-twincat-motion,VERSION=0.0.0,VENDOR=SLAC")
+#   Tc2_MC2: * (Beckhoff Automation GmbH)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=Tc2_MC2,VERSION=*,VENDOR=Beckhoff Automation GmbH")
+#   Tc2_Standard: * (Beckhoff Automation GmbH)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=Tc2_Standard,VERSION=*,VENDOR=Beckhoff Automation GmbH")
+#   Tc2_System: * (Beckhoff Automation GmbH)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=Tc2_System,VERSION=*,VENDOR=Beckhoff Automation GmbH")
+#   Tc2_Utilities: * (Beckhoff Automation GmbH)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=Tc2_Utilities,VERSION=*,VENDOR=Beckhoff Automation GmbH")
+#   Tc3_Module: * (Beckhoff Automation GmbH)
+dbLoadRecords("TwinCAT_Dependency.db", "PREFIX=PLC:MRCO:MOTION,DEPENDENCY=Tc3_Module,VERSION=*,VENDOR=Beckhoff Automation GmbH")
 
 cd "$(IOC_TOP)"
 
-## Database files ##
-< "$(IOC_TOP)/load_plc_databases.cmd"
+## PLC Project Database files ##
+dbLoadRecords("mrco_motion.db", "PORT=$(ASYN_PORT),PREFIX=PLC:MRCO:MOTION:,IOCNAME=$(IOC),IOC=$(IOC)")
 
+# Total records: 516
+callbackSetQueueSize(3032)
 
-# Setup autosave
-set_savefile_path( "$(IOC_DATA)/$(IOC)/autosave" )
-set_requestfile_path( "$(IOC_TOP)/autosave" )
+# Autosave and archive settings:
+save_restoreSet_status_prefix("PLC:MRCO:MOTION:")
+save_restoreSet_IncompleteSetsOk(1)
+save_restoreSet_DatedBackupFiles(1)
+set_pass0_restoreFile("info_positions.sav")
+set_pass1_restoreFile("info_settings.sav")
 
-save_restoreSet_status_prefix( "PLC:MRCO:MOTION:" )
-save_restoreSet_IncompleteSetsOk( 1 )
-save_restoreSet_DatedBackupFiles( 1 )
-set_pass0_restoreFile( "info_positions.sav" )
-set_pass1_restoreFile( "info_settings.sav" )
+# ** Production IOC Settings **
+set_savefile_path("$(IOC_DATA)/$(IOC)/autosave")
+set_requestfile_path("$(IOC_DATA)/$(IOC)/autosave")
 
-cd "$(IOC_TOP)/autosave"
+# Production IOC autosave files go in iocData:
+cd "$(IOC_DATA)/$(IOC)/autosave"
+
+# Create info_positions.req and info_settings.req
 makeAutosaveFiles()
-cd "$(IOC_TOP)"
 
-# Create the archiver file
-makeArchiveFromDbInfo("$(IOC_DATA)/$(IOC)/archive/$(IOC).archive", "archive")
+cd "$(IOC_DATA)/$(IOC)/archive"
+
+# Create $(IOC).archive
+makeArchiveFromDbInfo("$(IOC).archive", "archive")
+cd "$(IOC_TOP)"
 
 # Configure access security: this is required for caPutLog.
 asSetFilename("$(ACF_FILE)")
@@ -220,7 +314,7 @@ iocInit()
 iocLogInit()
 
 # Configure and start the caPutLogger after iocInit
-epicsEnvSet(EPICS_AS_PUT_LOG_PV, "${IOC}:caPutLog:Last")
+epicsEnvSet(EPICS_AS_PUT_LOG_PV, "$(IOC):caPutLog:Last")
 
 # caPutLogInit("HOST:PORT", config)
 # config options:
@@ -228,7 +322,7 @@ epicsEnvSet(EPICS_AS_PUT_LOG_PV, "${IOC}:caPutLog:Last")
 #       caPutLogOnChange    0: log only on value change
 #       caPutLogAll         1: log all puts
 #       caPutLogAllNoFilter 2: log all puts no filtering on same PV
-caPutLogInit("${EPICS_CAPUTLOG_HOST}:${EPICS_CAPUTLOG_PORT}", 0)
+caPutLogInit("$(EPICS_CAPUTLOG_HOST):$(EPICS_CAPUTLOG_PORT)", 0)
 
 # Start autosave backups
 create_monitor_set( "info_positions.req", 10, "" )
@@ -236,3 +330,4 @@ create_monitor_set( "info_settings.req", 60, "" )
 
 # All IOCs should dump some common info after initial startup.
 < /reg/d/iocCommon/All/post_linux.cmd
+

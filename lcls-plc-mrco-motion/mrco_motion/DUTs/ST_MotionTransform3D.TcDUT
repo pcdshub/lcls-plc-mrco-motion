@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ST_MotionTransform3D" Id="{fb74dff7-e5bf-45c2-9bd7-624fbe6c0c65}">
+    <Declaration><![CDATA[TYPE ST_MotionTransform3D :
+    // Defines the interface required for the FB_MotionTransform3D function block.
+STRUCT
+    // Parameters to convert from motor axis coordinate system to resultant coordinate system.
+    {attribute 'pytmc' := '
+        pv: fADeg
+        io: io
+        field: DESC alpha, the angle for the first rotation.
+    '}
+    fADeg: LREAL; // alpha, the angle for the first rotation.
+    {attribute 'pytmc' := '
+        pv: fBDeg
+        io: io
+        field: DESC beta, the angle for the second rotation.
+    '}
+    fBDeg: LREAL; // beta, the angle for the second rotation.
+    {attribute 'pytmc' := '
+        pv: fGDeg
+        io: io
+        field: DESC gamma, the angle for the third rotation.
+    '}
+    fGDeg: LREAL; // gamma, the angle for the third rotation.
+
+    // Setpoints in resultant coordinate system.
+    {attribute 'pytmc' := '
+        pv: fXSP
+        io: io
+        field: DESC The desired final x position in the resultant coordinates.
+    '}
+    fXSP: LREAL; // The desired x position in the resultant coordinate system.
+    {attribute 'pytmc' := '
+        pv: fYSP
+        io: io
+        field: DESC The desired final y position in the resultant coordinates.
+    '}
+    fYSP: LREAL; // The desired y position in the resultant coordinate system.
+    {attribute 'pytmc' := '
+        pv: fZSP
+        io: io
+        field: DESC The desired final z position in the resultant coordinates.
+    '}
+    fZSP: LREAL; // The desired z position in the resultant coordinate system.
+
+    // Measured Values in resultant coordinate system.
+    {attribute 'pytmc' := '
+        pv: fXMeas
+        io: i
+        field: DESC The measured x position in the resultant coordinates.
+    '}
+    fXMeas: LREAL; // The measured x position in the resultant coordinate system. Calculated internally.
+    {attribute 'pytmc' := '
+        pv: fYMeas
+        io: i
+        field: DESC The measured y position in the resultant coordinates.
+    '}
+    fYMeas: LREAL; // The measured y position in the resultant coordinate system. Calculated internally.
+    {attribute 'pytmc' := '
+        pv: fZMeas
+        io: i
+        field: DESC The measured y position in the resultant coordinates.
+    '}
+    fZMeas: LREAL; // The measured z position in the resultant coordinate system. Calculated internally.
+
+    // Setpoints in motor coordinate system. These values are calculated in FB_MotionTransform3D.
+    {attribute 'pytmc' := '
+        pv: fMotorXSP
+        io: i
+        field: DESC The desired x position in the motor coordinate system. Calculated internally.
+    '}
+    fMotorXSP: LREAL; // The desired x position in the motor coordinate system. Calculated internally.
+    {attribute 'pytmc' := '
+        pv: fMotorYSP
+        io: i
+        field: DESC The desired y position in the motor coordinate system. Calculated internally.
+    '}
+    fMotorYSP: LREAL; // The desired y position in the motor coordinate system. Calculated internally.
+    {attribute 'pytmc' := '
+        pv: fMotorZSP
+        io: i
+        field: DESC The desired z position in the motor coordinate system. Calculated internally.
+    '}
+    fMotorZSP: LREAL; // The desired z position in the motor coordinate system. Calculated internally.
+
+    // Measured values in motor coordinate system.
+    {attribute 'pytmc' := '
+        pv: fMotorXMeas
+        io: i
+        field: DESC The measured x position in the motor coordinate system. Intended from encoder input.
+    '}
+    fMotorXMeas: LREAL; // The measured x position in the motor coordinate system. Intended from encoder input.
+    {attribute 'pytmc' := '
+        pv: fMotorYMeas
+        io: i
+        field: DESC The measured y position in the motor coordinate system. Intended from encoder input.
+    '}
+    fMotorYMeas: LREAL; // The measured y position in the motor coordinate system. Intended from encoder input.
+    {attribute 'pytmc' := '
+        pv: fMotorZMeas
+        io: i
+        field: DESC The measured z position in the motor coordinate system. Intended from encoder input.
+    '}
+    fMotorZMeas: LREAL; // The measured z position in the motor coordinate system. Intended from encoder input.
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

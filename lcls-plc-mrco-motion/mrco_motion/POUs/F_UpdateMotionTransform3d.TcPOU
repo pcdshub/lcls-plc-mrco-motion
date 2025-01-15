@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="F_UpdateMotionTransform3d" Id="{0023ce29-44fa-4445-81bf-247d95bc74f3}" SpecialFunc="None">
+    <Declaration><![CDATA[
+FUNCTION F_UpdateMotionTransform3d : ST_MotionTransform3D
+VAR_INPUT
+    fAlphaDegrees : LREAL;
+    fBetaDegrees : LREAL;
+    fGammaDegrees : LREAL;
+    fbRealActVec3 : FB_Vec3;
+    fbRealTarVec3 : FB_Vec3;
+    fbVirtActVec3 : FB_Vec3;
+    fbVirtTarVec3 : FB_Vec3;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+F_UpdateMotionTransform3d.fADeg := fAlphaDegrees;
+F_UpdateMotionTransform3d.fBDeg := fBetaDegrees;
+F_UpdateMotionTransform3d.fGDeg := fGammaDegrees;
+
+F_UpdateMotionTransform3d.fMotorXMeas := fbRealActVec3.x;
+F_UpdateMotionTransform3d.fMotorYMeas := fbRealActVec3.y;
+F_UpdateMotionTransform3d.fMotorZMeas := fbRealActVec3.Z;
+
+F_UpdateMotionTransform3d.fXMeas := fbVirtActVec3.x;
+F_UpdateMotionTransform3d.fYMeas := fbVirtActVec3.y;
+F_UpdateMotionTransform3d.fZMeas := fbVirtActVec3.Z;
+
+F_UpdateMotionTransform3d.fXSP := fbVirtTarVec3.x;
+F_UpdateMotionTransform3d.fYSP := fbVirtTarVec3.y;
+F_UpdateMotionTransform3d.fZSP := fbVirtTarVec3.Z;
+
+F_UpdateMotionTransform3d.fMotorXSP := fbRealTarVec3.x;
+F_UpdateMotionTransform3d.fMotorYSP := fbRealTarVec3.y;
+F_UpdateMotionTransform3d.fMotorZSP := fbRealTarVec3.Z;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
