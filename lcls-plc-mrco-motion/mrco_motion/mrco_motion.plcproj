@@ -27,6 +27,9 @@
     <Compile Include="POUs\FB_EPSSamplePaddleGasNeedle.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_MotionVirtualFrame.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_UpdateMotionTransform3d.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -88,7 +91,7 @@
       <Resolution>lcls-twincat-math, * (SLAC - LCLS)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="lcls-twincat-motion">
-      <Resolution>lcls-twincat-motion, 0.0.0 (SLAC)</Resolution>
+      <Resolution>lcls-twincat-motion, 4.2.0 (SLAC)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
